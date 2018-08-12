@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta name="author" content="Miles Whitman">
+
+        <title>Hotel Listings</title>
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/style.css') }}">
+
+        <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Barlow+Semi+Condensed|Fredericka+the+Great" rel="stylesheet">
+    </head>
+
+    <body>
+        <div class="container">
+            <header class="header">
+                <h1 class="branding--name">Yamagata Hotels</h1>
+            </header>
+
+            <content class="content container">
+            {% block body %}
+            {% endblock %}
+            </content>
+
+            <footer class="footer">
+                <p class="footer--info">Copyright © 2018, Miles Whitman</p>
+            </footer>
+        </div>
+    </body>
+</html>

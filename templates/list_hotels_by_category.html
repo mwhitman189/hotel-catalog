@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block body %}
+
+<h1 class="page-title heading">{{ category }}</h1>
+
+{% for hotel in hotels %}
+    <h2><a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">{{ hotel.name }}</a></h2>
+{% endfor %}
+<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Cancel</a>
+
+{% endblock %}
