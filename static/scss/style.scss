@@ -2,14 +2,14 @@ $font-stack: 'Amatic SC', cursive, 'Work Sans', sans-serif;
 $font-title: 'Amatic SC', cursive;
 $font-heading: 'Fredericka the Great', cursive;
 $font-one: 'Barlow Semi Condensed', sans-serif;
-$header-font-size: 1.5rem;
+$header-font-size: 2rem;
 $paragraph-font-size: 18px;
-$background-color: #454548;
-$primary-color: #fac501;
+$background-color: #fff;
+$primary-color: #a30404;
 $secondary-color: #fff;
-$primary-text-color: #c5c5c6;
-$link-color: #d1b202;
-$shadow-color: #000;
+$primary-text-color: #302626;
+$link-color: #f70202;
+$shadow-color: #888;
 
 body,
 html {
@@ -31,19 +31,93 @@ body {
   color: $primary-text-color;
   font-family: $font-one;
   font-size: $paragraph-font-size;
+}
 
+a {
+  color: $primary-color;
 
+  &:hover {
+    color: $link-color;
+    text-decoration: none;
+  }
+}
 
+.navbar-nav {
+  float: right;
 
+  a {
+    color: $primary-text-color;
+    display: block;
+    padding: 14px 16px;
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      color: $secondary-color;
+    }
+  }
+}
+
+.navbar {
+  background-color: $primary-color;
+  box-shadow: 0 4px 5px $shadow-color;
+  display: block;
+  position: fixed;
+  width: 100%;
+}
+
+.navbar-header {
+  width: 100%;
+}
+
+.navbar-brand {
+  color: $primary-text-color;
+  float: left;
+  font-family: $font-heading;
+  font-size: $header-font-size;
+  height: 100%;
+  width: 150px;
+
+  &:hover {
+    color: $secondary-color;
+  }
+}
+
+.navbar-toggle {
+  background-color: transparent;
+  border: 0;
+  float: right;
+
+  .icon-bar {
+    background-color: $primary-text-color;
+    border-radius: 1px;
+    display: block;
+    height: 4px;
+    margin-top: 4px;
+    width: 30px;
+  }
+}
+
+.spacer {
+  height: 75px;
+}
+
+.footer {
+  width: 100%;
+
+  .footer--info {
+    text-align: center;
+  }
+}
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) { ... }
+@media (min-width: 576px) {}
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) { ... }
+@media (min-width: 768px) {}
 
 // Large devices (desktops, 992px and up)
-@media (min-width: 992px) { ... }
+@media (min-width: 992px) {}
 
 // Extra large devices (large desktops, 1200px and up)
-@media (min-width: 1200px) { ... }
+@media (min-width: 1200px) {}

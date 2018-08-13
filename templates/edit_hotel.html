@@ -8,12 +8,12 @@
         <input type="number" step="0.01" name="price" placeholder="Price: {{ hotel.price }}">
         <input type="number" max="5" name="rating" placeholder="Rating: {{ hotel.rating }}">
         <select name="category">
-            <option selected>--Choose Category--</option>
-            <option value="Bed & Breakfast">Bed & Breakfast</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Hot Spring Inn">Hot Spring Inn</option>
-            <option value="Love Hotel">Love Hotel</option>
-            <option value="Ryokan">Ryokan (Japanese Inn)</option>
+            <option {% if not hotel.category %}selected{% endif %}>--Choose Category--</option>
+            <option value="Bed & Breakfast"{% if hotel.category == "Bed & Breakfast" %} selected{% endif %}>Bed & Breakfast</option>
+            <option value="Hotel"{% if hotel.category == "Hotel" %} selected{% endif %}>Hotel</option>
+            <option value="Hot Spring Inn"{% if hotel.category == "Hot Spring Inn" %} selected{% endif %}>Hot Spring Inn</option>
+            <option value="Love Hotel"{% if hotel.category == "Love Hotel" %} selected{% endif %}>Love Hotel</option>
+            <option value="Ryokan"{% if hotel.category == "Ryokan" %} selected{% endif %}>Ryokan (Japanese Inn)</option>
         </select>
 
         <input type="submit" value="Edit Hotel">
