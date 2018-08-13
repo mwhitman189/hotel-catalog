@@ -1,0 +1,49 @@
+$font-stack: 'Amatic SC', cursive, 'Work Sans', sans-serif;
+$font-title: 'Amatic SC', cursive;
+$font-heading: 'Fredericka the Great', cursive;
+$font-one: 'Barlow Semi Condensed', sans-serif;
+$header-font-size: 1.5rem;
+$paragraph-font-size: 18px;
+$background-color: #454548;
+$primary-color: #fac501;
+$secondary-color: #fff;
+$primary-text-color: #c5c5c6;
+$link-color: #d1b202;
+$shadow-color: #000;
+
+body,
+html {
+  margin: 0;
+  max-width: 100%;
+  min-height: 100vh;
+  min-width: 360px;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: $background-color;
+  color: $primary-text-color;
+  font-family: $font-one;
+  font-size: $paragraph-font-size;
+
+
+
+
+
+// Small devices (landscape phones, 576px and up)
+@media (min-width: 576px) { ... }
+
+// Medium devices (tablets, 768px and up)
+@media (min-width: 768px) { ... }
+
+// Large devices (desktops, 992px and up)
+@media (min-width: 992px) { ... }
+
+// Extra large devices (large desktops, 1200px and up)
+@media (min-width: 1200px) { ... }

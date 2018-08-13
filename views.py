@@ -41,12 +41,6 @@ def listHotelsByCategory(category):
     return render_template('list_hotels_by_category.html', hotels=hotels)
 
 
-@app.route('/hotel/<int:hotel_id>/')
-def showHotel(hotel_id):
-    hotel = session.query(Hotel).filter_by(id=hotel_id).one()
-    return render_template('show_hotel.html', hotel=hotel)
-
-
 @app.route('/hotel/new/', methods=['GET', 'POST'])
 def newHotel():
     if request.method == 'POST':
@@ -64,6 +58,36 @@ def newHotel():
         return redirect(url_for('listHotels'))
     else:
         return render_template('new_hotel.html')
+
+
+@app.route('/hotel/<int:hotel_id>/')
+def showHotel(hotel_id):
+    hotel = session.query(Hotel).filter_by(id=hotel_id).one()
+    return render_template('show_hotel.html', hotel=hotel)
+
+
+@app.route('/hotel/<int:hotel_id>/edit/', methods=['GET', 'POST'])
+def editHotel(hotel_id):
+    hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
+    if request.method == 'POST':
+        if request.form['name']:
+            hotel_to_edit.name = request.form['name']
+        if request.form['picture']:
+            hotel_to_edit.picture = request.form['picture']
+        if request.form['description']:
+            hotel_to_edit.description = request.form['description']
+        if request.form['price']:
+            hotel_to_edit.price = request.form['price']
+        if request.form['rating']:
+            hotel_to_edit.rating = request.form['rating']
+        if request.form['category']:
+            hotel_to_edit.category = request.form['category']
+            session.add(hotel_to_edit)
+            session.commit()
+            flash("Hotel successfully edited!")
+            return redirect(url_for('showHotel', hotel_id=hotel_id))
+    else:
+        return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
 
 
 
