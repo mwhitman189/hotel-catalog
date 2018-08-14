@@ -31,7 +31,8 @@ def listHotels():
 
 @app.route('/hotel/categories/')
 def listHotelCategories():
-    categories = session.query(Hotel.category).all()
+    categories = session.query(Hotel.category).group_by(
+        Hotel.category).order_by(Hotel.category).all()
     return render_template('list_hotel_categories.html', categories=categories)
 
 

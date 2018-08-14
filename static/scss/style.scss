@@ -31,6 +31,7 @@ body {
   color: $color-4;
   font-family: $font-one;
   font-size: $paragraph-font-size;
+  width: 100%;
 }
 
 a {
@@ -142,8 +143,20 @@ li {
 }
 
 .hotels {
-  float: right;
-  width: 350px;
+  float: none;
+  width: 100%;
+}
+
+.hotel-name {
+  span {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: auto 100%;
+
+    &:hover {
+      opacity: .7;
+    }
+  }
 }
 
 .img {
@@ -176,7 +189,12 @@ li {
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 576px) {}
+@media (min-width: 520px) {
+  .hotels {
+    float: right;
+    width: 350px;
+  }
+}
 
 // Medium devices (tablets, 768px and up)
 @media (min-width: 768px) {}

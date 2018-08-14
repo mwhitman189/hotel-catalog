@@ -15,7 +15,8 @@ body {
   background-color: #fff;
   color: #302626;
   font-family: "Barlow Semi Condensed", sans-serif;
-  font-size: 18px; }
+  font-size: 18px;
+  width: 100%; }
 
 a {
   color: #a30404; }
@@ -102,8 +103,15 @@ li {
   width: 150px; }
 
 .hotels {
-  float: right;
-  width: 350px; }
+  float: none;
+  width: 100%; }
+
+.hotel-name span {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%; }
+  .hotel-name span:hover {
+    opacity: .7; }
 
 .img {
   border-radius: 30px;
@@ -128,3 +136,8 @@ li {
   .footer .footer--info {
     color: #eee;
     text-align: center; }
+
+@media (min-width: 520px) {
+  .hotels {
+    float: right;
+    width: 350px; } }

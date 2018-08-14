@@ -14,7 +14,7 @@
     <ul>
     {% for hotel in hotels %}
         <li>
-            <a class="hotel-name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" style="background-image:url('https://www.ichinobo.com/daikon-no-hana/images/home/img_spa2.jpg');"></span>
+            <a class="hotel-name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" style="background-image:url('{{ hotel.picture }}');"></span>
             </a>
             <a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a>
         </li>
