@@ -133,10 +133,10 @@ li {
   float: left;
   font-size: 13px;
   height: 100px;
-  line-height: 120px;
+  line-height: 140px;
   list-style: none;
   overflow: hidden;
-  padding-left: 68px;
+  padding-left: 72px;
   position: relative;
   text-transform: uppercase;
   width: 150px;
@@ -154,19 +154,19 @@ li {
     background-size: auto 100%;
 
     &:hover {
-      opacity: .7;
+      opacity: .8;
     }
   }
 }
 
 .img {
-  border-radius: 30px;
+  border-radius: 35px;
   display: block;
-  height: 60px;
+  height: 70px;
   left: 0;
   position: absolute;
-  top: 15px;
-  width: 60px;
+  top: 10px;
+  width: 70px;
 }
 
 .btn-danger {

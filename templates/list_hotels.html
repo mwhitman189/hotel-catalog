@@ -10,11 +10,26 @@
     {% endif %}
 {% endwith %}
 <h1 class="page-title heading">Lodgings</h1>
+<h2 class="subtitle">Categories</h2>
+
+<!-- TODO:Figure out how to display categories -->
+<div class="hotels">
+    <ul>
+    {% for hotel in category %}
+        <li>
+            <a class="categories" href="{{ url_for('listHotelsByCategory', category=category[0]) }}">{{ category[0] }}<span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
+            </a>
+            <a class="categories" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a>
+        </li>
+    {% endfor %}
+    </ul>
+</div>
+
 <div class="hotels">
     <ul>
     {% for hotel in hotels %}
         <li>
-            <a class="hotel-name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" style="background-image:url('{{ hotel.picture }}');"></span>
+            <a class="hotel-name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
             </a>
             <a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a>
         </li>
