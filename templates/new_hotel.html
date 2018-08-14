@@ -2,21 +2,39 @@
 {% block body %}
     <h1 class="page-title heading">Add New Hotel</h1>
     <form action="{{ url_for('newHotel') }}" method="POST">
-        <input type="text" name="name" placeholder="Name of hotel">
-        <input type="text" name="picture" placeholder="URL of image">
-        <input type="text" name="description" placeholder="Description">
-        <input type="number" step="0.01" name="price" placeholder="Room price(in USD)">
-        <input type="number" max="5" name="rating" placeholder="Rating">
-        <select name="category">
-            <option selected>--Choose Category--</option>
-            <option value="Bed & Breakfast">Bed & Breakfast</option>
-            <option value="Hotel">Hotel</option>
-            <option value="Hot Spring Inn">Hot Spring Inn</option>
-            <option value="Love Hotel">Love Hotel</option>
-            <option value="Ryokan">Ryokan (Japanese Inn)</option>
-        </select>
+        <div class="form-group">
+            <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
+            <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="Name of hotel">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="urlOfImage">URL of Image</label>
+            <input class="form-control" type="text" id="urlOfImage" name="picture" placeholder="URL of image">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="description">Description</label>
+            <input class="form-control" type="textarea" id="description" name="description" placeholder="Description">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="roomPrice">Room Rate (in USD)</label>
+            <input class="form-control" type="number" id="roomPrice" step="0.01" name="price" placeholder="Room rate(in USD)">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="rating">Rating</label>
+            <input class="form-control" type="number" id="rating" max="5" name="rating" placeholder="Rating">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="hotelType">Type of lodging</label>
+            <select class="form-control" name="category" id="hotelType">
+                <option selected>--Choose Category--</option>
+                <option value="Bed & Breakfast">Bed & Breakfast</option>
+                <option value="Hotel">Hotel</option>
+                <option value="Hot Spring Inn">Hot Spring Inn</option>
+                <option value="Love Hotel">Love Hotel</option>
+                <option value="Ryokan">Ryokan (Japanese Inn)</option>
+            </select>
+        </div>
 
-        <input type="submit" value="Add Hotel">
+        <input class="btn btn-danger" type="submit" value="Add Hotel">
     </form>
     <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Cancel</a>
 {% endblock %}

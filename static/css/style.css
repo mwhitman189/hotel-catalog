@@ -32,14 +32,15 @@ a {
     text-align: center;
     text-decoration: none; }
     .navbar-nav a:hover {
-      color: #fff; }
+      color: #eee; }
 
 .navbar {
   background-color: #a30404;
-  box-shadow: 0 4px 5px #888;
+  box-shadow: 0 4px 5px #595454;
   display: block;
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  z-index: 99; }
 
 .navbar-header {
   width: 100%; }
@@ -52,7 +53,7 @@ a {
   height: 100%;
   width: 150px; }
   .navbar-brand:hover {
-    color: #fff; }
+    color: #eee; }
 
 .navbar-toggle {
   background-color: transparent;
@@ -65,11 +66,65 @@ a {
     height: 4px;
     margin-top: 4px;
     width: 30px; }
+    .navbar-toggle .icon-bar:hover {
+      background-color: #eee; }
 
 .spacer {
-  height: 75px; }
+  height: 85px; }
+
+.page-title {
+  border-bottom: #302626 solid 1px; }
+
+ul {
+  display: block;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  padding-inline-start: 40px; }
+  ul::after {
+    clear: both;
+    content: '';
+    display: block; }
+
+li {
+  border-bottom: #eee solid 1px;
+  box-sizing: border-box;
+  float: left;
+  font-size: 13px;
+  height: 100px;
+  line-height: 120px;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 68px;
+  position: relative;
+  text-transform: uppercase;
+  width: 150px; }
+
+.hotels {
+  float: right;
+  width: 350px; }
+
+.img {
+  border-radius: 30px;
+  display: block;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 15px;
+  width: 60px; }
+
+.btn-danger {
+  background-color: #a30404;
+  border: 0; }
 
 .footer {
+  background-color: #595454;
+  bottom: 0;
+  height: 60px;
+  line-height: 60px;
+  position: fixed;
   width: 100%; }
   .footer .footer--info {
+    color: #eee;
     text-align: center; }

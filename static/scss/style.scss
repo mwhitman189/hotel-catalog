@@ -4,12 +4,12 @@ $font-heading: 'Fredericka the Great', cursive;
 $font-one: 'Barlow Semi Condensed', sans-serif;
 $header-font-size: 2rem;
 $paragraph-font-size: 18px;
-$background-color: #fff;
-$primary-color: #a30404;
-$secondary-color: #fff;
-$primary-text-color: #302626;
-$link-color: #f70202;
-$shadow-color: #888;
+$color-1: #fff;
+$color-2: #a30404;
+$color-3: #eee;
+$color-4: #302626;
+$color-5: #f70202;
+$color-6: #595454;
 
 body,
 html {
@@ -27,17 +27,17 @@ html {
 }
 
 body {
-  background-color: $background-color;
-  color: $primary-text-color;
+  background-color: $color-1;
+  color: $color-4;
   font-family: $font-one;
   font-size: $paragraph-font-size;
 }
 
 a {
-  color: $primary-color;
+  color: $color-2;
 
   &:hover {
-    color: $link-color;
+    color: $color-5;
     text-decoration: none;
   }
 }
@@ -46,24 +46,25 @@ a {
   float: right;
 
   a {
-    color: $primary-text-color;
+    color: $color-4;
     display: block;
     padding: 14px 16px;
     text-align: center;
     text-decoration: none;
 
     &:hover {
-      color: $secondary-color;
+      color: $color-3;
     }
   }
 }
 
 .navbar {
-  background-color: $primary-color;
-  box-shadow: 0 4px 5px $shadow-color;
+  background-color: $color-2;
+  box-shadow: 0 4px 5px $color-6;
   display: block;
   position: fixed;
   width: 100%;
+  z-index: 99;
 }
 
 .navbar-header {
@@ -71,7 +72,7 @@ a {
 }
 
 .navbar-brand {
-  color: $primary-text-color;
+  color: $color-4;
   float: left;
   font-family: $font-heading;
   font-size: $header-font-size;
@@ -79,7 +80,7 @@ a {
   width: 150px;
 
   &:hover {
-    color: $secondary-color;
+    color: $color-3;
   }
 }
 
@@ -89,23 +90,87 @@ a {
   float: right;
 
   .icon-bar {
-    background-color: $primary-text-color;
+    background-color: $color-4;
     border-radius: 1px;
     display: block;
     height: 4px;
     margin-top: 4px;
     width: 30px;
+
+    &:hover {
+      background-color: $color-3;
+    }
   }
 }
 
 .spacer {
-  height: 75px;
+  height: 85px;
+}
+
+.page-title {
+  border-bottom: $color-4 solid 1px;
+}
+
+ul {
+  display: block;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  padding-inline-start: 40px;
+
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}
+
+li {
+  border-bottom: $color-3 solid 1px;
+  box-sizing: border-box;
+  float: left;
+  font-size: 13px;
+  height: 100px;
+  line-height: 120px;
+  list-style: none;
+  overflow: hidden;
+  padding-left: 68px;
+  position: relative;
+  text-transform: uppercase;
+  width: 150px;
+}
+
+.hotels {
+  float: right;
+  width: 350px;
+}
+
+.img {
+  border-radius: 30px;
+  display: block;
+  height: 60px;
+  left: 0;
+  position: absolute;
+  top: 15px;
+  width: 60px;
+}
+
+.btn-danger {
+  background-color: $color-2;
+  border: 0;
 }
 
 .footer {
+  background-color: $color-6;
+  bottom: 0;
+  height: 60px;
+  line-height: 60px;
+  position: fixed;
   width: 100%;
 
   .footer--info {
+    color: $color-3;
     text-align: center;
   }
 }
