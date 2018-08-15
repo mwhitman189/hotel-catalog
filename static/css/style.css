@@ -18,6 +18,9 @@ body {
   font-size: 18px;
   width: 100%; }
 
+.content-container {
+  margin-top: 100px; }
+
 a {
   color: #a30404; }
   a:hover {
@@ -39,7 +42,9 @@ a {
   background-color: #a30404;
   box-shadow: 0 4px 5px #595454;
   display: block;
+  left: 0;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 99; }
 
@@ -59,18 +64,19 @@ a {
 .navbar-toggle {
   background-color: transparent;
   border: 0;
-  float: right; }
+  float: right;
+  margin: 10px; }
+  .navbar-toggle:hover .icon-bar {
+    background-color: #eee; }
   .navbar-toggle .icon-bar {
     background-color: #302626;
-    border-radius: 1px;
+    border-radius: 2px;
     display: block;
-    height: 4px;
+    height: 6px;
     margin-top: 4px;
     width: 30px; }
-    .navbar-toggle .icon-bar:hover {
-      background-color: #eee; }
 
-.spacer {
+.spacer-1 {
   height: 85px; }
 
 .page-title {
@@ -93,8 +99,8 @@ li {
   box-sizing: border-box;
   float: left;
   font-size: 13px;
-  height: 100px;
-  line-height: 140px;
+  height: 115px;
+  line-height: 175px;
   list-style: none;
   overflow: hidden;
   padding-left: 72px;
@@ -102,16 +108,26 @@ li {
   text-transform: uppercase;
   width: 150px; }
 
-.hotels {
+.main-div {
   float: none;
   width: 100%; }
 
-.hotel-name span {
+.sidebar {
+  float: none;
+  width: 100%; }
+
+.main-div li {
+  position: relative;
+  left: 30px;
+  top: 45px; }
+
+.hotel span {
   background-position: center;
   background-repeat: no-repeat;
-  background-size: auto 100%; }
-  .hotel-name span:hover {
-    opacity: .8; }
+  background-size: auto 100%;
+  z-index: 3; }
+  .hotel span:hover {
+    opacity: .7; }
 
 .img {
   border-radius: 35px;
@@ -126,18 +142,23 @@ li {
   background-color: #a30404;
   border: 0; }
 
+.spacer-2 {
+  height: 65px; }
+
 .footer {
   background-color: #595454;
   bottom: 0;
   height: 60px;
   line-height: 60px;
   position: fixed;
-  width: 100%; }
+  width: 100%;
+  z-index: 9; }
   .footer .footer--info {
     color: #eee;
+    font-size: 12.6px;
     text-align: center; }
 
-@media (min-width: 520px) {
-  .hotels {
+@media (min-width: 768px) {
+  .sidebar {
     float: right;
-    width: 350px; } }
+    width: 380px; } }

@@ -34,6 +34,10 @@ body {
   width: 100%;
 }
 
+.content-container {
+  margin-top: 100px;
+}
+
 a {
   color: $color-2;
 
@@ -63,7 +67,9 @@ a {
   background-color: $color-2;
   box-shadow: 0 4px 5px $color-6;
   display: block;
+  left: 0;
   position: fixed;
+  top: 0;
   width: 100%;
   z-index: 99;
 }
@@ -89,22 +95,25 @@ a {
   background-color: transparent;
   border: 0;
   float: right;
+  margin: 10px;
 
-  .icon-bar {
-    background-color: $color-4;
-    border-radius: 1px;
-    display: block;
-    height: 4px;
-    margin-top: 4px;
-    width: 30px;
-
-    &:hover {
+  &:hover {
+    .icon-bar {
       background-color: $color-3;
     }
   }
+
+  .icon-bar {
+    background-color: $color-4;
+    border-radius: 2px;
+    display: block;
+    height: 6px;
+    margin-top: 4px;
+    width: 30px;
+  }
 }
 
-.spacer {
+.spacer-1 {
   height: 85px;
 }
 
@@ -132,8 +141,8 @@ li {
   box-sizing: border-box;
   float: left;
   font-size: 13px;
-  height: 100px;
-  line-height: 140px;
+  height: 115px;
+  line-height: 175px;
   list-style: none;
   overflow: hidden;
   padding-left: 72px;
@@ -142,19 +151,33 @@ li {
   width: 150px;
 }
 
-.hotels {
+.main-div {
   float: none;
   width: 100%;
 }
 
-.hotel-name {
+.sidebar {
+  float: none;
+  width: 100%;
+}
+
+.main-div {
+  li {
+    position: relative;
+    left: 30px;
+    top: 45px;
+  }
+}
+
+.hotel {
   span {
     background-position: center;
     background-repeat: no-repeat;
     background-size: auto 100%;
+    z-index: 3;
 
     &:hover {
-      opacity: .8;
+      opacity: .7;
     }
   }
 }
@@ -174,6 +197,10 @@ li {
   border: 0;
 }
 
+.spacer-2 {
+  height: 65px;
+}
+
 .footer {
   background-color: $color-6;
   bottom: 0;
@@ -181,23 +208,25 @@ li {
   line-height: 60px;
   position: fixed;
   width: 100%;
+  z-index: 9;
 
   .footer--info {
     color: $color-3;
+    font-size: $paragraph-font-size * .7;
     text-align: center;
   }
 }
 
 // Small devices (landscape phones, 576px and up)
-@media (min-width: 520px) {
-  .hotels {
-    float: right;
-    width: 350px;
-  }
-}
+@media (min-width: 576px) {}
 
 // Medium devices (tablets, 768px and up)
-@media (min-width: 768px) {}
+@media (min-width: 768px) {
+  .sidebar {
+    float: right;
+    width: 380px;
+  }
+}
 
 // Large devices (desktops, 992px and up)
 @media (min-width: 992px) {}
