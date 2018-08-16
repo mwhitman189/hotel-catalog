@@ -1,9 +1,11 @@
 #from redis import Redis
 import time
+import random
+import string
 from functools import update_wrapper
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, g, make_response
+from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, g, make_response, session as login_session
 from flask_httpauth import HTTPBasicAuth
-from models import Base, User, Hotel
+from models import Base, Hotel
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
@@ -28,143 +30,54 @@ CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
 
 
-#TODO: check this
-@auth.verify_password
-def verify_password(username_or_token, password):
-    # Check if it's a token
-    user_id = User.verify_auth_token(username_or_token)
-    if user_id:
-        user = session.query(User).filter_by(id=user_id).one()
-    else:
-        user = session.query(User).filter_by(username=username_ousername_or_token).first()
-        if not user or not user.verifty_password(password):
-            return False
-    g.user = user
-    return True
-
-#TODO: check this
-@app.route('/clientOAuth')
-def start():
-    return render_template('client_OAuth.html')
+def createUser(login_session):
+    newUser = User(name=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+    session.add(newUser)
+    session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
 
 
-@app.route('/oauth/<provider>', methods=['POST'])
-def login(provider):
-    # Step 1: Parse the authorization code
-    auth_code = request.json.get('auth_code')
-    print "Step 1 complete: received auth code %s" % auth_code
-    if provider == 'google':
-        # Step 2: Exchange auth code for a token
-        try:
-            # Upgrade the authorization code into a credentials object
-            oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-            oauth_flow.redirect_uri = 'postmessage'
-            credentials = oauth_flow.step2_exchange(auth_code)
-        except FlowExchangeError:
-            response = make_response(json.dumps('Failed to upgrade the authorization code.'), 401)
-            response.headers['Content-Type'] = 'application/json'
-            return response
-
-        # Confirm that the access token is valid
-        access_token = credentials.access_token
-        url = ('https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=%s' % access_token) # NOQA
-        h = httplib2.Http()
-        result = json.loads(h.request(url, 'GET')[1])
-        # If there was an error in the access token info, abort
-        if result.get('error') is not None:
-            response = make_response(json.dumps(result.get('error')), 500)
-            response.headers['Content-Type'] = 'application/json'
-
-        # Verify that the access token is used for the intended user.
-        gplus_id = credentials.id_token['sub']
-        if result['user_id'] != gplus_id:
-            response = make_response(json.dumps("Token's user ID doesn't match given user ID."), 401)
-            response.headers['Content-Type'] = 'application/json'
-            return response
-
-        # Verify that the access token is valid for this app.
-        if result['issued_to'] != CLIENT_ID:
-            response = make_response(json.dumps("Token's client ID does not match app's."), 401)
-            response.headers['Content-Type'] = 'application/json'
-            return response
-
-        stored_credentials = login_session.get('credentials')
-        stored_gplus_id = login_session.get('gplus_id')
-        if stored_credentials is not None and gplus_id == stored_gplus_id:
-            response = make_response(json.dumps('Current user is already connected.'), 200)
-            response.headers['Content-Type'] = 'application/json'
-            return response
-        print "Step 2 Complete! Access Token : %s " % credentials.access_token
-
-        # Step 3: Find User or make a new one
-        # Get user info
-        h = httplib2.Http()
-        userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
-        params = {'access_token': credentials.access_token, 'alt':'json'}
-        answer = requests.get(userinfo_url, params=params)
-
-        data = answer.json()
-
-        name = data['name']
-        picture = data['picture']
-        email = data['email']
-
-        # Check is user exists; if not, make a new one
-        user = session.query(User).filter_by(email=email).first()
-        if not user:
-            user = User(username=name, picture=picture, email=email)
-            session.add(user)
-            session.commit()
-
-        # Step 4: Make a token
-        token = user.generate_auth_token(600)
-
-        # Step 5: Send token back to client
-        return jsonify({'token': token.decode('ascii')})
-
-        # Return jsonify({'token': token.decode('ascii'), 'duration': 600})
-    else:
-        return "Unrecoginized Provider"
+def getUserInfo(user_id):
+    user = session.query(User).filter_by(id=user_id).one()
+    return user
 
 
-@app.route('/token')
-@auth.login_required
-def get_auth_token():
-    token = g.user.generate_auth_token()
-    return jsonify({'token': token.decode('ascii')})
+def getUserID(email):
+    try:
+        user = session.query(User).filter_by(email=email).one()
+        return user.id
+    except:
+        return None
 
 
-@app.route('/users', methods=['POST'])
-def new_user():
-    username = request.json.get('username')
-    password = request.json.get('password')
-    if username is None or password is None:
-        print "Missing arguments"
-        abort(400)
-
-    if session.query(User).filter_by(username=username).first() is not None:
-        print "Existing user"
-        user = session.query(User).filter_by(username=username).first()
-        return jsonify({'message':'User already exists'}), 200
-
-    user = User(username=username)
-    user.hash_password(password)
-    session.add(user)
-    session.commit(
-    return jsonify({ 'username': user.username }), 201
-
-@app.route('/api/users/<int:id>')
-def get_user(id):
-    user = session.query(User).filter_by(id=id).one()
-    if not user:
-        abort(400)
-    return jsonify({'username': user.username})
+# Create anti-forgery state token
+@app.route('/login')
+def showLogin():
+    state = ''.join(random.choice(string.ascii_uppercase + string.digits)for x in xrange(32))
+    login_session['state'] = state
+    return "The current session state is %s" % login_session['state']
 
 
-@app.route('/api/resource')
-@auth.login_required
-def get_resource():
-    return jsonify({ 'data': 'Hello, %s!' % g.user.username })
+### JSON APIs to view Hotel information ###
+@app.route('/hotels/JSON')
+def listHotelsJSON():
+    hotels = session.query(Hotel).all()
+    return jsonify(hotels=[h.serialize for h in hotels])
+
+
+@app.route('/hotel/categories/JSON')
+def listHotelCategoriesJSON():
+    categories = session.query(Hotel.category).group_by(
+        Hotel.category).order_by(Hotel.category).all()
+    return jsonify(categories=[c.serialize for c in categories])
+
+
+@app.route('/hotels/<category>/JSON')
+def listHotelsByCategoryJSON(category):
+    hotels = session.query(Hotel).filter_by(
+        category=category).all()
+    return jsonify(hotels=[h.serialize for h in hotels])
 
 
 @app.route('/')
@@ -196,6 +109,8 @@ def listHotelsByCategory(category):
 
 @app.route('/hotel/new/', methods=['GET', 'POST'])
 def newHotel():
+    if 'username' not in login_session:
+        return redirect('/login')
     if request.method == 'POST':
         new_hotel = Hotel(
             name=request.form['name'],
@@ -204,10 +119,11 @@ def newHotel():
             price=request.form['price'],
             rating=request.form['rating'],
             category=request.form['category'],
+            user_id=login_session['user_id'],
             )
         session.add(new_hotel)
         session.commit()
-        flash("New hotel added!")
+        flash("Success! %s was added to the database." % new_hotel.name)
         return redirect(url_for('listHotels'))
     else:
         return render_template('new_hotel.html')
