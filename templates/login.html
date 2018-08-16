@@ -41,6 +41,7 @@ function signInCallback(authResult) {
             url: '/gconnect?state={{STATE}}',
             processData: false,
             contentType: 'application/octet-stream; charset=utf-8',
+            data: authResult['code'],
             success: function(result) {
                 // Handle or verify the server response if necessary
                 if (result) {
@@ -54,8 +55,6 @@ function signInCallback(authResult) {
                     $('#result').html('Failed to make a server-side call. Check your configuration and consoe');
                 }
             }
-        });
-    }
-}
+        }); } }
 </script>
 {% endblock %}
