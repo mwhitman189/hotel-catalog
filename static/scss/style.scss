@@ -113,6 +113,12 @@ a {
   }
 }
 
+.flashes {
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%;
+}
+
 .spacer-1 {
   height: 85px;
 }
@@ -148,25 +154,23 @@ li {
   padding-left: 72px;
   position: relative;
   text-transform: uppercase;
-  width: 150px;
+  width: 500px;
 }
 
 .main-div {
   float: none;
   width: 100%;
+
+  li {
+    left: 30px;
+    position: relative;
+    top: 45px;
+  }
 }
 
 .sidebar {
   float: none;
   width: 100%;
-}
-
-.main-div {
-  li {
-    position: relative;
-    left: 30px;
-    top: 45px;
-  }
 }
 
 .hotel {
