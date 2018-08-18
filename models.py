@@ -1,5 +1,5 @@
 
-from sqlalchemy import Column,Integer,String
+from sqlalchemy import Column,Integer,String, ForeignKey
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
@@ -16,7 +16,9 @@ secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for x
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    username = Column(String(32), index=True)
+    name = Column(String(32), nullable=False, index=True)
+    picture = Column(String(250))
+    email = Column(String(250), nullable=False)
     password_hash = Column(String(64))
 
     def hash_password(self, password):
@@ -53,8 +55,8 @@ class Hotel(Base):
     price = Column(Integer)
     rating = Column(Integer)
     category = Column(String)
-    #user_id = Column(Integer, ForeignKey('user.id'))
-    #user = relationship(user)
+    user_id = Column(Integer, ForeignKey('user.id'))
+    user = relationship(User)
 
     @property
     def serialize(self):

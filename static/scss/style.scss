@@ -35,7 +35,16 @@ body {
 }
 
 .content-container {
+  margin-left: auto;
+  margin-right: auto;
   margin-top: 100px;
+  width: 85%;
+}
+
+.content-container2 {
+  margin-left: auto;
+  margin-right: auto;
+  width: 85%;
 }
 
 a {
@@ -79,7 +88,7 @@ a {
 }
 
 .navbar-brand {
-  color: $color-4;
+  color: $color-1;
   float: left;
   font-family: $font-heading;
   font-size: $header-font-size;
@@ -114,9 +123,12 @@ a {
 }
 
 .flashes {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
+  li {
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 50%;
+  }
 }
 
 .spacer-1 {
@@ -125,6 +137,7 @@ a {
 
 .page-title {
   border-bottom: $color-4 solid 1px;
+  line-height: 1.5em;
 }
 
 ul {
@@ -157,8 +170,17 @@ li {
   width: 500px;
 }
 
+.result {
+  left: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  width: 50%;
+}
+
 .main-div {
   float: none;
+  margin-bottom: 70px;
   width: 100%;
 
   li {
@@ -171,6 +193,31 @@ li {
 .sidebar {
   float: none;
   width: 100%;
+
+  li {
+    left: 30px;
+    position: relative;
+    top: 45px;
+  }
+}
+
+.hotels-btn {
+  background-color: $color-5;
+  color: $color-1;
+  font-weight: bold;
+  height: 40px;
+  left: 20px;
+  margin: 8px;
+  padding-bottom: 10px;
+  padding-top: 8px;
+  position: relative;
+  text-align: center;
+  top: 40px;
+  width: 90px;
+}
+
+.signin-btn {
+  width: 150px;
 }
 
 .hotel {

@@ -26,16 +26,14 @@
     </ul>
 </div>
 
-<h2 class="subtitle">Hotels</h2>
 <div class="sidebar">
     <ul>
     {% for hotel in hotels %}
         <li>
             <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
             </a>
-            <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a>
+            <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a>
         </li>
-        <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
     {% endfor %}
     </ul>
 </div>

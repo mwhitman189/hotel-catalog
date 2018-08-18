@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block head %}
+<meta name="Description" content="Edit hotel or lodging information. Name of hotel, image, price, description, category, rating">
+{% endblock %}
 {% block body %}
     <h1 class="page-title heading">Edit Hotel</h1>
     <form action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">

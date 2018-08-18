@@ -3,6 +3,7 @@
 {% block head %}
 <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
 <html itemscope itemtype="http://schema.org/Article">
+<meta name="Description" content="Login page for Yamagata Hotels; Description: Hotel and lodging listings, Location: Yamagata Yamagata Japan">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
@@ -22,7 +23,7 @@
 {% block body %}
 
 <!-- GOOGLE SIGN IN BUTTON -->
-<button id="signinButton">Sign in with Google</button>
+<button id="signinButton" class="btn hotels-btn">Sign in with Google</button>
 <script>
   $('#signinButton').click(function() {
     // signInCallback defined in step 6.
@@ -30,6 +31,10 @@
   });
 </script>
 <!-- /GOOGLE SIGNIN BUTTON -->
+
+<div class="result">
+    <div id="result"></div>
+</div>
 
 <script>
 function signInCallback(authResult) {

@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block head %}
+<meta name="Description" content="Display information about a selected Yamagata City hotel.">
+{% endblock %}
 {% block body %}
 {% with messages = get_flashed_messages()%}
     {% if messages %}
