@@ -1,14 +1,16 @@
 #from redis import Redis
+from apiclient import discovery
 import time
 import random
 import string
 from functools import update_wrapper
 from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, g, make_response, session as login_session
 from flask_httpauth import HTTPBasicAuth
-from models import Base, Hotel
+from models import Base, Hotel, User
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, sessionmaker
 from sqlalchemy import create_engine
+from oauth2client import client
 from oauth2client.client import flow_from_clientsecrets
 from oauth2client.client import FlowExchangeError
 import json
@@ -21,12 +23,15 @@ auth = HTTPBasicAuth()
 APPLICATION_NAME = "Hotel Listings"
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
+CLIENT_SECRET_FILE = 'client_secrets.json'
 
-engine = create_engine('sqlite:///hotelListings.db')
+
+engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
+
 
 
 
@@ -62,16 +67,24 @@ def showLogin():
 
 @app.route('/gconnect', methods=['GET', 'POST'])
 def gconnect():
+    # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
+    # Obtain authorization code
     code = request.data
+
     try:
         # Upgrade the authorization code to a credentials object
-        oauth_flow = flow_from_clientsecrets('client_secrets.json', scope='')
-        oauth_flow.redirect_uri = 'postmessage'
-        credentials = oauth_flow.step2_exchange(code)
+        if not request.headers.get('X-Requested-With'):
+            abort(403)
+
+        flow = flow_from_clientsecrets('client_secrets.json', scope='profile')
+        flow.redirect_uri = 'postmessage'
+        # Exchange auth code for access token, refresh token, and ID token
+        credentials = flow.step2_exchange(code)
+
     except FlowExchangeError:
         response = make_response(json.dumps("Failed to upgrade the authorization code."), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -91,8 +104,11 @@ def gconnect():
         return response
 
     # Verify that the access token is used for the inteded user
-    gplus_id = credentials.id_token['sub']
-    if result['user_id'] != gplus_id:
+    # Get profile info from ID token
+    userid = credentials.id_token['sub']
+    email = credentials.id_token['email']
+
+    if result['user_id'] != userid:
         response = make_response(json.dumps("Token's user ID doesn't match the given user ID."), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -105,8 +121,9 @@ def gconnect():
         return response
 
     stored_access_token = login_session.get('access_token')
-    stored_gplus_id = login_session.get('gplus_id')
-    if stored_access_token is not None and gplus_id == stored_gplus_id:
+    stored_userid = login_session.get('userid')
+    if stored_access_token is not None and userid == stored_userid:
+        login_session['access_token'] = credentials.access_token
         response = make_response(json.dumps('Current user is already connected'), 200)
         flash("Current user is already connected!")
         response.headers['Content-Type'] = 'application/json'
@@ -114,7 +131,7 @@ def gconnect():
 
     # Store the access token in the session for later use
     login_session['access_token'] = credentials.access_token
-    login_session['gplus_id'] = gplus_id
+    login_session['userid'] = userid
 
     # Get user info
     userinfo_url = "https://www.googleapis.com/oauth2/v1/userinfo"
@@ -133,10 +150,44 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += ' " style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
+    output += '" style = "width: 300px; height: 300px;border-radius: 150px;-webkit-border-radius: 150px;-moz-border-radius: 150px;"> '
     flash("You are now logged in as %s" % login_session['username'])
+    print output
     print "done!"
     return output
+
+
+# Disconnect: Revoke the current user's token and reset their login_session
+@app.route('/gdisconnect')
+def gdisconnect():
+    credentials = login_session.get('access_token')
+    if credentials is None:
+        response = make_response(json.dumps('Current user not connected'), 401)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    # Execute HTTP GET request to revoke the current token
+    access_token = credentials
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    h = httplib2.Http()
+    result = h.request(url, 'GET')[0]
+
+    if result['status'] == '200':
+        # Reset the user's session
+        del login_session['access_token']
+        del login_session['userid']
+        del login_session['username']
+        del login_session['email']
+        del login_session['picture']
+
+        response = make_response(json.dumps('Successfully disconnected'), 200)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+    else:
+        # The given token was invalid
+        response = make_response(json.dumps('Failed to revoke the user token'), 400)
+        response.headers['Content-Type'] = 'application/json'
+        return response
+
 
 
 ### JSON APIs to view Hotel information ###
