@@ -12,6 +12,6 @@
     <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
     <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>
 {% endfor %}
-<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Back to Hotels</a>
+<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Cancel</a>
 
 {% endblock %}

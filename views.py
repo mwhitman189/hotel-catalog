@@ -223,14 +223,12 @@ def listHotels():
         Hotel.category).order_by(Hotel.category).all()
     hotels_by_category = session.query(Hotel).group_by(Hotel.category).all()
     hotels = session.query(Hotel).all()
-    creator = getUserInfo(Hotel.user_id)
-    user_id = session.query(User.id).first()[0]
-    if creator.id == user_id:
-        return render_template(
-            'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
-    else:
+    if 'username' not in login_session:
         return render_template(
             'public_list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
+    else:
+        return render_template(
+            'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
 
 
 @app.route('/hotel/categories/')
@@ -247,7 +245,7 @@ def listHotelsByCategory(category):
     creator = getUserInfo(Hotel.user_id)
     user_id = session.query(User.id).first()[0]
     if creator.id == user_id:
-        return render_template('list_hotels_by_category.html', hotels=hotels)
+        return render_template('list_hotels_by_category.html', hotels=hotels, creator=creator)
     else:
         return render_template('public_list_hotels_by_category.html', hotels=hotels)
 
@@ -283,6 +281,8 @@ def showHotel(hotel_id):
 
 @app.route('/hotel/<int:hotel_id>/edit/', methods=['GET', 'POST'])
 def editHotel(hotel_id):
+    if 'username' not in login_session:
+        return redirect('/login')
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
     if request.method == 'POST':
         if request.form['name']:
@@ -303,6 +303,20 @@ def editHotel(hotel_id):
             return redirect(url_for('showHotel', hotel_id=hotel_id))
     else:
         return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
+
+
+@app.route('/hotel/<int:hotel_id>/delete/', methods=['GET', 'POST'])
+def deleteHotel(hotel_id):
+    if 'username' not in login_session:
+        return redirect('/login')
+    hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
+    if request.method == 'POST':
+        session.delete(hotel_to_delete)
+        session.commit()
+        flash("Hotel successfully deleted.")
+        return redirect(url_for('listHotels'))
+    else:
+        return render_template('delete_hotel.html', hotel_id=hotel_id, hotel=hotel_to_delete)
 
 
 

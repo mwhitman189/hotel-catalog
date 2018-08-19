@@ -26,8 +26,8 @@
     </ul>
 </div>
 
-<h2 class="subtitle">Hotels</h2>
 <div class="sidebar">
+    <h2 class="subtitle">Hotels</h2>
     <ul>
     {% for hotel in hotels %}
         <li>
@@ -36,8 +36,10 @@
             <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a>
         </li>
         <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
+        <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>
     {% endfor %}
     </ul>
 </div>
+<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Back to Hotels</a>
 
 {% endblock %}

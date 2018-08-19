@@ -29,6 +29,23 @@ body {
   margin-right: auto;
   width: 85%; }
 
+li {
+  border-bottom: #eee solid 1px;
+  box-sizing: border-box;
+  float: left;
+  font-size: 13px;
+  height: 115px;
+  line-height: 175px;
+  list-style: none;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  padding-left: 72px;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  width: 50%; }
+
 a {
   color: #a30404; }
   a:hover {
@@ -36,7 +53,12 @@ a {
     text-decoration: none; }
 
 .navbar-nav {
-  float: right; }
+  float: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 50%; }
+  .navbar-nav li {
+    width: 100%; }
   .navbar-nav a {
     color: #302626;
     display: block;
@@ -84,11 +106,15 @@ a {
     margin-top: 4px;
     width: 30px; }
 
-.flashes li {
+.center-text {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   width: 50%; }
+
+.logged-in-user {
+  float: right;
+  margin: 10px; }
 
 .spacer-1 {
   height: 85px; }
@@ -109,20 +135,6 @@ ul {
     content: '';
     display: block; }
 
-li {
-  border-bottom: #eee solid 1px;
-  box-sizing: border-box;
-  float: left;
-  font-size: 13px;
-  height: 115px;
-  line-height: 175px;
-  list-style: none;
-  overflow: hidden;
-  padding-left: 72px;
-  position: relative;
-  text-transform: uppercase;
-  width: 500px; }
-
 .result {
   left: 80px;
   margin-left: auto;
@@ -134,18 +146,19 @@ li {
   float: none;
   margin-bottom: 70px;
   width: 100%; }
-  .main-div li {
-    left: 30px;
-    position: relative;
-    top: 45px; }
 
 .sidebar {
   float: none;
   width: 100%; }
-  .sidebar li {
-    left: 30px;
-    position: relative;
-    top: 45px; }
+
+.profile-pic {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  border-radius: 25px;
+  height: 50px;
+  width: 50px;
+  z-index: 3; }
 
 .hotels-btn {
   background-color: #f70202;
@@ -184,9 +197,6 @@ li {
 .btn-danger {
   background-color: #a30404;
   border: 0; }
-
-.spacer-2 {
-  height: 65px; }
 
 .footer {
   background-color: #595454;
