@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block head %}
+<meta name="Description" content="List all of the hotels in certain category or of a certain type.">
+{% endblock %}
+{% block body %}
+
+<h1 class="page-title heading">{{ category }}</h1>
+
+{% for hotel in hotels %}
+    <h2><a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">{{ hotel.name }}</a></h2>
+    <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a>
+{% endfor %}
+<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Back to Hotels</a>
+
+{% endblock %}

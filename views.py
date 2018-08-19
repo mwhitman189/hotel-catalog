@@ -223,10 +223,14 @@ def listHotels():
         Hotel.category).order_by(Hotel.category).all()
     hotels_by_category = session.query(Hotel).group_by(Hotel.category).all()
     hotels = session.query(Hotel).all()
-    for hotel in hotels_by_category:
-        print hotel.picture
-    return render_template(
-        'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
+    creator = getUserInfo(Hotel.user_id)
+    user_id = session.query(User.id).first()[0]
+    if creator.id == user_id:
+        return render_template(
+            'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
+    else:
+        return render_template(
+            'public_list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
 
 
 @app.route('/hotel/categories/')
@@ -240,7 +244,13 @@ def listHotelCategories():
 @app.route('/hotels/<category>/')
 def listHotelsByCategory(category):
     hotels = session.query(Hotel).filter_by(category=category).all()
-    return render_template('list_hotels_by_category.html', hotels=hotels)
+    creator = getUserInfo(Hotel.user_id)
+    user_id = session.query(User.id).first()[0]
+    if creator.id == user_id:
+        return render_template('list_hotels_by_category.html', hotels=hotels)
+    else:
+        return render_template('public_list_hotels_by_category.html', hotels=hotels)
+
 
 
 @app.route('/hotel/new/', methods=['GET', 'POST'])
