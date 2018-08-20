@@ -34,13 +34,11 @@ li {
   box-sizing: border-box;
   float: left;
   font-size: 13px;
-  height: 115px;
-  line-height: 175px;
+  line-height: 4;
   list-style: none;
   margin-left: auto;
   margin-right: auto;
   overflow: hidden;
-  padding-left: 72px;
   position: relative;
   text-align: center;
   text-transform: uppercase;
@@ -62,7 +60,6 @@ a {
   .navbar-nav a {
     color: #302626;
     display: block;
-    padding: 14px 16px;
     text-align: center;
     text-decoration: none; }
     .navbar-nav a:hover {
@@ -106,6 +103,13 @@ a {
     margin-top: 4px;
     width: 30px; }
 
+.navbar-right {
+  height: 30px;
+  margin-bottom: 0;
+  margin-right: 70px;
+  margin-top: 0;
+  width: 150px; }
+
 .center-text {
   margin-left: auto;
   margin-right: auto;
@@ -124,12 +128,7 @@ a {
   line-height: 1.5em; }
 
 ul {
-  display: block;
-  margin-block-end: 1em;
-  margin-block-start: 1em;
-  margin-inline-end: 0;
-  margin-inline-start: 0;
-  padding-inline-start: 40px; }
+  display: block; }
   ul::after {
     clear: both;
     content: '';

@@ -16,7 +16,7 @@ secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for x
 class User(Base):
     __tablename__ = 'user'
     id = Column(Integer, primary_key=True)
-    name = Column(String(32), nullable=False, index=True)
+    username = Column(String(32), nullable=False, index=True)
     picture = Column(String(250))
     email = Column(String(250), nullable=False)
     password_hash = Column(String(64))
@@ -36,7 +36,7 @@ class User(Base):
         s = Serializer(secret_key)
         try:
             data = s.loads(token)
-        except SegnatureExpired:
+        except SignatureExpired:
             #Valid Token, but expired
             return None
         except BadSignature:
@@ -52,6 +52,7 @@ class Hotel(Base):
     name = Column(String)
     picture = Column(String)
     description = Column(String)
+
     price = Column(Integer)
     rating = Column(Integer)
     category = Column(String)
