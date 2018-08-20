@@ -5,15 +5,12 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="#">山形Hotels</a>
-          {% if 'username' in session %}
-          <h4 class="logged-in-user">Hi, {{ session.username }}</h4>
-          {% endif %}
           <ul class="nav navbar-nav navbar-right">
             {%if 'username' not in session %}
             <li><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Log In</a></li>
             {% else %}
-            <li><a href="{{ url_for('gdisconnect') }}"><span class="glyphicon glyphicon-user"></span>Log Out</a></li>
-            <li><a href="#"><span class="glyphicon glyphicon-log-in"></span> My Profile</a></li>
+            <button type="button" class="dropdown logged-in-user-toggle" title="User-links dropdown menu" data-toggle="collapse" data-targt="#userNav">{{ session.username }}</button>
+            <li><a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user"></span>Log Out</a></li>
             {% endif %}
           </ul>
           <button type="button" class="navbar-toggle" title="Toggle navigation menu." data-toggle="collapse" data-target="#myNavbar">

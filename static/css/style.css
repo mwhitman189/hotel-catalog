@@ -29,8 +29,13 @@ body {
   margin-right: auto;
   width: 85%; }
 
+button {
+  background-color: transparent;
+  border: #fff solid 1px;
+  border-radius: 6px;
+  color: #fff; }
+
 li {
-  border-bottom: #eee solid 1px;
   box-sizing: border-box;
   float: left;
   font-size: 13px;
@@ -43,6 +48,16 @@ li {
   text-align: center;
   text-transform: uppercase;
   width: 50%; }
+  li::after {
+    border-bottom: #eee solid 1px;
+    bottom: 0;
+    content: '';
+    left: 50%;
+    position: absolute;
+    transition: .2s;
+    width: 10px; }
+    li::after:hover::after {
+      width: 100%; }
 
 a {
   color: #a30404; }
@@ -91,8 +106,12 @@ a {
 .navbar-toggle {
   background-color: transparent;
   border: 0;
+  cursor: pointer;
   float: right;
-  margin: 10px; }
+  margin-right: 0;
+  position: absolute;
+  right: 20px;
+  top: 20px; }
   .navbar-toggle:hover .icon-bar {
     background-color: #eee; }
   .navbar-toggle .icon-bar {
@@ -104,21 +123,26 @@ a {
     width: 30px; }
 
 .navbar-right {
-  height: 30px;
-  margin-bottom: 0;
-  margin-right: 70px;
-  margin-top: 0;
+  margin-right: 30px;
+  position: relative;
+  top: 15px;
   width: 150px; }
+  .navbar-right li {
+    border: #fff solid 1px;
+    border-radius: 6px;
+    font-weight: bold;
+    height: 30px;
+    line-height: 2.2;
+    text-align: center; }
+
+.usernav-collapse {
+  border-radius: 6px; }
 
 .center-text {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   width: 50%; }
-
-.logged-in-user {
-  float: right;
-  margin: 10px; }
 
 .spacer-1 {
   height: 85px; }
@@ -128,7 +152,8 @@ a {
   line-height: 1.5em; }
 
 ul {
-  display: block; }
+  display: block;
+  margin-block-end: 10px; }
   ul::after {
     clear: both;
     content: '';
@@ -174,6 +199,7 @@ ul {
   width: 90px; }
 
 .signin-btn {
+  border: #fff solid 1px;
   width: 150px; }
 
 .hotel span {
