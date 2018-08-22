@@ -1,0 +1,33 @@
+<!-- {% extends 'base.html' %} -->
+<!--{% block header %}
+<header class="header">
+    <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="#">山形Hotels</a>
+          <ul class="nav navbar-nav navbar-right flex-container" role="navigation">
+            {%if 'username' not in session %}
+            <li><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Log In</a></li>
+            {% else %}
+            <button type="button" class="dropdown logged-in-user-toggle" title="User-links dropdown menu" data-toggle="collapse" data-targt="#userNav">{{ session.username }}</button>
+            <li><a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user"></span>Log Out</a></li>
+            {% endif %}
+          </ul>
+          <button type="button" class="navbar-toggle" title="Toggle navigation menu." data-toggle="collapse" data-target="#myNavbar">
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+              <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">Home</a></li>
+            <li><a href="#">Page 1</a></li>
+            <li><a href="#">Page 2</a></li>
+            <li><a href="#">Page 3</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+</header>
+{% endblock %}

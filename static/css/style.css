@@ -153,7 +153,12 @@ a {
 
 ul {
   display: block;
-  margin-block-end: 10px; }
+  list-style-type: disc;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  padding-inline-start: 40px; }
   ul::after {
     clear: both;
     content: '';
@@ -203,10 +208,14 @@ ul {
   width: 150px; }
 
 .hotel span {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
+  left: 0;
+  position: absolute;
+  top: 15px;
   z-index: 3; }
+  .hotel span .img {
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover; }
   .hotel span:hover {
     opacity: .7; }
 

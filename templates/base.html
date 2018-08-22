@@ -18,15 +18,10 @@
     </head>
 
     <body>
-        <div class="wrapper">
         {% block header %}
         {% endblock %}
             <content>
                 <div class="content-container">
-                    {% block title %}
-                    {% endblock %}
-                </div>
-                <div class="content-container2">
                     {% block body %}
                     {% endblock %}
                 </div>
@@ -35,7 +30,6 @@
             <footer class="footer">
                 <p class="footer--info">Copyright © 2018, Miles Whitman</p>
             </footer>
-        </div>
         <!-- [/wrapper] -->
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
