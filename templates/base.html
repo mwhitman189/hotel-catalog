@@ -13,6 +13,9 @@
 
         <link href="https://fonts.googleapis.com/css?family=Amatic+SC:700|Barlow+Semi+Condensed|Fredericka+the+Great" rel="stylesheet">
 
+        <!-- Load an icon library to show a hamburger menu (bars) on small screens -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         {% block head %}
         {% endblock %}
     </head>
@@ -20,17 +23,20 @@
     <body>
         {% block header %}
         {% endblock %}
-            <content>
-                <div class="content-container">
-                    {% block body %}
-                    {% endblock %}
-                </div>
-            </content>
 
-            <footer class="footer">
-                <p class="footer--info">Copyright © 2018, Miles Whitman</p>
-            </footer>
+        <content>
+            <div class="lay-content-container">
+                {% block body %}
+                {% endblock %}
+            </div>
+        </content>
+
+        <footer class="ftr">
+            <p class="ftr-info">Copyright © 2018, Miles Whitman</p>
+        </footer>
         <!-- [/wrapper] -->
+        {% block scripts %}
+        {% endblock %}
         <script
             src="https://code.jquery.com/jquery-3.3.1.min.js"
             integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="

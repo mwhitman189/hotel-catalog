@@ -1,15 +1,13 @@
-body,
-html {
-  margin: 0;
-  max-width: 100%;
-  min-height: 100vh;
-  min-width: 360px;
-  padding: 0; }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0; }
+
+body,
+html {
+  max-width: 100%;
+  min-height: 100vh;
+  min-width: 360px; }
 
 body {
   background-color: #fff;
@@ -18,234 +16,106 @@ body {
   font-size: 18px;
   width: 100%; }
 
-.content-container {
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 100px;
-  width: 85%; }
+h2 {
+  font-size: 2.5rem; }
 
-.content-container2 {
-  margin-left: auto;
-  margin-right: auto;
-  width: 85%; }
+dl,
+ol,
+p,
+ul {
+  font-size: 1.5rem; }
 
-button {
-  background-color: transparent;
-  border: #fff solid 1px;
-  border-radius: 6px;
-  color: #fff; }
-
-li {
-  box-sizing: border-box;
-  float: left;
-  font-size: 13px;
-  line-height: 4;
-  list-style: none;
-  margin-left: auto;
-  margin-right: auto;
-  overflow: hidden;
-  position: relative;
-  text-align: center;
-  text-transform: uppercase;
-  width: 50%; }
-  li::after {
-    border-bottom: #eee solid 1px;
-    bottom: 0;
-    content: '';
-    left: 50%;
-    position: absolute;
-    transition: .2s;
-    width: 10px; }
-    li::after:hover::after {
-      width: 100%; }
-
-a {
-  color: #a30404; }
-  a:hover {
-    color: #f70202;
-    text-decoration: none; }
-
-.navbar-nav {
-  float: none;
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%; }
-  .navbar-nav li {
-    width: 100%; }
-  .navbar-nav a {
-    color: #302626;
-    display: block;
-    text-align: center;
-    text-decoration: none; }
-    .navbar-nav a:hover {
-      color: #eee; }
-
-.navbar {
-  background-color: #a30404;
-  box-shadow: 0 4px 5px #595454;
-  display: block;
-  left: 0;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 99; }
-
-.navbar-header {
-  width: 100%; }
-
-.navbar-brand {
-  color: #fff;
-  float: left;
-  font-family: "Fredericka the Great", cursive;
-  font-size: 2rem;
-  height: 100%;
-  width: 150px; }
-  .navbar-brand:hover {
-    color: #eee; }
-
-.navbar-toggle {
-  background-color: transparent;
-  border: 0;
-  cursor: pointer;
-  float: right;
-  margin-right: 0;
-  position: absolute;
-  right: 20px;
-  top: 20px; }
-  .navbar-toggle:hover .icon-bar {
-    background-color: #eee; }
-  .navbar-toggle .icon-bar {
-    background-color: #302626;
-    border-radius: 2px;
-    display: block;
-    height: 6px;
-    margin-top: 4px;
-    width: 30px; }
-
-.navbar-right {
-  margin-right: 30px;
-  position: relative;
-  top: 15px;
-  width: 150px; }
-  .navbar-right li {
-    border: #fff solid 1px;
-    border-radius: 6px;
-    font-weight: bold;
-    height: 30px;
-    line-height: 2.2;
-    text-align: center; }
-
-.usernav-collapse {
-  border-radius: 6px; }
-
-.center-text {
-  margin-left: auto;
-  margin-right: auto;
-  text-align: center;
-  width: 50%; }
-
-.spacer-1 {
-  height: 85px; }
-
-.page-title {
-  border-bottom: #302626 solid 1px;
-  line-height: 1.5em; }
+li,
+p {
+  line-height: 1.5; }
 
 ul {
-  display: block;
-  list-style-type: disc;
-  margin-block-end: 1em;
-  margin-block-start: 1em;
-  margin-inline-end: 0;
-  margin-inline-start: 0;
-  padding-inline-start: 40px; }
-  ul::after {
-    clear: both;
-    content: '';
-    display: block; }
+  list-style: none; }
 
-.result {
-  left: 80px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-  width: 50%; }
+a {
+  color: #f70202;
+  text-decoration: none; }
+  a:hover {
+    text-decoration: none; }
 
-.main-div {
-  float: none;
-  margin-bottom: 70px;
-  width: 100%; }
+input {
+  background-color: #efefef;
+  border: #595454;
+  border-radius: 2px; }
 
-.sidebar {
-  float: none;
-  width: 100%; }
+.btn {
+  border: 2px solid; }
 
-.profile-pic {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: auto 100%;
-  border-radius: 25px;
-  height: 50px;
-  width: 50px;
-  z-index: 3; }
+.lay-content-container {
+  margin-top: 100px; }
 
-.hotels-btn {
-  background-color: #f70202;
-  color: #fff;
-  font-weight: bold;
-  height: 40px;
-  left: 20px;
-  margin: 8px;
-  padding-bottom: 10px;
-  padding-top: 8px;
-  position: relative;
-  text-align: center;
-  top: 40px;
-  width: 90px; }
+.lay-flex-container {
+  display: flex;
+  justify-content: space-between; }
 
-.signin-btn {
-  border: #fff solid 1px;
-  width: 150px; }
-
-.hotel span {
-  left: 0;
-  position: absolute;
-  top: 15px;
-  z-index: 3; }
-  .hotel span .img {
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover; }
-  .hotel span:hover {
-    opacity: .7; }
-
-.img {
-  border-radius: 35px;
-  display: block;
-  height: 70px;
-  left: 0;
-  position: absolute;
-  top: 10px;
-  width: 70px; }
-
-.btn-danger {
+.hdr {
   background-color: #a30404;
-  border: 0; }
+  height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%; }
 
-.footer {
+.hdr-brand {
+  color: #fff;
+  font-size: 2.5rem;
+  overflow: hidden;
+  white-space: nowrap; }
+
+.hdr-navbar {
+  height: 100%; }
+  .hdr-navbar a {
+    color: #fff;
+    display: none;
+    float: left;
+    font-size: 1.5rem;
+    height: 80px;
+    padding: 14px 16px; }
+    .hdr-navbar a .fa-bars {
+      color: #fff;
+      display: block;
+      float: right; }
+    .hdr-navbar a:hover {
+      background-color: #a30404;
+      color: #302626;
+      text-decoration: none; }
+    .hdr-navbar a:last-child {
+      display: block; }
+
+.hdr-navbar.responsive {
+  position: relative;
+  width: 300px; }
+  .hdr-navbar.responsive a {
+    display: block;
+    float: none;
+    text-align: left; }
+  .hdr-navbar.responsive:hover {
+    background-color: #302626;
+    color: #fff;
+    text-decoration: none; }
+  .hdr-navbar.responsive .hdr-icon {
+    background-color: #a30404;
+    position: absolute;
+    right: 0;
+    top: 0; }
+    .hdr-navbar.responsive .hdr-icon .fa-bars {
+      color: #302626; }
+
+.ftr {
   background-color: #595454;
   bottom: 0;
-  height: 60px;
-  line-height: 60px;
   position: fixed;
   width: 100%;
   z-index: 9; }
-  .footer .footer--info {
-    color: #eee;
-    font-size: 12.6px;
+  .ftr .ftr-info {
+    color: #fff;
+    font-size: 18px;
     text-align: center; }
 
-@media (min-width: 768px) {
-  .sidebar {
-    float: right;
-    width: 380px; } }
+.hdr-navbar a.is-active {
+  background-color: #302626;
+  color: #fff; }

@@ -2,33 +2,31 @@ $font-stack: 'Amatic SC', cursive, 'Work Sans', sans-serif;
 $font-title: 'Amatic SC', cursive;
 $font-one: 'Fredericka the Great', cursive;
 $font-two: 'Barlow Semi Condensed', sans-serif;
-$font-size-base: 10px;
-$font-size-one: 2rem;
+$font-size-base: 18px;
+$font-size-one: 2.5rem;
 $font-size-two: 1.5rem;
 $color-1: #fff;
 $color-2: #a30404;
-$color-3: #eee;
+$color-3: #efefef;
 $color-4: #302626;
 $color-5: #f70202;
 $color-6: #595454;
 
-//
+// ************************************
 // Base Rules *************************
-//
-
-body,
-html {
-  margin: 0;
-  max-width: 100%;
-  min-height: 100vh;
-  min-width: 360px;
-  padding: 0;
-}
+// ************************************
 
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body,
+html {
+  max-width: 100%;
+  min-height: 100vh;
+  min-width: 360px;
 }
 
 body {
@@ -62,48 +60,135 @@ ul {
 a {
   color: $color-5;
   text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
 }
 
 input {
-  background-color: $color-4;
+  background-color: $color-3;
   border: $color-6;
   border-radius: 2px;
 }
 
-//
+.btn {
+  border: 2px solid;
+}
+// ************************************
 // Layout Rules ***********************
-//
-.header {
-  background-color: $color-2;
+// ************************************
+
+.lay-content-container {
+  margin-top: 100px;
 }
 
-.flex-container {
+.lay-flex-container {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
-.nav {
-  flex-wrap: nowrap;
+// ************************************
+// Modules Rules **********************
+// ************************************
+
+// hdr = header
+.hdr {
+  background-color: $color-2;
+  height: 80px;
+  position: fixed;
+  top: 0;
+  width: 100%;
 }
 
-.hd-navbar {
+.hdr-brand {
+  color: $color-1;
+  font-size: $font-size-one;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.hdr-navbar {
+  height: 100%;
+  // Style the links inside the navigation bar
   a {
     color: $color-1;
+    display: none;
+    float: left;
+    font-size: $font-size-two;
+    height: 80px;
+    padding: 14px 16px;
+
+    .fa-bars {
+      color: $color-1;
+      display: block;
+      float: right;
+    }
+    // Change the link colors on hover
+    &:hover {
+      background-color: $color-2;
+      color: $color-4;
+      text-decoration: none;
+    }
+
+    &:last-child {
+      display: block;
+    }
   }
 }
 
-.footer {
-  bottom: 0;
+.hdr-navbar.responsive {
+  position: relative;
+  width: 300px;
+
+  a {
+    display: block;
+    float: none;
+    text-align: left;
+  }
+
+  &:hover {
+    background-color: $color-4;
+    color: $color-1;
+    text-decoration: none;
+  }
+
+  .hdr-icon {
+    background-color: $color-2;
+    position: absolute;
+    right: 0;
+    top: 0;
+
+    .fa-bars {
+      color: $color-4;
+    }
+  }
 }
 
-//
-// Modules Rules **********************
-//
+.ftr {
+  background-color: $color-6;
+  bottom: 0;
+  position: fixed;
+  width: 100%;
+  z-index: 9;
 
-//
+  .ftr-info {
+    color: $color-1;
+    font-size: $font-size-base;
+    text-align: center;
+  }
+}
+
+// ************************************
 // State Rules ************************
-//
-
-//
+// ************************************
+.hdr-navbar {
+  // Style the links inside the navigation bar
+  a.is-active {
+    background-color: $color-4;
+    color: $color-1;
+  }
+}
+// ************************************
 // Theme Rules ************************
-//
+// ************************************
