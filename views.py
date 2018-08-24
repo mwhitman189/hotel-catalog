@@ -121,6 +121,7 @@ def gconnect():
         response = make_response(json.dumps('Invalid state parameter'), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
+
     # Obtain authorization code
     code = request.data
 
@@ -133,7 +134,6 @@ def gconnect():
         flow.redirect_uri = 'postmessage'
         # Exchange auth code for access token, refresh token, and ID token
         credentials = flow.step2_exchange(code)
-
     except FlowExchangeError:
         response = make_response(json.dumps("Failed to upgrade the authorization code."), 401)
         response.headers['Content-Type'] = 'application/json'
@@ -152,7 +152,7 @@ def gconnect():
         respose.headers['Content-Type'] = 'application/json'
         return response
 
-    # Verify that the access token is used for the inteded user
+    # Verify that the access token is used for the intended user
     # Get profile info from ID token
     userid = credentials.id_token['sub']
     email = credentials.id_token['email']

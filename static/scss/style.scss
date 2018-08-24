@@ -11,6 +11,8 @@ $color-3: #efefef;
 $color-4: #302626;
 $color-5: #f70202;
 $color-6: #595454;
+$color-7: #092bea;
+$color-8: #f9d803;
 
 // ************************************
 // Base Rules *************************
@@ -124,6 +126,7 @@ input {
       display: block;
       float: right;
     }
+
     // Change the link colors on hover
     &:hover {
       background-color: $color-2;
@@ -134,6 +137,24 @@ input {
     &:last-child {
       display: block;
     }
+  }
+}
+
+.hdr-user-link {
+  .far {
+    color: $color-1;
+  }
+
+  .fas {
+    color: $color-7;
+  }
+
+  .fa-user {
+    float: right;
+    font-size: 50px;
+    position: absolute;
+    right: 80px;
+    top: 10px;
   }
 }
 

@@ -4,6 +4,11 @@
 <header class="hdr">
     <div class="lay-flex-container">
         <a class="hdr-brand fl" href="#">山形Hotels</a>
+        {% if 'username' not in session %}
+        <a class="hdr-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"></i></a>
+        {% else %}
+        <a class="hdr-user-link" href="#"><i class="fas fa-user"></i></a>
+        {% endif %}
         <div class="hdr-nav">
             <nav class="hdr-navbar" id="hdrNavbar">
                 <a class="is-active" href="#">Home</a>
