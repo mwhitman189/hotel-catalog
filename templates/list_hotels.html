@@ -1,7 +1,9 @@
 {% extends 'header.html' %}
+
 {% block head %}
 <meta name="Description" content="List all of the recommended hotels in Yamagata City, Japan.">
 {% endblock %}
+
 {% block body %}
 {% with messages = get_flashed_messages()%}
     {% if messages %}
@@ -12,8 +14,7 @@
     </ul>
     {% endif %}
 {% endwith %}
-<h1 class="page-title heading">Lodgings</h1>
-<h2 class="subtitle">Categories</h2>
+
 <div class="main-div">
     <ul>
         {% for hotel in hotels_by_category %}
@@ -31,7 +32,7 @@
     <ul>
     {% for hotel in hotels %}
         <li>
-            <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
+            <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ichotels_hotel_48px.svg');"{% endif %}></span>
             </a>
             <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a>
         </li>

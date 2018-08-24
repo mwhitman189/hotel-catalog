@@ -54,11 +54,13 @@ input {
   justify-content: space-between; }
 
 .hdr {
-  background-color: #a30404;
+  background-color: rgba(163, 4, 4, 0.7);
+  box-shadow: 3px 3px 3px #302626;
   height: 80px;
   position: fixed;
   top: 0;
-  width: 100%; }
+  width: 100%;
+  z-index: 11; }
 
 .hdr-brand {
   color: #fff;
@@ -67,8 +69,15 @@ input {
   white-space: nowrap; }
 
 .hdr-navbar {
+  background-color: rgba(48, 38, 38, 0.9);
   height: 100%; }
+  .hdr-navbar .hdr-icon {
+    border: 0;
+    position: absolute;
+    right: 0;
+    top: 0; }
   .hdr-navbar a {
+    border-bottom: 1px solid #595454;
     color: #fff;
     display: none;
     float: left;
@@ -85,6 +94,10 @@ input {
       text-decoration: none; }
     .hdr-navbar a:last-child {
       display: block; }
+
+.hdr-user-link .hdr-text {
+  color: #fff;
+  font-size: 1.5rem; }
 
 .hdr-user-link .far {
   color: #fff; }
@@ -107,8 +120,6 @@ input {
     float: none;
     text-align: left; }
   .hdr-navbar.responsive:hover {
-    background-color: #302626;
-    color: #fff;
     text-decoration: none; }
   .hdr-navbar.responsive .hdr-icon {
     background-color: #a30404;
@@ -119,7 +130,7 @@ input {
       color: #302626; }
 
 .ftr {
-  background-color: #595454;
+  background-color: rgba(48, 38, 38, 0.9);
   bottom: 0;
   position: fixed;
   width: 100%;
@@ -129,6 +140,29 @@ input {
     font-size: 18px;
     text-align: center; }
 
-.hdr-navbar a.is-active {
-  background-color: #302626;
-  color: #fff; }
+.signin-btn {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 150px; }
+
+@media screen and (min-width: 600px) {
+  .hero-image {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/ginzan.jpeg");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+    position: relative;
+    width: 100%; }
+    .hero-image .hero-text {
+      color: #fff;
+      position: relative;
+      text-align: center;
+      top: 300px; }
+      .hero-image .hero-text a {
+        color: #fff; }
+  .hdr {
+    right: 0;
+    top: 60px;
+    width: 90%; } }
