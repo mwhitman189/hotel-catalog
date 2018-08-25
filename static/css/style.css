@@ -141,8 +141,8 @@ input {
     text-align: center; }
 
 .signin-btn {
-  position: absolute;
   left: 50%;
+  position: absolute;
   top: 50%;
   width: 150px; }
 
@@ -152,7 +152,7 @@ input {
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 50vh;
     position: relative;
     width: 100%; }
     .hero-image .hero-text {
@@ -166,3 +166,8 @@ input {
     right: 0;
     top: 60px;
     width: 90%; } }
+
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%; }

@@ -6,7 +6,9 @@
 
 <h1 class="page-title heading">Delete {{ hotel.name }}</h1>
 
-    <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>
+    <form action="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" method="POST">
+        <input class="btn btn-danger" type="submit" value="Delete Hotel"></input>
+    </form>
 
 <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Cancel</a>
 

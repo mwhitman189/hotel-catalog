@@ -251,7 +251,7 @@ def listHotelsJSON():
     return jsonify(hotels=[h.serialize for h in hotels])
 
 
-@app.route('/hotel/categories/JSON')
+@app.route('/hotels/categories/JSON')
 #@ratelimit(limit=30, per=60 * 1)
 def listHotelCategoriesJSON():
     categories = session.query(Hotel.category).group_by(
@@ -283,7 +283,7 @@ def listHotels():
             'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
 
 
-@app.route('/hotel/categories/')
+@app.route('/hotels/categories/')
 #@ratelimit(limit=30, per=60 * 1)
 def listHotelCategories():
     categories = session.query(Hotel.category).group_by(
@@ -305,7 +305,7 @@ def listHotelsByCategory(category):
 
 
 
-@app.route('/hotel/new/', methods=['GET', 'POST'])
+@app.route('/hotels/new/', methods=['GET', 'POST'])
 #@ratelimit(limit=30, per=60 * 1)
 def newHotel():
     if 'username' not in login_session:
@@ -328,14 +328,14 @@ def newHotel():
         return render_template('new_hotel.html')
 
 
-@app.route('/hotel/<int:hotel_id>/')
+@app.route('/hotels/<int:hotel_id>/')
 #@ratelimit(limit=30, per=60 * 1)
 def showHotel(hotel_id):
     hotel = session.query(Hotel).filter_by(id=hotel_id).one()
     return render_template('show_hotel.html', hotel=hotel)
 
 
-@app.route('/hotel/<int:hotel_id>/edit/', methods=['GET', 'POST'])
+@app.route('/hotels/<int:hotel_id>/edit/', methods=['GET', 'POST'])
 #@ratelimit(limit=30, per=60 * 1)
 def editHotel(hotel_id):
     if 'username' not in login_session:
@@ -361,13 +361,16 @@ def editHotel(hotel_id):
     else:
         return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
 
+
 # TODO: finish delete page
-@app.route('/hotel/<int:hotel_id>/delete/', methods=['GET', 'POST'])
+@app.route('/hotels/<int:hotel_id>/delete', methods=['GET', 'POST'])
 #@ratelimit(limit=30, per=60 * 1)
 def deleteHotel(hotel_id):
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
+    print hotel_to_delete
+    print request.method
     if request.method == 'POST':
         session.delete(hotel_to_delete)
         session.commit()

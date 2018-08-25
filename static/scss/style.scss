@@ -12,7 +12,7 @@ $color-4: #302626;
 $color-5: #f70202;
 $color-6: #595454;
 $color-7: #092bea;
-$color-8: #f9d803;
+$color-8: #000;
 
 // ************************************
 // Base Rules *************************
@@ -216,8 +216,8 @@ input {
 }
 
 .signin-btn {
-  position: absolute;
   left: 50%;
+  position: absolute;
   top: 50%;
   width: 150px;
 }
@@ -227,11 +227,11 @@ input {
 
 @media screen and (min-width: 600px) {
   .hero-image {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/ginzan.jpeg");
+    background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6)), url('/static/img/ginzan.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 100vh;
+    height: 50vh;
     position: relative;
     width: 100%;
 
@@ -252,6 +252,12 @@ input {
     top: 60px;
     width: 90%;
   }
+}
+
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
 }
 
 // ************************************
