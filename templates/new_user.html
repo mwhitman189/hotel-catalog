@@ -1,0 +1,24 @@
+{% extends 'header.html' %}
+{% block head %}
+<meta name="Description" content="Create a new Yamagata Hotels account">
+{% endblock %}
+{% block body %}
+    <h1 class="page-title heading">Create Account</h1>
+    <form class="form" action="{{ url_for('newUser') }}" method="POST">
+        <div class="form-group">
+            <label class=".sr-only" for="newUsername">New Username</label>
+            <input class="form-control" type="text" id="newUsername" name="username" placeholder="New Username">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="profilePicture">Profile Picture</label>
+            <input class="form-control" type="photo" id="profilePicture" name="picture" placeholder="Profile Picture">
+        </div>
+        <div class="form-group">
+            <label class=".sr-only" for="accountEmail">Name of hotel</label>
+            <input class="form-control" type="email" id="accountEmail" name="email" placeholder="E-mail (example@example.com)">
+        </div>
+
+        <input class="btn btn-danger" type="submit" value="Add Hotel">
+    </form>
+    <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Cancel</a>
+{% endblock %}

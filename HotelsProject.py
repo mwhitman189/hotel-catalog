@@ -83,12 +83,7 @@ def inject_x_rate_headers(response):
     return response
 """
 
-def createUser(login_session):
-    newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
-    session.add(newUser)
-    session.commit()
-    user = session.query(User).filter_by(email=login_session['email']).one()
-    return user.id
+
 
 
 def getUserInfo(user_id):
@@ -102,6 +97,21 @@ def getUserID(email):
         return user.id
     except:
         return None
+
+
+@app.route('/users/new', methods=['GET', 'POST'])
+def createUser(login_session):
+    if 'username' not in login_session:
+        if request.method == 'POST':
+            newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+            session.add(newUser)
+            session.commit()
+            user = session.query(User).filter_by(email=login_session['email']).one()
+            return user.id
+        else:
+            return render_template('new_user.html')
+    else:
+        return "Your're already logged in as %s!" % (login_session['username'])
 
 
 # Create anti-forgery state token
