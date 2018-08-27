@@ -30,10 +30,19 @@ Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
-#redis = Redis()
+redis = Redis()
 
-"""
+
+
+
 class RateLimit(object):
+    """
+    Create rate limiter using Redis.
+
+    The rate limiter is added as a decorator with a limit per specified number of seconds.
+
+    Send JSON data when the limit is exceeded.
+    """
     expiration_window = 10
 
     def __init__(self, key_prefix, limit, per, send_x_headers):
@@ -81,9 +90,19 @@ def inject_x_rate_headers(response):
         h.add('X-RateLimit-Limit', str(limit.limit))
         h.add('X-RateLimit-Reset', str(limit.reset))
     return response
-"""
 
 
+
+####################
+# Helper functions for user objects
+####################
+
+def createUser(login_session):
+    newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+    session.add(newUser)
+    session.commit()
+    user = session.query(User).filter_by(email=login_session['email']).one()
+    return user.id
 
 
 def getUserInfo(user_id):
@@ -99,25 +118,17 @@ def getUserID(email):
         return None
 
 
-@app.route('/users/new', methods=['GET', 'POST'])
-def createUser(login_session):
-    if 'username' not in login_session:
-        if request.method == 'POST':
-            newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
-            session.add(newUser)
-            session.commit()
-            user = session.query(User).filter_by(email=login_session['email']).one()
-            return user.id
-        else:
-            return render_template('new_user.html')
-    else:
-        return "Your're already logged in as %s!" % (login_session['username'])
 
+####################
+# Authentication
+####################
 
-# Create anti-forgery state token
 @app.route('/login')
-#@ratelimit(limit=30, per=60 * 1)
+@ratelimit(limit=30, per=60 * 1)
 def showLogin():
+    """
+    Create an anti-forgery state token.
+    """
     state = ''.join(random.choice(
         string.ascii_uppercase + string.digits)for x in xrange(32))
     login_session['state'] = state
@@ -126,6 +137,9 @@ def showLogin():
 
 @app.route('/gconnect', methods=['GET', 'POST'])
 def gconnect():
+    """
+    Connect to google using OAuth2.
+    """
     # Validate state token
     if request.args.get('state') != login_session['state']:
         response = make_response(json.dumps('Invalid state parameter'), 401)
@@ -221,9 +235,11 @@ def gconnect():
     return output
 
 
-# Disconnect: Revoke the current user's token and reset their login_session
 @app.route('/gdisconnect')
 def gdisconnect():
+    """
+    Revoke the current user's token and reset their login_session.
+    """
     credentials = login_session.get('access_token')
     if credentials is None:
         response = make_response(json.dumps('Current user not connected'), 401)
@@ -244,7 +260,7 @@ def gdisconnect():
 
         response = make_response(json.dumps('Successfully disconnected'), 200)
         response.headers['Content-Type'] = 'application/json'
-        return response
+        return redirect(url_for('showLogin'))
     else:
         # The given token was invalid
         response = make_response(json.dumps('Failed to revoke the user token'), 400)
@@ -253,34 +269,54 @@ def gdisconnect():
 
 
 
+####################
+# API calls
+####################
+
 ### JSON APIs to view Hotel information ###
-@app.route('/hotels/JSON')
-#@ratelimit(limit=30, per=60 * 1)
+@app.route('/api/hotels/JSON/')
+@ratelimit(limit=30, per=60 * 1)
 def listHotelsJSON():
+    """
+    Return the hotels list as JSON.
+    """
     hotels = session.query(Hotel).all()
     return jsonify(hotels=[h.serialize for h in hotels])
 
 
-@app.route('/hotels/categories/JSON')
-#@ratelimit(limit=30, per=60 * 1)
+@app.route('/api/hotels/categories/JSON/')
+@ratelimit(limit=30, per=60 * 1)
 def listHotelCategoriesJSON():
+    """
+    Return the hotel categories list as JSON.
+    """
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return jsonify(categories=[c.serialize for c in categories])
 
 
-@app.route('/hotels/<category>/JSON')
-#@ratelimit(limit=30, per=60 * 1)
+@app.route('/api/hotels/<category>/JSON/')
+@ratelimit(limit=30, per=60 * 1)
 def listHotelsByCategoryJSON(category):
+    """
+    Return a list of hotels in a specified category as JSON.
+    """
     hotels = session.query(Hotel).filter_by(
         category=category).all()
     return jsonify(hotels=[h.serialize for h in hotels])
 
 
+
+####################
+# User facing web pages
+####################
+
 @app.route('/')
 @app.route('/hotels/')
-#@ratelimit(limit=30, per=60 * 1)
 def listHotels():
+    """
+    Return a list of all of the hotels in the database.
+    """
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     hotels_by_category = session.query(Hotel).group_by(Hotel.category).all()
@@ -294,8 +330,10 @@ def listHotels():
 
 
 @app.route('/hotels/categories/')
-#@ratelimit(limit=30, per=60 * 1)
 def listHotelCategories():
+    """
+    Return a list of hotel categories.
+    """
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return render_template(
@@ -303,8 +341,10 @@ def listHotelCategories():
 
 
 @app.route('/hotels/<category>/')
-#@ratelimit(limit=30, per=60 * 1)
 def listHotelsByCategory(category):
+    """
+    Return a list of hotels in a specified category.
+    """
     hotels = session.query(Hotel).filter_by(category=category).all()
     creator = getUserInfo(Hotel.user_id)
     user_id = session.query(User.id).first()[0]
@@ -314,10 +354,12 @@ def listHotelsByCategory(category):
         return render_template('public_list_hotels_by_category.html', hotels=hotels)
 
 
-
 @app.route('/hotels/new/', methods=['GET', 'POST'])
-#@ratelimit(limit=30, per=60 * 1)
+@ratelimit(limit=30, per=60 * 1)
 def newHotel():
+    """
+    If the user is logged in: allow the user to create a new hotel.
+    """
     if 'username' not in login_session:
         return redirect('/login')
     if request.method == 'POST':
@@ -339,15 +381,20 @@ def newHotel():
 
 
 @app.route('/hotels/<int:hotel_id>/')
-#@ratelimit(limit=30, per=60 * 1)
 def showHotel(hotel_id):
+    """
+    Show a specific hotel.
+    """
     hotel = session.query(Hotel).filter_by(id=hotel_id).one()
     return render_template('show_hotel.html', hotel=hotel)
 
-
+# TODO: Add authorization so that only the user who created the entry can edit.
 @app.route('/hotels/<int:hotel_id>/edit/', methods=['GET', 'POST'])
-#@ratelimit(limit=30, per=60 * 1)
+@ratelimit(limit=30, per=60 * 1)
 def editHotel(hotel_id):
+    """
+    If the user is logged in, allow them to edit only hotel entries they created.
+    """
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
@@ -371,11 +418,13 @@ def editHotel(hotel_id):
     else:
         return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
 
-
-# TODO: finish delete page
+# TODO: Add authorization so that only the user who created the entry can delete
 @app.route('/hotels/<int:hotel_id>/delete', methods=['GET', 'POST'])
-#@ratelimit(limit=30, per=60 * 1)
+@ratelimit(limit=30, per=60 * 1)
 def deleteHotel(hotel_id):
+    """
+    If the user is logged in, allow them to edit only hotel entries they created.
+    """
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
