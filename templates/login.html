@@ -24,7 +24,13 @@
 
 <!-- GOOGLE SIGN IN BUTTON -->
 {% if 'username' not in session %}
-<button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
+<div class="box">
+    <div class="login-box">
+        <h1 class="login-title">Google Login</h1>
+        <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
+    </div>
+</div>
+
 {% else %}
 <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.
 {% endif %}

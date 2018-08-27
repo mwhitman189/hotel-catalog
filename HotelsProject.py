@@ -440,7 +440,6 @@ def deleteHotel(hotel_id):
 
 
 
-
 ### Initialize App ###
 if __name__ == '__main__':
     app.secret_key = 'unbelievably_secret_key'

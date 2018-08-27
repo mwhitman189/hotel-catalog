@@ -14,6 +14,7 @@ body {
   color: #302626;
   font-family: "Barlow Semi Condensed", sans-serif;
   font-size: 18px;
+  position: relative;
   width: 100%; }
 
 h2 {
@@ -140,11 +141,29 @@ input {
     font-size: 18px;
     text-align: center; }
 
-.signin-btn {
-  left: 50%;
+.box {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center; }
+
+.login-box {
+  align-items: center;
+  background-color: #efefef;
+  box-shadow: 3px 3px 3px #595454;
+  color: #595454;
+  display: flex;
+  height: 400px;
+  justify-content: center;
+  width: 300px; }
+
+.login-title {
   position: absolute;
-  top: 50%;
-  width: 150px; }
+  top: 80px; }
+
+.signin-btn {
+  position: absolute;
+  top: 300px; }
 
 @media screen and (min-width: 600px) {
   .hero-image {
