@@ -58,6 +58,9 @@ input {
   display: flex;
   justify-content: space-between; }
 
+.section {
+  margin-top: 100px; }
+
 .wrap {
   overflow-x: hidden; }
 
@@ -156,10 +159,12 @@ input {
 
 .hero-banner-box {
   background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
-  border-radius: 5px;
-  height: 350px;
+  border-radius: 7px;
+  height: 600px;
   margin: 0 auto;
-  width: 80%; }
+  position: relative;
+  top: -30px;
+  width: 1200px; }
 
 .hero-banner-wrap {
   margin-top: 80px; }
@@ -184,10 +189,10 @@ input {
 
 @media screen and (min-width: 600px) {
   .hero-banner {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/ginzan.jpeg");
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/YukiBdayCard.svg");
     background-position: center;
     background-repeat: no-repeat;
-    background-size: cover;
+    background-size: 35%;
     display: flex;
     flex-direction: column;
     height: 100vh;
