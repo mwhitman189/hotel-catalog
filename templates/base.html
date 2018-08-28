@@ -20,21 +20,18 @@
         {% endblock %}
     </head>
 
-    <body>
+    <body class="wrap">
         {% block header %}
         {% endblock %}
 
-        <content>
-            <div class="lay-content-container">
+        <content class="lay-content">
                 {% block body %}
                 {% endblock %}
-            </div>
         </content>
 
         <footer class="ftr">
             <p class="ftr-info">Copyright © 2018, Miles Whitman</p>
         </footer>
-        <!-- [/wrapper] -->
         {% block scripts %}
         {% endblock %}
         <script

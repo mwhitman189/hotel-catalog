@@ -1,17 +1,17 @@
-$font-stack: 'Amatic SC', cursive, 'Work Sans', sans-serif;
+$font-stack: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
 $font-title: 'Amatic SC', cursive;
 $font-one: 'Fredericka the Great', cursive;
-$font-two: 'Barlow Semi Condensed', sans-serif;
+$font-two: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 $font-size-base: 18px;
-$font-size-one: 2.5rem;
-$font-size-two: 1.5rem;
-$color-1: #fff;
-$color-2: #a30404;
-$color-3: #efefef;
-$color-4: #302626;
-$color-5: #f70202;
+$font-size-one: 1.5rem;
+$font-size-two: 1rem;
+$color-1: #2e005e;
+$color-2: #f9c500;
+$color-3: #090b01;
+$color-4: #090b01;
+$color-5: #108295;
 $color-6: #595454;
-$color-7: #092bea;
+$color-7: #f9c500;
 $color-8: #000;
 
 // ************************************
@@ -34,14 +34,14 @@ html {
 body {
   background-color: $color-1;
   color: $color-4;
-  font-family: $font-two;
+  font-family: $font-stack;
   font-size: $font-size-base;
   position: relative;
   width: 100%;
 }
 
 h2 {
-  font-size: $font-size-one;
+  font-size: $font-size-two;
 }
 
 dl,
@@ -78,17 +78,25 @@ input {
 .btn {
   border: 2px solid;
 }
+
 // ************************************
 // Layout Rules ***********************
 // ************************************
 
-.lay-content-container {
-  margin-top: 100px;
+.lay-box {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center;
 }
 
 .lay-flex-container {
   display: flex;
   justify-content: space-between;
+}
+
+.wrap {
+  overflow-x: hidden;
 }
 
 // ************************************
@@ -97,8 +105,7 @@ input {
 
 // hdr = header
 .hdr {
-  background-color: rgba($color-2, .7);
-  box-shadow: 3px 3px 3px $color-4;
+  background-color: $color-2;
   height: 80px;
   position: fixed;
   top: 0;
@@ -109,6 +116,7 @@ input {
 .hdr-brand {
   color: $color-1;
   font-size: $font-size-one;
+  font-weight: bold;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -152,29 +160,6 @@ input {
   }
 }
 
-.hdr-user-link {
-  .hdr-text {
-    color: $color-1;
-    font-size: $font-size-two;
-  }
-
-  .far {
-    color: $color-1;
-  }
-
-  .fas {
-    color: $color-7;
-  }
-
-  .fa-user {
-    float: right;
-    font-size: 50px;
-    position: absolute;
-    right: 80px;
-    top: 10px;
-  }
-}
-
 .hdr-navbar.responsive {
   position: relative;
   width: 300px;
@@ -201,6 +186,36 @@ input {
   }
 }
 
+.hdr-user-link {
+  .hdr-text {
+    color: $color-1;
+    font-family: $font-two;
+    font-size: $font-size-two;
+  }
+
+  .far {
+    color: $color-1;
+  }
+
+  .fas {
+    color: $color-7;
+  }
+
+  .fa-user {
+    float: right;
+    font-size: 50px;
+    position: absolute;
+    right: 80px;
+    top: 10px;
+  }
+}
+
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%;
+}
+
 // ftr = footer
 .ftr {
   background-color: rgba($color-4, .9);
@@ -216,11 +231,16 @@ input {
   }
 }
 
-.box {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
+.hero-banner-box {
+  background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6));
+  border-radius: 5px;
+  height: 350px;
+  margin: 0 auto;
+  width: 80%;
+}
+
+.hero-banner-wrap {
+  margin-top: 80px;
 }
 
 .login-box {
@@ -249,12 +269,15 @@ input {
 // ************************************
 
 @media screen and (min-width: 600px) {
-  .hero-image {
+  .hero-banner {
     background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6)), url('/static/img/ginzan.jpeg');
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
     position: relative;
     width: 100%;
 
@@ -269,18 +292,6 @@ input {
       }
     }
   }
-
-  .hdr {
-    right: 0;
-    top: 60px;
-    width: 90%;
-  }
-}
-
-.form {
-  margin-left: auto;
-  margin-right: auto;
-  width: 75%;
 }
 
 // ************************************

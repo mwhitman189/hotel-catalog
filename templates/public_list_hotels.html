@@ -4,6 +4,7 @@
 <meta name="Description" content="List all of the recommended hotels in Yamagata City, Japan.">
 {% endblock %}
 
+
 {% block body %}
 {% with messages = get_flashed_messages()%}
     {% if messages %}
@@ -15,7 +16,8 @@
     {% endif %}
 {% endwith %}
 
-<div class="main-div">
+<section class="main-div">
+
     <ul>
         {% for hotel in hotels_by_category %}
         <li>
@@ -25,9 +27,11 @@
         </li>
         {% endfor %}
     </ul>
-</div>
 
-<div class="sidebar">
+</section>
+
+<section class="sidebar">
+    
     <ul>
     {% for hotel in hotels %}
         <li>
@@ -37,6 +41,7 @@
         </li>
     {% endfor %}
     </ul>
-</div>
+
+</section>
 
 {% endblock %}

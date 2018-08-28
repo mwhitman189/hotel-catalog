@@ -23,17 +23,24 @@
 {% block body %}
 
 <!-- GOOGLE SIGN IN BUTTON -->
-{% if 'username' not in session %}
-<div class="box">
-    <div class="login-box">
-        <h1 class="login-title">Google Login</h1>
-        <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
+<section>
+    {% if 'username' not in session %}
+    <div class="lay-box">
+        <div class="login-box">
+            <h1 class="login-title">Google Login</h1>
+            <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
+        </div>
     </div>
-</div>
 
-{% else %}
-<h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.
-{% endif %}
+    {% else %}
+    <div class="lay-box">
+        <div class="login-box">
+            <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
+        </div>
+    </div>
+    {% endif %}
+</section>
+
 <script>
   $('#signinButton').click(function() {
     // signInCallback defined in step 6.

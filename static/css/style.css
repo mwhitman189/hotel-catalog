@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -10,21 +11,21 @@ html {
   min-width: 360px; }
 
 body {
-  background-color: #fff;
-  color: #302626;
-  font-family: "Barlow Semi Condensed", sans-serif;
+  background-color: #2e005e;
+  color: #090b01;
+  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
   font-size: 18px;
   position: relative;
   width: 100%; }
 
 h2 {
-  font-size: 2.5rem; }
+  font-size: 1rem; }
 
 dl,
 ol,
 p,
 ul {
-  font-size: 1.5rem; }
+  font-size: 1rem; }
 
 li,
 p {
@@ -34,29 +35,34 @@ ul {
   list-style: none; }
 
 a {
-  color: #f70202;
+  color: #108295;
   text-decoration: none; }
   a:hover {
     text-decoration: none; }
 
 input {
-  background-color: #efefef;
+  background-color: #090b01;
   border: #595454;
   border-radius: 2px; }
 
 .btn {
   border: 2px solid; }
 
-.lay-content-container {
-  margin-top: 100px; }
+.lay-box {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  justify-content: center; }
 
 .lay-flex-container {
   display: flex;
   justify-content: space-between; }
 
+.wrap {
+  overflow-x: hidden; }
+
 .hdr {
-  background-color: rgba(163, 4, 4, 0.7);
-  box-shadow: 3px 3px 3px #302626;
+  background-color: #f9c500;
   height: 80px;
   position: fixed;
   top: 0;
@@ -64,13 +70,14 @@ input {
   z-index: 11; }
 
 .hdr-brand {
-  color: #fff;
-  font-size: 2.5rem;
+  color: #2e005e;
+  font-size: 1.5rem;
+  font-weight: bold;
   overflow: hidden;
   white-space: nowrap; }
 
 .hdr-navbar {
-  background-color: rgba(48, 38, 38, 0.9);
+  background-color: rgba(9, 11, 1, 0.9);
   height: 100%; }
   .hdr-navbar .hdr-icon {
     border: 0;
@@ -79,39 +86,22 @@ input {
     top: 0; }
   .hdr-navbar a {
     border-bottom: 1px solid #595454;
-    color: #fff;
+    color: #2e005e;
     display: none;
     float: left;
-    font-size: 1.5rem;
+    font-size: 1rem;
     height: 80px;
     padding: 14px 16px; }
     .hdr-navbar a .fa-bars {
-      color: #fff;
+      color: #2e005e;
       display: block;
       float: right; }
     .hdr-navbar a:hover {
-      background-color: #a30404;
-      color: #302626;
+      background-color: #f9c500;
+      color: #090b01;
       text-decoration: none; }
     .hdr-navbar a:last-child {
       display: block; }
-
-.hdr-user-link .hdr-text {
-  color: #fff;
-  font-size: 1.5rem; }
-
-.hdr-user-link .far {
-  color: #fff; }
-
-.hdr-user-link .fas {
-  color: #092bea; }
-
-.hdr-user-link .fa-user {
-  float: right;
-  font-size: 50px;
-  position: absolute;
-  right: 80px;
-  top: 10px; }
 
 .hdr-navbar.responsive {
   position: relative;
@@ -123,33 +113,60 @@ input {
   .hdr-navbar.responsive:hover {
     text-decoration: none; }
   .hdr-navbar.responsive .hdr-icon {
-    background-color: #a30404;
+    background-color: #f9c500;
     position: absolute;
     right: 0;
     top: 0; }
     .hdr-navbar.responsive .hdr-icon .fa-bars {
-      color: #302626; }
+      color: #090b01; }
+
+.hdr-user-link .hdr-text {
+  color: #2e005e;
+  font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
+  font-size: 1rem; }
+
+.hdr-user-link .far {
+  color: #2e005e; }
+
+.hdr-user-link .fas {
+  color: #f9c500; }
+
+.hdr-user-link .fa-user {
+  float: right;
+  font-size: 50px;
+  position: absolute;
+  right: 80px;
+  top: 10px; }
+
+.form {
+  margin-left: auto;
+  margin-right: auto;
+  width: 75%; }
 
 .ftr {
-  background-color: rgba(48, 38, 38, 0.9);
+  background-color: rgba(9, 11, 1, 0.9);
   bottom: 0;
   position: fixed;
   width: 100%;
   z-index: 9; }
   .ftr .ftr-info {
-    color: #fff;
+    color: #2e005e;
     font-size: 18px;
     text-align: center; }
 
-.box {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center; }
+.hero-banner-box {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  border-radius: 5px;
+  height: 350px;
+  margin: 0 auto;
+  width: 80%; }
+
+.hero-banner-wrap {
+  margin-top: 80px; }
 
 .login-box {
   align-items: center;
-  background-color: #efefef;
+  background-color: #090b01;
   box-shadow: 3px 3px 3px #595454;
   color: #595454;
   display: flex;
@@ -166,27 +183,21 @@ input {
   top: 300px; }
 
 @media screen and (min-width: 600px) {
-  .hero-image {
+  .hero-banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/ginzan.jpeg");
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
-    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: center;
     position: relative;
     width: 100%; }
-    .hero-image .hero-text {
-      color: #fff;
+    .hero-banner .hero-text {
+      color: #2e005e;
       position: relative;
       text-align: center;
       top: 300px; }
-      .hero-image .hero-text a {
-        color: #fff; }
-  .hdr {
-    right: 0;
-    top: 60px;
-    width: 90%; } }
-
-.form {
-  margin-left: auto;
-  margin-right: auto;
-  width: 75%; }
+      .hero-banner .hero-text a {
+        color: #2e005e; } }

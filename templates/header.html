@@ -1,12 +1,9 @@
 {% extends 'base.html' %}
 
 {% block header %}
-<div class="hero-image">
-  <div class="hero-text">
-  </div>
-</div>
+
 <header class="hdr">
-    <div class="lay-flex-container">
+    <div role="banner" class="lay-flex-container">
         <a class="hdr-brand fl" href="#">山形Hotels</a>
         {% if 'username' not in session %}
         <a class="hdr-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text"> Log In</span></i></a>

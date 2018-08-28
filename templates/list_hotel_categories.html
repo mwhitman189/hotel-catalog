@@ -2,12 +2,16 @@
 {% block head %}
 <meta name="Description" content="List the different types or categories of hotels or lodgings.">
 {% endblock %}
+
 {% block body %}
 
+<section>
 <h1 class="page-title heading">What kind of lodging are you looking for?</h1>
 
 {% for category in categories %}
     <h2><a class="category" href="{{ url_for('listHotelsByCategory', category=category[0]) }}">{{ category[0] }}</a></h2>
 {% endfor %}
+
+</section>
 
 {% endblock %}
