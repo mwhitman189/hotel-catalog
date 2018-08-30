@@ -21,9 +21,9 @@
     <ul>
         {% for hotel in hotels_by_category %}
         <li>
-            <a class="hotel category--name img" href="{{ url_for('listHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
+            <a class="hotel category--name img" href="{{ url_for('showHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
             </a>
-            <a class="hotel category name-text" href="{{ url_for('listHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}">{{ hotel.category }}</a>
+            <a class="hotel category name-text" href="{{ url_for('showHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}">{{ hotel.category }}</a>
         </li>
         {% endfor %}
     </ul>

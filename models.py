@@ -63,6 +63,7 @@ class Hotel(Base):
         """Return object data in easily serializeable format"""
         return {
             'name' : self.name,
+            'category' : self.category,
             'picture' : self.picture,
             'price' : self.price,
             'description' : self.description,

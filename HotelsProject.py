@@ -276,9 +276,9 @@ def gdisconnect():
 ### JSON APIs to view Hotel information ###
 @app.route('/api/hotels/JSON/')
 @ratelimit(limit=30, per=60 * 1)
-def listHotelsJSON():
+def showHotelsJSON():
     """
-    Return the hotels list as JSON.
+    Return the hotels show as JSON.
     """
     hotels = session.query(Hotel).all()
     return jsonify(hotels=[h.serialize for h in hotels])
@@ -286,9 +286,9 @@ def listHotelsJSON():
 
 @app.route('/api/hotels/categories/JSON/')
 @ratelimit(limit=30, per=60 * 1)
-def listHotelCategoriesJSON():
+def showHotelCategoriesJSON():
     """
-    Return the hotel categories list as JSON.
+    Return the hotel categories show as JSON.
     """
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
@@ -297,9 +297,9 @@ def listHotelCategoriesJSON():
 
 @app.route('/api/hotels/<category>/JSON/')
 @ratelimit(limit=30, per=60 * 1)
-def listHotelsByCategoryJSON(category):
+def showHotelsByCategoryJSON(category):
     """
-    Return a list of hotels in a specified category as JSON.
+    Return a show of hotels in a specified category as JSON.
     """
     hotels = session.query(Hotel).filter_by(
         category=category).all()
@@ -312,35 +312,35 @@ def listHotelsByCategoryJSON(category):
 ####################
 
 @app.route('/hotels/')
-def listHotels():
+def showHotels():
     """
-    Return a list of all of the hotels in the database.
+    Return a show of all of the hotels in the database.
     """
     hotels = session.query(Hotel).order_by(Hotel.rating.desc()).all()
     if 'username' not in login_session:
         return render_template(
-            'public_list_hotels.html', hotels=hotels)
+            'public_show_hotels.html', hotels=hotels)
     else:
         return render_template(
-            'list_hotels.html', hotels=hotels)
+            'show_hotels.html', hotels=hotels)
 
 
 @app.route('/')
 @app.route('/hotels/categories/')
-def listHotelCategories():
+def showHotelCategories():
     """
-    Return a list of hotel categories.
+    Return a show of hotel categories.
     """
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return render_template(
-        'list_hotel_categories.html', categories=categories)
+        'show_hotel_categories.html', categories=categories)
 
 
 @app.route('/hotels/<category>/')
-def listHotelsByCategory(category):
+def showHotelsByCategory(category):
     """
-    Return a list of hotels in a specified category.
+    Return a show of hotels in a specified category.
     """
     hotels = session.query(Hotel).filter_by(category=category).all()
     print hotels
@@ -348,16 +348,16 @@ def listHotelsByCategory(category):
         creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
     if creator.id == user_id:
-        return render_template('list_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
+        return render_template('show_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
     else:
-        return render_template('public_list_hotels_by_category.html', hotels=hotels)
+        return render_template('public_show_hotels_by_category.html', hotels=hotels)
 
 
 @app.route('/hotels/new/', methods=['GET', 'POST'])
 @ratelimit(limit=30, per=60 * 1)
 def newHotel():
     """
-    If the user is logged in, allow the user to create a new hotel; Otherwise redirect the user to the Lodgings list.
+    If the user is logged in, allow the user to create a new hotel; Otherwise redirect the user to the Lodgings show.
     """
     if 'username' not in login_session:
         return redirect('/login')
@@ -374,7 +374,7 @@ def newHotel():
         session.add(new_hotel)
         session.commit()
         flash("Success! %s was added to the database." % new_hotel.name)
-        return redirect(url_for('listHotels'))
+        return redirect(url_for('showHotels'))
     else:
         return render_template('new_hotel.html')
 
@@ -433,7 +433,7 @@ def deleteHotel(hotel_id):
         session.delete(hotel_to_delete)
         session.commit()
         flash("Hotel successfully deleted.")
-        return redirect(url_for('listHotels'))
+        return redirect(url_for('showHotels'))
     else:
         return render_template('delete_hotel.html', hotel_id=hotel_id, hotel=hotel_to_delete)
 
