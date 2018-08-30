@@ -3,7 +3,7 @@
 {% block head %}
 <!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
 <html itemscope itemtype="http://schema.org/Article">
-<meta name="Description" content="Login page for Yamagata Hotels; Description: Hotel and lodging listings, Location: Yamagata Yamagata Japan">
+<meta name="Description" content="Login page for Yamagata Hotels; Description: Hotel and lodging showings, Location: Yamagata Yamagata Japan">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
 <!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
@@ -35,7 +35,7 @@
     {% else %}
     <div class="lay-box">
         <div class="login-box">
-            <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
+            <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
         </div>
     </div>
     {% endif %}

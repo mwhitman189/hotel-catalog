@@ -311,24 +311,21 @@ def listHotelsByCategoryJSON(category):
 # User facing web pages
 ####################
 
-@app.route('/')
 @app.route('/hotels/')
 def listHotels():
     """
     Return a list of all of the hotels in the database.
     """
-    categories = session.query(Hotel.category).group_by(
-        Hotel.category).order_by(Hotel.category).all()
-    hotels_by_category = session.query(Hotel).group_by(Hotel.category).all()
-    hotels = session.query(Hotel).all()
+    hotels = session.query(Hotel).order_by(Hotel.rating.desc()).all()
     if 'username' not in login_session:
         return render_template(
-            'public_list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
+            'public_list_hotels.html', hotels=hotels)
     else:
         return render_template(
-            'list_hotels.html', hotels=hotels, categories=categories, hotels_by_category=hotels_by_category)
+            'list_hotels.html', hotels=hotels)
 
 
+@app.route('/')
 @app.route('/hotels/categories/')
 def listHotelCategories():
     """
@@ -347,7 +344,8 @@ def listHotelsByCategory(category):
     """
     hotels = session.query(Hotel).filter_by(category=category).all()
     print hotels
-    creator = getUserInfo(login_session['user_id'])
+    if login_session['user_id']:
+        creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
     if creator.id == user_id:
         return render_template('list_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
@@ -359,7 +357,7 @@ def listHotelsByCategory(category):
 @ratelimit(limit=30, per=60 * 1)
 def newHotel():
     """
-    If the user is logged in, allow the user to create a new hotel.
+    If the user is logged in, allow the user to create a new hotel; Otherwise redirect the user to the Lodgings list.
     """
     if 'username' not in login_session:
         return redirect('/login')

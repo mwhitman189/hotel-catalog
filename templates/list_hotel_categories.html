@@ -10,7 +10,7 @@
 <h1 class="page-title heading">What kind of lodging are you looking for?</h1>
 
 {% for category in categories %}
-    <h2><a class="category" href="{{ url_for('listHotelsByCategory', category=category[0]) }}">{{ category[0] }}</a></h2>
+    <h1><a class="category" href="{{ url_for('listHotelsByCategory', category=category[0]) }}">{{ category[0] }}</a></h1>
 {% endfor %}
 
 </section>

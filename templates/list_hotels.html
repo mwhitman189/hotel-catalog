@@ -27,34 +27,21 @@
 </section>
 
 <section class="main-div">
-    <ul>
-        {% for hotel in hotels_by_category %}
-        <li>
-            <a class="hotel category--name img" href="{{ url_for('listHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
-            </a>
-            <a class="hotel category name-text" href="{{ url_for('listHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}">{{ hotel.category }}s</a>
-        </li>
-        {% endfor %}
-    </ul>
 </section>
 
 <section class="sidebar">
-
-    <h2 class="subtitle">Hotels</h2>
+    <h1 class="subtitle">Lodgings</h1>
     <ul>
     {% for hotel in hotels %}
         <li>
             <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ichotels_hotel_48px.svg');"{% endif %}></span>
             </a>
-            <a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a>
+            <h1><a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h1>
         </li>
-        <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
-        <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>
     {% endfor %}
     </ul>
-
 </section>
 
-<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Back to Hotels</a>
+<a class="sub-link" href="{{ url_for('listHotels', hotels=hotels) }}">Back to Lodgings</a>
 
 {% endblock %}
