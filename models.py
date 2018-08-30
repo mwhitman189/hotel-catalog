@@ -52,7 +52,6 @@ class Hotel(Base):
     name = Column(String)
     picture = Column(String)
     description = Column(String)
-
     price = Column(Integer)
     rating = Column(Integer)
     category = Column(String)

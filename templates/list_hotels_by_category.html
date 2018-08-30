@@ -1,14 +1,16 @@
 {% extends 'header.html' %}
+
 {% block head %}
 <meta name="Description" content="List all of the hotels in certain category or of a certain type.">
 {% endblock %}
+
+
 {% block body %}
-<section>
-    
+<section class="lay-content">
     <h1 class="page-title heading">{{ category }}</h1>
 
     {% for hotel in hotels %}
-        <h2><a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">{{ hotel.name }}</a></h2>
+        <h2><a class="hotel-name" href="{{ url_for('listHotelsByCategory', creator=creator, category=category, hotel=hotel.id) }}">{{ hotel.name }}</a></h2>
         <div class="profile-pic" style="background-image:url({{ creator.picture }})"></div>
         <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
         <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>

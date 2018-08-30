@@ -346,10 +346,11 @@ def listHotelsByCategory(category):
     Return a list of hotels in a specified category.
     """
     hotels = session.query(Hotel).filter_by(category=category).all()
-    creator = getUserInfo(Hotel.user_id)
+    print hotels
+    creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
     if creator.id == user_id:
-        return render_template('list_hotels_by_category.html', hotels=hotels, creator=creator)
+        return render_template('list_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
     else:
         return render_template('public_list_hotels_by_category.html', hotels=hotels)
 
@@ -358,7 +359,7 @@ def listHotelsByCategory(category):
 @ratelimit(limit=30, per=60 * 1)
 def newHotel():
     """
-    If the user is logged in: allow the user to create a new hotel.
+    If the user is logged in, allow the user to create a new hotel.
     """
     if 'username' not in login_session:
         return redirect('/login')

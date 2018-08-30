@@ -1,8 +1,12 @@
 {% extends 'header.html' %}
+
 {% block head %}
 <meta name="Description" content="Edit hotel or lodging information. Name of hotel, image, price, description, category, rating">
 {% endblock %}
+
+
 {% block body %}
+<section class="lay-content">
     <h1 class="page-title heading">Edit Hotel</h1>
     <form action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
         <div class="form-group">
@@ -45,5 +49,7 @@
 
         <input class="btn btn-danger" type="submit" value="Edit Hotel">
     </form>
+</section>
+
     <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
 {% endblock %}
