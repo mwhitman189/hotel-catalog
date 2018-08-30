@@ -280,6 +280,8 @@ def showHotelsJSON():
     """
     Return the hotels show as JSON.
     """
+    if 'username' not in login_session:
+        return redirect('/login')
     hotels = session.query(Hotel).all()
     return jsonify(hotels=[h.serialize for h in hotels])
 
@@ -290,6 +292,8 @@ def showHotelCategoriesJSON():
     """
     Return the hotel categories show as JSON.
     """
+    if 'username' not in login_session:
+        return redirect('/login')
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return jsonify(categories=[c.serialize for c in categories])
@@ -301,6 +305,8 @@ def showHotelsByCategoryJSON(category):
     """
     Return a show of hotels in a specified category as JSON.
     """
+    if 'username' not in login_session:
+        return redirect('/login')
     hotels = session.query(Hotel).filter_by(
         category=category).all()
     return jsonify(hotels=[h.serialize for h in hotels])
@@ -387,7 +393,7 @@ def showHotel(hotel_id):
     hotel = session.query(Hotel).filter_by(id=hotel_id).one()
     return render_template('show_hotel.html', hotel=hotel)
 
-# TODO: Add authorization so that only the user who created the entry can edit.
+
 @app.route('/hotels/<int:hotel_id>/edit/', methods=['GET', 'POST'])
 @ratelimit(limit=30, per=60 * 1)
 def editHotel(hotel_id):
@@ -397,27 +403,33 @@ def editHotel(hotel_id):
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
-    if request.method == 'POST':
-        if request.form['name']:
-            hotel_to_edit.name = request.form['name']
-        if request.form['picture']:
-            hotel_to_edit.picture = request.form['picture']
-        if request.form['description']:
-            hotel_to_edit.description = request.form['description']
-        if request.form['price']:
-            hotel_to_edit.price = request.form['price']
-        if request.form['rating']:
-            hotel_to_edit.rating = request.form['rating']
-        if request.form['category']:
-            hotel_to_edit.category = request.form['category']
-            session.add(hotel_to_edit)
-            session.commit()
-            flash("Hotel successfully edited!")
-            return redirect(url_for('showHotel', hotel_id=hotel_id))
+    if login_session['user_id']:
+        creator = getUserInfo(login_session['user_id'])
+    user_id = session.query(User.id).first()[0]
+    if creator.id == user_id:
+        if request.method == 'POST':
+            if request.form['name']:
+                hotel_to_edit.name = request.form['name']
+            if request.form['picture']:
+                hotel_to_edit.picture = request.form['picture']
+            if request.form['description']:
+                hotel_to_edit.description = request.form['description']
+            if request.form['price']:
+                hotel_to_edit.price = request.form['price']
+            if request.form['rating']:
+                hotel_to_edit.rating = request.form['rating']
+            if request.form['category']:
+                hotel_to_edit.category = request.form['category']
+                session.add(hotel_to_edit)
+                session.commit()
+                flash("Hotel successfully edited!")
+                return redirect(url_for('showHotel', hotel_id=hotel_id))
+        else:
+            return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
     else:
-        return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
+        return "You do not have permission to edit or delete this item. You can only delete items you have created."
 
-# TODO: Add authorization so that only the user who created the entry can delete
+
 @app.route('/hotels/<int:hotel_id>/delete', methods=['GET', 'POST'])
 @ratelimit(limit=30, per=60 * 1)
 def deleteHotel(hotel_id):
@@ -427,15 +439,19 @@ def deleteHotel(hotel_id):
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
-    print hotel_to_delete
-    print request.method
-    if request.method == 'POST':
-        session.delete(hotel_to_delete)
-        session.commit()
-        flash("Hotel successfully deleted.")
-        return redirect(url_for('showHotels'))
+    if login_session['user_id']:
+        creator = getUserInfo(login_session['user_id'])
+    user_id = session.query(User.id).first()[0]
+    if creator.id == user_id:
+        if request.method == 'POST':
+            session.delete(hotel_to_delete)
+            session.commit()
+            flash("Hotel successfully deleted.")
+            return redirect(url_for('showHotels'))
+        else:
+            return render_template('delete_hotel.html', hotel_id=hotel_id, hotel=hotel_to_delete)
     else:
-        return render_template('delete_hotel.html', hotel_id=hotel_id, hotel=hotel_to_delete)
+        return "You do not have permission to edit or delete this item. You can only delete items you have created."
 
 
 

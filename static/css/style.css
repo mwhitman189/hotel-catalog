@@ -12,7 +12,7 @@ html {
 
 body {
   background-color: #2e005e;
-  color: #e3e0e5;
+  color: #108295;
   font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
   font-size: 18px;
   position: relative;
@@ -35,7 +35,7 @@ ul {
   list-style: none; }
 
 a {
-  color: #108295;
+  color: #e3e0e5;
   text-decoration: none; }
   a:hover {
     text-decoration: none; }
@@ -83,7 +83,7 @@ input {
   white-space: nowrap; }
 
 .hdr-navbar {
-  background-color: rgba(227, 224, 229, 0.9);
+  background-color: rgba(16, 130, 149, 0.9);
   height: 100%; }
   .hdr-navbar .hdr-icon {
     border: 0;
@@ -104,7 +104,7 @@ input {
       float: right; }
     .hdr-navbar a:hover {
       background-color: #f9c500;
-      color: #e3e0e5;
+      color: #108295;
       text-decoration: none; }
     .hdr-navbar a:last-child {
       display: block; }
@@ -124,7 +124,7 @@ input {
     right: 0;
     top: 0; }
     .hdr-navbar.responsive .hdr-icon .fa-bars {
-      color: #e3e0e5; }
+      color: #108295; }
 
 .hdr-user-link .hdr-text {
   color: #2e005e;
@@ -150,7 +150,7 @@ input {
   width: 75%; }
 
 .ftr {
-  background-color: rgba(227, 224, 229, 0.9);
+  background-color: rgba(16, 130, 149, 0.9);
   bottom: 0;
   position: fixed;
   width: 100%;
