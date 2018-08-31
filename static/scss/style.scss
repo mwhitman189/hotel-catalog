@@ -3,6 +3,7 @@ $font-title: 'Amatic SC', cursive;
 $font-one: 'Fredericka the Great', cursive;
 $font-two: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
 $font-size-base: 18px;
+$font-size-big: 2rem;
 $font-size-one: 1.5rem;
 $font-size-two: 1rem;
 $color-1: #2e005e;
@@ -91,7 +92,7 @@ input {
 }
 
 .lay-content {
-  margin-top: 80px;
+  margin-top: 100px;
 }
 
 .lay-flex-container {
@@ -112,9 +113,14 @@ input {
 // ************************************
 
 // hdr = header
+.bf {
+  font-size: $font-size-big;
+}
+
 .hdr {
   background-color: $color-2;
-  height: 80px;
+  height: 90px;
+  line-height: 1.5;
   position: fixed;
   top: 0;
   width: 100%;
@@ -125,6 +131,7 @@ input {
   color: $color-1;
   font-size: $font-size-one;
   font-weight: bold;
+  margin-left: 15px;
   overflow: hidden;
   white-space: nowrap;
 }
@@ -250,7 +257,7 @@ input {
 }
 
 .hero-banner-wrap {
-  margin-top: 80px;
+  margin-top: 100px;
 }
 
 .hotel-img {
@@ -284,6 +291,10 @@ input {
 // ************************************
 
 @media screen and (min-width: 600px) {
+  .sm-form {
+    width: 75%;
+  }
+
   .hero-banner {
     background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6)), url('/static/img/YukiBdayCard.svg');
     background-position: center;
@@ -309,6 +320,9 @@ input {
   }
 }
 
+.container {
+  margin-bottom: 70px;
+}
 // ************************************
 // Theme Rules ************************
 // ************************************

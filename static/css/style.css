@@ -55,7 +55,7 @@ input {
   justify-content: center; }
 
 .lay-content {
-  margin-top: 80px; }
+  margin-top: 100px; }
 
 .lay-flex-container {
   display: flex;
@@ -67,9 +67,13 @@ input {
 .wrap {
   overflow-x: hidden; }
 
+.bf {
+  font-size: 2rem; }
+
 .hdr {
   background-color: #f9c500;
-  height: 80px;
+  height: 90px;
+  line-height: 1.5;
   position: fixed;
   top: 0;
   width: 100%;
@@ -79,6 +83,7 @@ input {
   color: #2e005e;
   font-size: 1.5rem;
   font-weight: bold;
+  margin-left: 15px;
   overflow: hidden;
   white-space: nowrap; }
 
@@ -170,7 +175,7 @@ input {
   width: 1200px; }
 
 .hero-banner-wrap {
-  margin-top: 80px; }
+  margin-top: 100px; }
 
 .hotel-img {
   height: 200px;
@@ -195,6 +200,8 @@ input {
   top: 300px; }
 
 @media screen and (min-width: 600px) {
+  .sm-form {
+    width: 75%; }
   .hero-banner {
     background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/YukiBdayCard.svg");
     background-position: center;
@@ -213,3 +220,6 @@ input {
       top: 300px; }
       .hero-banner .hero-text a {
         color: #2e005e; } }
+
+.container {
+  margin-bottom: 70px; }

@@ -8,10 +8,9 @@
 {% block body %}
 
 <section class="lay-content">
-
     <h1 class="page-title heading">Add New Hotel</h1>
 
-    <form class="form" action="{{ url_for('newHotel') }}" method="POST">
+    <form class="form sm-form" action="{{ url_for('newHotel') }}" method="POST">
         <div class="form-group">
             <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
             <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="Name of hotel">
@@ -25,7 +24,7 @@
             <input class="form-control" type="textarea" id="description" name="description" placeholder="Description">
         </div>
         <div class="form-group">
-            <label class=".sr-only" for="roomPrice">Room Rate  (in USD)</label>
+            <label class=".sr-only" for="roomPrice">Room Rate (in USD)</label>
             <input class="form-control" type="number" id="roomPrice" step="0.01" name="price" placeholder="Room rate(in USD)">
         </div>
         <div class="form-group">

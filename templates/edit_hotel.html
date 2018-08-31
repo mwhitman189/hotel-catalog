@@ -8,7 +8,7 @@
 {% block body %}
 <section class="lay-content">
     <h1 class="page-title heading">Edit Hotel</h1>
-    <form action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
+    <form class="form sm-form" action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
         <div class="form-group">
             <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
             <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="{{ hotel.name }}">

@@ -346,15 +346,14 @@ def showHotelCategories():
 @app.route('/hotels/<category>/')
 def showHotelsByCategory(category):
     """
-    Return a show of hotels in a specified category.
+    Return a list of hotels in a specified category.
     """
     hotels = session.query(Hotel).filter_by(category=category).all()
-    print hotels
-    if login_session['user_id']:
+    if 'user_id' in login_session:
         creator = getUserInfo(login_session['user_id'])
-    user_id = session.query(User.id).first()[0]
-    if creator.id == user_id:
-        return render_template('show_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
+        user_id = session.query(User.id).first()[0]
+        if creator.id == user_id:
+            return render_template('show_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
     else:
         return render_template('public_show_hotels_by_category.html', hotels=hotels)
 
@@ -403,8 +402,7 @@ def editHotel(hotel_id):
     if 'username' not in login_session:
         return redirect('/login')
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
-    if login_session['user_id']:
-        creator = getUserInfo(login_session['user_id'])
+    creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
     if creator.id == user_id:
         if request.method == 'POST':
