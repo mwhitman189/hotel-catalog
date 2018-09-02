@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="297mm"
+   height="210mm"
+   viewBox="0 0 297 210"
+   version="1.1"
+   id="svg8"
+   sodipodi:docname="yamagata_hotels_(1).svg"
+   inkscape:version="0.92.3 (unknown)">
+  <defs
+     id="defs2">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient869">
+      <stop
+         style="stop-color:#00d400;stop-opacity:1;"
+         offset="0"
+         id="stop865" />
+      <stop
+         style="stop-color:#00d400;stop-opacity:0;"
+         offset="1"
+         id="stop867" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient861">
+      <stop
+         style="stop-color:#00d400;stop-opacity:1;"
+         offset="0"
+         id="stop857" />
+      <stop
+         style="stop-color:#00d400;stop-opacity:0;"
+         offset="1"
+         id="stop859" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient861"
+       id="radialGradient863"
+       cx="78.756638"
+       cy="192.65462"
+       fx="78.756638"
+       fy="192.65462"
+       r="60.021418"
+       gradientTransform="matrix(1,0,0,0.86895468,0,25.246488)"
+       gradientUnits="userSpaceOnUse" />
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient869"
+       id="radialGradient871"
+       cx="180.04413"
+       cy="177.99127"
+       fx="180.04413"
+       fy="177.99127"
+       r="67.137903"
+       gradientTransform="matrix(1,0,0,0.86804228,0,23.487323)"
+       gradientUnits="userSpaceOnUse" />
+    <filter
+       inkscape:label="Apparition"
+       inkscape:menu="Blurs"
+       inkscape:menu-tooltip="Edges are partly feathered out"
+       style="color-interpolation-filters:sRGB;"
+       id="filter887">
+      <feMorphology
+         radius="4"
+         in="SourceGraphic"
+         result="result0"
+         id="feMorphology881" />
+      <feGaussianBlur
+         in="result0"
+         stdDeviation="8"
+         result="result91"
+         id="feGaussianBlur883" />
+      <feComposite
+         operator="in"
+         in="SourceGraphic"
+         in2="result91"
+         id="feComposite885" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.0104563"
+     inkscape:cx="397.89796"
+     inkscape:cy="396.85039"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1853"
+     inkscape:window-height="1006"
+     inkscape:window-x="67"
+     inkscape:window-y="37"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-87)">
+    <g
+       id="g1053">
+      <path
+         transform="matrix(1.2705029,0,0,1.4625808,-20.254962,-76.324445)"
+         inkscape:transform-center-y="-17.150874"
+         inkscape:transform-center-x="-0.20301718"
+         d="M 138.77806,244.10724 18.73522,244.81052 78.147583,140.49873 Z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5649379"
+         sodipodi:arg1="0.5177403"
+         sodipodi:r2="34.65398"
+         sodipodi:r1="69.307953"
+         sodipodi:cy="209.8055"
+         sodipodi:cx="78.553619"
+         sodipodi:sides="3"
+         id="path823"
+         style="opacity:1;fill:url(#radialGradient863);fill-opacity:1;stroke:none;stroke-width:13.06499958;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="star" />
+      <path
+         transform="matrix(1.2705029,0,0,1.4625808,-20.254962,-76.324445)"
+         inkscape:transform-center-y="-19.245637"
+         inkscape:transform-center-x="-0.15635421"
+         d="m 247.18203,235.72818 -134.2758,0.54163 66.66883,-116.55707 z"
+         inkscape:randomized="0"
+         inkscape:rounded="0"
+         inkscape:flatsided="true"
+         sodipodi:arg2="1.5667626"
+         sodipodi:arg1="0.51956505"
+         sodipodi:r2="38.762405"
+         sodipodi:r1="77.524803"
+         sodipodi:cy="197.23691"
+         sodipodi:cx="179.88777"
+         sodipodi:sides="3"
+         id="path825"
+         style="opacity:1;fill:url(#radialGradient871);fill-opacity:1;stroke:none;stroke-width:13.06499958;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+         sodipodi:type="star" />
+      <text
+         transform="matrix(0.33615389,0,0,0.46632796,1.7016099,25.16552)"
+         id="text1046"
+         y="366.14944"
+         x="334.50195"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:192px;line-height:1.25;font-family:'DejaVu Serif';-inkscape-font-specification:'DejaVu Serif, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-feature-settings:normal;text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none;filter:url(#filter887)"
+         xml:space="preserve"><tspan
+           id="tspan1044"
+           y="366.14944"
+           x="334.50195"
+           sodipodi:role="line"><tspan
+             id="tspan1042"
+             y="366.14944"
+             x="334.50195">山</tspan></tspan></text>
+    </g>
+  </g>
+</svg>

@@ -1,13 +1,13 @@
-$font-stack: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
+$font-stack: mallory, Helvetica Neue, Helvetica, Arial, sans-serif;
 $font-title: 'Amatic SC', cursive;
 $font-one: 'Fredericka the Great', cursive;
 $font-two: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
-$font-size-base: 18px;
+$font-size-base: 14px;
 $font-size-big: 2rem;
 $font-size-one: 1.5rem;
 $font-size-two: 1rem;
 $color-1: #2e005e;
-$color-2: #f9c500;
+$color-2: #498fff;
 $color-3: #090b01;
 $color-4: #108295;
 $color-5: #e3e0e5;
@@ -27,22 +27,21 @@ $color-8: #000;
 
 body,
 html {
+  font-family: $font-stack;
   max-width: 100%;
   min-height: 100vh;
   min-width: 360px;
 }
 
 body {
-  background-color: $color-1;
+  background-color: $color-5;
   color: $color-4;
-  font-family: $font-stack;
   font-size: $font-size-base;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
   position: relative;
   width: 100%;
-}
-
-h2 {
-  font-size: $font-size-two;
 }
 
 dl,
@@ -57,17 +56,39 @@ p {
   line-height: 1.5;
 }
 
+ol,
 ul {
   list-style: none;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  margin-top: 0;
+  outline: 0;
+  padding: 0;
 }
 
 a {
+  background-color: transparent;
   color: $color-5;
   text-decoration: none;
 
   &:hover {
-    text-decoration: none;
+    color: $color-4;
+    background-color: inherit !important;
   }
+}
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+  display: block;
 }
 
 input {
@@ -76,153 +97,153 @@ input {
   border-radius: 2px;
 }
 
+.btn,
+.ficon,
+img {
+  vertical-align: middle;
+}
+
+.ficon {
+  font-family: icons;
+  text-rendering: optimizeLegibility;
+}
+
 .btn {
   border: 2px solid;
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
 }
 
 // ************************************
 // Layout Rules ***********************
 // ************************************
 
-.lay-box {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center;
-}
-
-.lay-content {
-  margin-top: 100px;
-}
-
-.lay-flex-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.section {
-  margin-top: 100px;
-}
-
-.wrap {
-  overflow-x: hidden;
-}
-
 // ************************************
 // Modules Rules **********************
 // ************************************
 
-// hdr = header
-.bf {
-  font-size: $font-size-big;
-}
-
-.hdr {
-  background-color: $color-2;
-  height: 90px;
-  line-height: 1.5;
+// header
+.main-header {
+  background-color: rgba($color-8, .5);
+  color: $color-5;
+  height: 60px;
+  margin: 0 auto;
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 11;
 }
 
-.hdr-brand {
-  color: $color-1;
-  font-size: $font-size-one;
-  font-weight: bold;
-  margin-left: 15px;
-  overflow: hidden;
-  white-space: nowrap;
+.header-menu {
+  display: inline-block;
+  margin: 0;
 }
 
-.hdr-navbar {
-  background-color: rgba($color-4, .9);
-  height: 100%;
-
-  .hdr-icon {
-    border: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  // Style the links inside the navigation bar
-  a {
-    border-bottom: 1px solid $color-6;
-    color: $color-1;
-    display: none;
-    float: left;
-    font-size: $font-size-two;
-    height: 80px;
-    padding: 14px 16px;
-
-    .fa-bars {
-      color: $color-1;
-      display: block;
-      float: right;
-    }
-
-    // Change the link colors on hover
-    &:hover {
-      background-color: $color-2;
-      color: $color-4;
-      text-decoration: none;
-    }
-
-    &:last-child {
-      display: block;
-    }
-  }
+.header-container {
+  display: flex;
+  padding: 0 16px;
 }
 
-.hdr-navbar.responsive {
+.header-container__item--left {
+  display: inline-block;
+  flex: none;
+}
+
+.logo-and-links-menu__logo-container {
+  display: inline-block;
+  line-height: 60px;
   position: relative;
-  width: 300px;
+}
 
-  a {
-    display: block;
-    float: none;
-    text-align: left;
-  }
+.logo-and-links-menu__yamagata-hotels-logo {
+  height: 60px;
 
   &:hover {
+    opacity: .7;
+  }
+}
+
+.logo-and-links-menu__yamagata-hotels-link {
+  display: inline-block;
+}
+
+.link-container {
+  display: inline-block;
+  font-size: $font-size-base;
+  margin-bottom: 0;
+  position: relative;
+}
+
+@-moz-document url-prefix() {
+  .nav hr {
+    float: left;
+  }
+}
+
+.link-container__link-wrapper {
+  cursor: pointer;
+  display: inline-block;
+}
+
+.link-container__link {
+  display: inline-block;
+  font-weight: 700;
+  line-height: 60px;
+  min-width: 44px;
+  padding: 0 10px;
+
+  &:link,
+  :focus,
+  :visited {
+    color: rgba($color-2, .75);
     text-decoration: none;
   }
 
-  .hdr-icon {
-    background-color: $color-2;
-    position: absolute;
-    right: 0;
-    top: 0;
-
-    .fa-bars {
-      color: $color-4;
-    }
+  &:hover {
+    color: rgba($color-4, 1);
   }
 }
 
-.hdr-user-link {
-  .hdr-text {
-    color: $color-1;
-    font-family: $font-two;
-    font-size: $font-size-two;
-  }
+.nav {
+  hr {
+    background: $color-5;
+    border: 0;
+    display: block;
+    height: .2rem;
+    margin: 0;
+    transition: all .2s ease-in-out;
 
-  .far {
-    color: $color-1;
   }
+}
 
-  .fas {
-    color: $color-7;
-  }
+.header-container__space {
+  flex: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px;
+}
 
-  .fa-user {
-    float: right;
-    font-size: 50px;
-    position: absolute;
-    right: 80px;
-    top: 10px;
-  }
+.header-container__item--right {
+  display: inline-flex;
+}
+
+.header-menu--right {
+  display: flex;
+}
+
+.header-menu__group {
+  display: inline-flex;
+  padding: 10px 10px 10px 0;
+}
+
+.header-user-link {
+  line-height: 45px;
+}
+
+.container {
+  margin: 80px 8% 60px;
 }
 
 .form {
@@ -231,16 +252,23 @@ input {
   width: 75%;
 }
 
+// Main content
+.wrap {
+  background: linear-gradient(rgba($color-8, 0.5), rgba($color-8, 0.5)), url('//www.jalan.net/jalan/images/ryotei/0/007613/4L/000076133000000000000A004.jpg');
+  background-position: center;
+  background-size: cover;
+}
+
 // ftr = footer
 .ftr {
-  background-color: rgba($color-4, .9);
+  background-color: rgba($color-8, .7);
   bottom: 0;
   position: fixed;
   width: 100%;
   z-index: 9;
 
   .ftr-info {
-    color: $color-1;
+    color: $color-5;
     font-size: $font-size-base;
     text-align: center;
   }
@@ -253,7 +281,7 @@ input {
   margin: 0 auto;
   position: relative;
   top: -30px;
-  width: 1200px;
+  width: 900px;
 }
 
 .hero-banner-wrap {
@@ -291,38 +319,14 @@ input {
 // ************************************
 
 @media screen and (min-width: 600px) {
-  .sm-form {
-    width: 75%;
-  }
-
-  .hero-banner {
-    background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6)), url('/static/img/YukiBdayCard.svg');
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 35%;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    position: relative;
-    width: 100%;
-
-    .hero-text {
-      color: $color-1;
-      position: relative;
-      text-align: center;
-      top: 300px;
-
-      a {
-        color: $color-1;
-      }
-    }
+  .header-dropdown__hamburger {
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 0;
+    padding: 0 10px;
   }
 }
 
-.container {
-  margin-bottom: 70px;
-}
 // ************************************
 // Theme Rules ************************
 // ************************************

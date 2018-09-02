@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   box-sizing: border-box;
   margin: 0;
@@ -6,20 +5,20 @@
 
 body,
 html {
+  font-family: mallory, Helvetica Neue, Helvetica, Arial, sans-serif;
   max-width: 100%;
   min-height: 100vh;
   min-width: 360px; }
 
 body {
-  background-color: #2e005e;
+  background-color: #e3e0e5;
   color: #108295;
-  font-family: "Hiragino Kaku Gothic Pro", "ヒラギノ角ゴ Pro W3", メイリオ, Meiryo, "ＭＳ Ｐゴシック", sans-serif;
-  font-size: 18px;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
   position: relative;
   width: 100%; }
-
-h2 {
-  font-size: 1rem; }
 
 dl,
 ol,
@@ -31,138 +30,168 @@ li,
 p {
   line-height: 1.5; }
 
+ol,
 ul {
-  list-style: none; }
+  list-style: none;
+  margin-block-end: 1em;
+  margin-block-start: 1em;
+  margin-inline-end: 0;
+  margin-inline-start: 0;
+  margin-top: 0;
+  outline: 0;
+  padding: 0; }
 
 a {
+  background-color: transparent;
   color: #e3e0e5;
   text-decoration: none; }
   a:hover {
-    text-decoration: none; }
+    color: #108295;
+    background-color: inherit !important; }
+
+article,
+aside,
+figcaption,
+figure,
+footer,
+header,
+main,
+nav,
+section {
+  display: block; }
 
 input {
   background-color: #090b01;
   border: #595454;
   border-radius: 2px; }
 
+.btn,
+.ficon,
+img {
+  vertical-align: middle; }
+
+.ficon {
+  font-family: icons;
+  text-rendering: optimizeLegibility; }
+
 .btn {
   border: 2px solid; }
 
-.lay-box {
-  align-items: center;
-  display: flex;
-  height: 100%;
-  justify-content: center; }
+.hidden {
+  display: none !important;
+  visibility: hidden !important; }
 
-.lay-content {
-  margin-top: 100px; }
-
-.lay-flex-container {
-  display: flex;
-  justify-content: space-between; }
-
-.section {
-  margin-top: 100px; }
-
-.wrap {
-  overflow-x: hidden; }
-
-.bf {
-  font-size: 2rem; }
-
-.hdr {
-  background-color: #f9c500;
-  height: 90px;
-  line-height: 1.5;
+.main-header {
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #e3e0e5;
+  height: 60px;
+  margin: 0 auto;
   position: fixed;
   top: 0;
-  width: 100%;
-  z-index: 11; }
+  width: 100%; }
 
-.hdr-brand {
-  color: #2e005e;
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-left: 15px;
-  overflow: hidden;
-  white-space: nowrap; }
+.header-menu {
+  display: inline-block;
+  margin: 0; }
 
-.hdr-navbar {
-  background-color: rgba(16, 130, 149, 0.9);
-  height: 100%; }
-  .hdr-navbar .hdr-icon {
-    border: 0;
-    position: absolute;
-    right: 0;
-    top: 0; }
-  .hdr-navbar a {
-    border-bottom: 1px solid #595454;
-    color: #2e005e;
-    display: none;
-    float: left;
-    font-size: 1rem;
-    height: 80px;
-    padding: 14px 16px; }
-    .hdr-navbar a .fa-bars {
-      color: #2e005e;
-      display: block;
-      float: right; }
-    .hdr-navbar a:hover {
-      background-color: #f9c500;
-      color: #108295;
-      text-decoration: none; }
-    .hdr-navbar a:last-child {
-      display: block; }
+.header-container {
+  display: flex;
+  padding: 0 16px; }
 
-.hdr-navbar.responsive {
-  position: relative;
-  width: 300px; }
-  .hdr-navbar.responsive a {
-    display: block;
-    float: none;
-    text-align: left; }
-  .hdr-navbar.responsive:hover {
+.header-container__item--left {
+  display: inline-block;
+  flex: none; }
+
+.logo-and-links-menu__logo-container {
+  display: inline-block;
+  line-height: 60px;
+  position: relative; }
+
+.logo-and-links-menu__yamagata-hotels-logo {
+  height: 60px; }
+  .logo-and-links-menu__yamagata-hotels-logo:hover {
+    opacity: .7; }
+
+.logo-and-links-menu__yamagata-hotels-link {
+  display: inline-block; }
+
+.link-container {
+  display: inline-block;
+  font-size: 14px;
+  margin-bottom: 0;
+  position: relative; }
+
+@-moz-document url-prefix() {
+  .nav hr {
+    float: left; } }
+
+.link-container__link-wrapper {
+  cursor: pointer;
+  display: inline-block; }
+
+.link-container__link {
+  display: inline-block;
+  font-weight: 700;
+  line-height: 60px;
+  min-width: 44px;
+  padding: 0 10px; }
+  .link-container__link:link,
+  .link-container__link :focus,
+  .link-container__link :visited {
+    color: rgba(73, 143, 255, 0.75);
     text-decoration: none; }
-  .hdr-navbar.responsive .hdr-icon {
-    background-color: #f9c500;
-    position: absolute;
-    right: 0;
-    top: 0; }
-    .hdr-navbar.responsive .hdr-icon .fa-bars {
-      color: #108295; }
+  .link-container__link:hover {
+    color: #108295; }
 
-.hdr-user-link .hdr-text {
-  color: #2e005e;
-  font-family: "Helvetica Neue", Arial, "Lucida Grande", sans-serif;
-  font-size: 1rem; }
+.nav hr {
+  background: #e3e0e5;
+  border: 0;
+  display: block;
+  height: .2rem;
+  margin: 0;
+  transition: all .2s ease-in-out; }
 
-.hdr-user-link .far {
-  color: #2e005e; }
+.header-container__space {
+  flex: none;
+  margin-left: auto;
+  margin-right: auto;
+  width: 100px; }
 
-.hdr-user-link .fas {
-  color: #f9c500; }
+.header-container__item--right {
+  display: inline-flex; }
 
-.hdr-user-link .fa-user {
-  float: right;
-  font-size: 50px;
-  position: absolute;
-  right: 80px;
-  top: 10px; }
+.header-menu--right {
+  display: flex; }
+
+.header-menu__group {
+  display: inline-flex;
+  padding: 10px 10px 10px 0; }
+
+.header-user-link {
+  line-height: 45px; }
+
+.container {
+  margin: 80px 8% 60px; }
 
 .form {
   margin-left: auto;
   margin-right: auto;
   width: 75%; }
 
+.wrap {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("//www.jalan.net/jalan/images/ryotei/0/007613/4L/000076133000000000000A004.jpg");
+  background-position: center;
+  background-size: cover; }
+
 .ftr {
-  background-color: rgba(16, 130, 149, 0.9);
+  background-color: rgba(0, 0, 0, 0.7);
   bottom: 0;
   position: fixed;
   width: 100%;
   z-index: 9; }
   .ftr .ftr-info {
-    color: #2e005e;
-    font-size: 18px;
+    color: #e3e0e5;
+    font-size: 14px;
     text-align: center; }
 
 .hero-banner-box {
@@ -172,7 +201,7 @@ input {
   margin: 0 auto;
   position: relative;
   top: -30px;
-  width: 1200px; }
+  width: 900px; }
 
 .hero-banner-wrap {
   margin-top: 100px; }
@@ -200,26 +229,8 @@ input {
   top: 300px; }
 
 @media screen and (min-width: 600px) {
-  .sm-form {
-    width: 75%; }
-  .hero-banner {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("/static/img/YukiBdayCard.svg");
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: 35%;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    justify-content: center;
-    position: relative;
-    width: 100%; }
-    .hero-banner .hero-text {
-      color: #2e005e;
-      position: relative;
-      text-align: center;
-      top: 300px; }
-      .hero-banner .hero-text a {
-        color: #2e005e; } }
-
-.container {
-  margin-bottom: 70px; }
+  .header-dropdown__hamburger {
+    font-weight: 700;
+    line-height: 60px;
+    margin-bottom: 0;
+    padding: 0 10px; } }

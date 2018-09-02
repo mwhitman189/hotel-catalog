@@ -1,23 +1,7 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<!--LOAD PRE-REQUISITES FOR GOOGLE SIGN IN -->
-<html itemscope itemtype="http://schema.org/Article">
-<meta name="Description" content="Login page for Yamagata Hotels; Description: Hotel and lodging listings, Location: Yamagata Yamagata Japan">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://apis.google.com/js/client:platform.js?onload=start" async defer></script>
-<!-- END PRE-REQUISITES FOR GOOGLE SIGN IN -->
-<script>
-  function start() {
-    gapi.load('auth2', function() {
-      auth2 = gapi.auth2.init({
-        client_id: '936000743443-1lb8midi1epefonrqg2r55cdoiag0tgg.apps.googleusercontent.com',
-        // Scopes to request in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
-      });
-    });
-  }
-</script>
+
 {% endblock %}
 
 {% block body %}
