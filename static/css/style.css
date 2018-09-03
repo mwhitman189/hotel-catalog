@@ -108,7 +108,8 @@ img {
   position: relative; }
 
 .logo-and-links-menu__yamagata-hotels-logo {
-  height: 60px; }
+  height: 60px;
+  vertical-align: 0; }
   .logo-and-links-menu__yamagata-hotels-logo:hover {
     opacity: .7; }
 
@@ -209,6 +210,9 @@ img {
 .hotel-img {
   height: 200px;
   width: 350px; }
+
+.hotel-info {
+  color: #e3e0e5; }
 
 .login-box {
   align-items: center;
