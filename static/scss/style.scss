@@ -74,8 +74,9 @@ a {
   text-decoration: none;
 
   &:hover {
+    background-color: inherit;
     color: $color-4;
-    background-color: inherit !important;
+    text-decoration: none;
   }
 }
 
@@ -127,8 +128,9 @@ img {
 
 // header
 .main-header {
-  background-color: rgba($color-8, .5);
+  background-color: transparent;
   color: $color-5;
+  display: inline-block;
   height: 60px;
   margin: 0 auto;
   position: fixed;
@@ -147,7 +149,7 @@ img {
 }
 
 .header-container__item--left {
-  display: inline-block;
+  display: inline-flex;
   flex: none;
 }
 
@@ -198,7 +200,7 @@ img {
   &:link,
   :focus,
   :visited {
-    color: rgba($color-2, .75);
+    color: $color-5;
     text-decoration: none;
   }
 
@@ -255,7 +257,7 @@ img {
 
 // Main content
 .wrap {
-  background: linear-gradient(rgba($color-8, 0.5), rgba($color-8, 0.5)), url('//www.jalan.net/jalan/images/ryotei/0/007613/4L/000076133000000000000A004.jpg');
+  background: linear-gradient(rgba(#fff, 0), rgba(#fff, 1)), url('//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971');
   background-position: center;
   background-size: cover;
 }
@@ -287,6 +289,17 @@ img {
 
 .hero-banner-wrap {
   margin-top: 100px;
+}
+
+.thumbnail {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 25px;
+  height: 50px;
+  position: relative;
+  right: 50px;
+  width: 50px;
 }
 
 .hotel-img {
