@@ -18,13 +18,6 @@
     {% endif %}
 {% endwith %}
 
-<!--<section class="lay-content hero-banner-wrap">
-    <div class="hero-banner">
-      <div class="hero-text"></div>
-      <div class="hero-banner-box">
-      </div>
-    </div>
-</section> -->
 
 
 <section class="main-div">
@@ -34,12 +27,12 @@
         <li>
             <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="thumbnail" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ichotels_hotel_48px.svg');"{% endif %}></span>
             </a>
-            <h1><a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h1>
+            <h1><a class="hotel hotel-link name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h1>
         </li>
     {% endfor %}
     </ul>
 </section>
 
-<a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
+<a class="link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
 
 {% endblock %}

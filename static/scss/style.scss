@@ -9,8 +9,8 @@ $font-size-two: 1rem;
 $color-1: #2e005e;
 $color-2: #498fff;
 $color-3: #090b01;
-$color-4: #108295;
-$color-5: #e3e0e5;
+$color-4: #fde0ff;
+$color-5: #fff;
 $color-6: #595454;
 $color-7: #f9c500;
 $color-8: #000;
@@ -30,12 +30,12 @@ html {
   font-family: $font-stack;
   max-width: 100%;
   min-height: 100vh;
-  min-width: 360px;
+  min-width: 320px;
 }
 
 body {
   background-color: $color-5;
-  color: $color-4;
+  color: $color-8;
   font-size: $font-size-base;
   font-weight: 400;
   letter-spacing: 0;
@@ -98,6 +98,10 @@ input {
   border-radius: 2px;
 }
 
+label {
+  color: $color-5;
+}
+
 .btn,
 .ficon,
 img {
@@ -111,6 +115,11 @@ img {
 
 .btn {
   border: 2px solid;
+  height: 40px;
+
+  &:active {
+    transform: translate(2px, 2px);
+  }
 }
 
 .hidden {
@@ -118,6 +127,9 @@ img {
   visibility: hidden !important;
 }
 
+.link {
+  font-size: $font-size-one;
+}
 // ************************************
 // Layout Rules ***********************
 // ************************************
@@ -160,8 +172,7 @@ img {
 }
 
 .logo-and-links-menu__yamagata-hotels-logo {
-  height: 60px;
-  vertical-align: 0;
+  height: 40px;
 
   &:hover {
     opacity: .7;
@@ -194,7 +205,6 @@ img {
   display: inline-block;
   font-weight: 700;
   line-height: 60px;
-  min-width: 44px;
   padding: 0 10px;
 
   &:link,
@@ -221,13 +231,6 @@ img {
   }
 }
 
-.header-container__space {
-  flex: none;
-  margin-left: auto;
-  margin-right: auto;
-  width: 100px;
-}
-
 .header-container__item--right {
   display: inline-flex;
 }
@@ -245,21 +248,31 @@ img {
   line-height: 45px;
 }
 
-.container {
-  margin: 80px 8% 60px;
-}
-
 .form {
-  margin-left: auto;
+  margin-left: 0;
   margin-right: auto;
   width: 75%;
 }
 
 // Main content
 .wrap {
-  background: linear-gradient(rgba(#fff, 0), rgba(#fff, 1)), url('//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971');
+  background: linear-gradient(rgba(#fff, 0), rgba(#000, .3)), url('//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971');
   background-position: center;
   background-size: cover;
+}
+
+.title {
+  margin-bottom: 50px;
+}
+
+.hotel-link {
+  &:hover {
+    opacity: .7;
+  }
+}
+
+.container {
+  margin-top: 100px;
 }
 
 // ftr = footer
@@ -277,24 +290,10 @@ img {
   }
 }
 
-.hero-banner-box {
-  background-image: linear-gradient(rgba($color-8, .6), rgba($color-8, .6));
-  border-radius: 7px;
-  height: 600px;
-  margin: 0 auto;
-  position: relative;
-  top: -30px;
-  width: 900px;
-}
-
-.hero-banner-wrap {
-  margin-top: 100px;
-}
-
 .thumbnail {
-  background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  background-size: cover;
   border-radius: 25px;
   height: 50px;
   position: relative;
@@ -303,33 +302,44 @@ img {
 }
 
 .hotel-img {
-  height: 200px;
-  width: 350px;
+  height: 50px;
+  width: 88px;
 }
 
 .hotel-info {
   color: $color-5;
 }
 
-.login-box {
-  align-items: center;
-  background-color: $color-3;
-  box-shadow: 3px 3px 3px $color-6;
-  color: $color-6;
+.signin-box {
+  background-color: $color-4;
+  border-radius: 3px;
+  box-shadow: 1px 1px 3px 1px $color-6;
+  color: $color-8;
   display: flex;
   height: 400px;
   justify-content: center;
-  width: 300px;
-}
-
-.login-title {
-  position: absolute;
-  top: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  text-align: center;
+  top: 50px;
+  width: 310px;
 }
 
 .signin-btn {
-  position: absolute;
+  background-color: $color-2;
+  border: 0;
+  box-shadow: 1px 1px 1px $color-6;
+  color: #fff;
+  position: relative;
   top: 300px;
+}
+
+.signin-title {
+  color: $color-8;
+  position: absolute;
+  text-align: center;
+  top: 120px;
 }
 
 // ************************************
@@ -342,6 +352,18 @@ img {
     line-height: 60px;
     margin-bottom: 0;
     padding: 0 10px;
+  }
+
+  .header-container__space {
+    flex: none;
+    margin-left: auto;
+    margin-right: auto;
+    width: 0;
+  }
+
+  .hotel-img {
+    height: 200px;
+    width: 350px;
   }
 }
 

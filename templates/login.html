@@ -7,20 +7,16 @@
 {% block body %}
 
 <!-- GOOGLE SIGN IN BUTTON -->
-<section class="lay-content">
+<section class="signin-section">
     {% if 'username' not in session %}
-    <div class="lay-box">
-        <div class="login-box">
-            <h1 class="login-title">Google Login</h1>
-            <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
-        </div>
+    <div class="signin-box">
+        <h1 class="signin-title">Signin</h1>
+        <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
     </div>
 
     {% else %}
-    <div class="lay-box">
-        <div class="login-box">
-            <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
-        </div>
+    <div class="signin-box">
+        <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
     </div>
     {% endif %}
 </section>
