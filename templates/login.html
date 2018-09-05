@@ -11,7 +11,12 @@
     {% if 'username' not in session %}
     <div class="signin-box">
         <img src="/static/img/basho_logo.svg" class="signin-logo" alt="basho logo" title="basho">
+        <div class="result">
+            <div id="result"></div>
+        </div>
+        {% if 'username' in session %}
         <h2 class="signin-title">Sign in</h2>
+        {% endif %}
         <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
     </div>
 
@@ -30,9 +35,7 @@
 </script>
 <!-- /GOOGLE SIGNIN BUTTON -->
 
-<div class="result">
-    <div id="result"></div>
-</div>
+
 
 <script>
 function signInCallback(authResult) {

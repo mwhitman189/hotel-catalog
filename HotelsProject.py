@@ -218,7 +218,7 @@ def gconnect():
     output += '!</h1>'
     output += '<img src="'
     output += login_session['picture']
-    output += '" style = "width: 300px; height: 300px;border-radius: 150px;"> '
+    output += '" style = "width: 100px; height: 100px;border-radius: 50px;"> '
     flash("You are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -317,7 +317,7 @@ def showLogin():
         string.ascii_uppercase + string.digits)for x in xrange(32))
     login_session['state'] = state
     return render_template('login.html', STATE=state)
-    
+
 
 @app.route('/hotels/')
 def showHotels():
