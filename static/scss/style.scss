@@ -12,8 +12,9 @@ $color-3: #090b01;
 $color-4: #fde0ff;
 $color-5: #fff;
 $color-6: #595454;
-$color-7: #f9c500;
-$color-8: #000;
+$color-7: #427bd6;
+$color-8: #373338;
+$color-9: #fff;
 
 // ************************************
 // Base Rules *************************
@@ -115,6 +116,7 @@ img {
 
 .btn {
   border: 2px solid;
+  font-weight: 600;
   height: 40px;
 
   &:active {
@@ -315,31 +317,46 @@ img {
   border-radius: 3px;
   box-shadow: 1px 1px 3px 1px $color-6;
   color: $color-8;
-  display: flex;
+  display: block;
   height: 400px;
   justify-content: center;
   margin-left: auto;
   margin-right: auto;
   position: relative;
   text-align: center;
-  top: 50px;
+  top: 70px;
   width: 310px;
 }
 
-.signin-btn {
-  background-color: $color-2;
-  border: 0;
-  box-shadow: 1px 1px 1px $color-6;
-  color: #fff;
+.signin-logo {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
-  top: 300px;
+  top: -20px;
+  width: 200px;
 }
 
 .signin-title {
   color: $color-8;
-  position: absolute;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
   text-align: center;
-  top: 120px;
+  top: 60px;
+}
+
+.signin-btn {
+  background-color: $color-2;
+  background-image: linear-gradient(rgba($color-2, 1), rgba($color-7, 1));
+  background-repeat: repeat-x;
+  border: 0;
+  border-color: $color-7;
+  box-shadow: 1px 1px 1px $color-6;
+  color: $color-9;
+  position: relative;
+  top: 200px;
 }
 
 // ************************************
