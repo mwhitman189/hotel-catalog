@@ -238,6 +238,13 @@ img {
   display: inline-flex;
 }
 
+// TODO: get the hamburger menu working properly
+.button {
+  position: absolute;
+  height: 50px;
+  width: 50px;
+}
+
 .header-menu--right {
   display: flex;
 }

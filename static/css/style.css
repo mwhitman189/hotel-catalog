@@ -166,6 +166,11 @@ img {
 .header-container__item--right {
   display: inline-flex; }
 
+.button {
+  position: absolute;
+  height: 50px;
+  width: 50px; }
+
 .header-menu--right {
   display: flex; }
 
