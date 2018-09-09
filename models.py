@@ -8,6 +8,7 @@ import random, string
 from itsdangerous import(TimedJSONWebSignatureSerializer as Serializer, BadSignature, SignatureExpired)
 
 
+
 Base = declarative_base()
 secret_key = ''.join(random.choice(string.ascii_uppercase + string.digits) for x in xrange(32))
 
@@ -44,6 +45,15 @@ class User(Base):
             return None
         user_id = data['id']
         return user_id
+
+    @property
+    def serialize(self):
+        """Return object data in easily serializeable format"""
+        return {
+            'username' : self.username,
+            'picture' : self.picture,
+            'email' : self.email,
+        }
 
 
 class Hotel(Base):

@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block header %}
+
+
+<header role="banner" class="navbar-hotels main-header">
+    <section class="header-container">
+        <div class="header-container__item">
+            <div class="logo-and-links-menu__logo-container">
+                <a href="{{ url_for('showHotelCategories') }}" class="logo-and-links-menu__yamagata-hotels-link">
+                    <img src="/static/img/basho_logo.svg" alt="basho logo" title="basho" class="logo-and-links-menu__yamagata-hotels-logo">
+                </a>
+            </div>
+        <nav class="navigation" id="hdrNavbar" role="navigation">
+            <!-- nav-right -->
+            <ul class="header-menu header-container__item--right">
+                {% if 'username' not in session %}
+                <li class="header-menu__group"><a class="header-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text">Sign in</span></i></a></li>
+                {% else %}
+                <li class="header-menu__group username"><a class="header-user-link" href="#"><i class="fas fa-user"><span class="hdr-text"> Welcome, {{ session.username }}!</span></i></a></li>
+                {% endif %}
+                {% if 'username' not in session %}
+                <li class="header-menu__group"><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Sign in</a></li>
+                {% else %}
+                <li class="header-menu__group"><a href="#"><span class="btn glyphicon glyphicon-user">{{ session.username }}</span></a></li>
+                <li class="header-menu__group"><a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user">Log Out</span></a></li>
+                {% endif %}
+
+            </ul>
+            <!-- Use comments to fill white space to prevent extra space between 'inline-block' links -->
+            <ul class="nav-list link-container header-container__item--left"><!--
+            --><li class="link-container__link-wrapper header-menu__group"><a href="{{ url_for('showHotels', hotels=hotels) }}" class="link-container__link"><span class="link-container__link__text">Home</span></a></li><!--
+            --><li class="link-container__link-wrapper header-menu__group"><a href="{{ url_for('newHotel') }}" class="link-container__link"><span class="link-container__link__text">Add A Lodging</span></a></li><!--
+            --><li class="link-container__link-wrapper header-menu__group"><a href="{{ url_for('showHotelCategories') }}" class="link-container__link"><span class="link-container__link__text">Types of Lodgings</span></a></li><!--
+            --><hr id="nav_slide_hover" class="link-container__highlight" style="width: 17.6152%; margin-left: 0%;">
+            </ul>
+            <span class="header-container__space"></span>
+        </nav>
+        <a href="javascript:void(0);" class="hdr-icon" onclick="hdrFunction()">
+            <i class="fa fa-bars fa-2x"></i>
+        </a>
+    </section>
+</header>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function hdrFunction() {
+    var x = document.getElementById("hdrNavbar");
+    if (x.className === "navigation") {
+        x.className += " visible";
+    } else {
+        x.className = "navigation";
+    }
+}
+</script>
+
+<script>
+// Create dynamic sliding navbar
+let menu = document.getElementsByClassName( 'nav-list' );
+// Values are set.
+if ( menu ) {
+
+  // HOVER
+  let menu_slider_hover = document.getElementById( 'nav_slide_hover' );
+  if ( menu_slider_hover ) {
+    nav_slider( menu[0], function( el, width, tempMarginLeft ) {
+      el.onmouseover = () => {
+        menu_slider_hover.style.width =  width + '%';
+        menu_slider_hover.style.marginLeft = tempMarginLeft + '%';
+      }
+    });
+  }
+
+} // endif
+
+function nav_slider( menu, callback ) {
+  let menu_width = menu.offsetWidth;
+  // We only want the <li> </li> tags
+  menu = menu.getElementsByTagName( 'li' );
+  if ( menu.length > 0 ) {
+    var marginLeft = [];
+    // Loop through nav children i.e li
+    [].forEach.call( menu, ( el, index ) => {
+      // Dynamic width/margin calculation for hr
+      var width = getPercentage( el.offsetWidth, menu_width );
+      var tempMarginLeft = 0;
+      // We don't want to modify first elements positioning
+      if ( index != 0 )  {
+        tempMarginLeft = getArraySum( marginLeft );
+      }
+      // Set mouse event [hover]
+      callback( el, width, tempMarginLeft );
+      // Store it in an array because the later accumulated value is used for positioning
+      marginLeft.push( width );
+    } );
+  }
+}
+
+// Might make this dynamic for px, %, pt, em
+function getPercentage( min, max ) {
+  return min / max * 100;
+}
+
+// Not using reduce, because IE8 doesn't supprt it
+function getArraySum( arr ) {
+  let sum = 0;
+  [].forEach.call( arr, ( el, index ) => {
+    sum += el;
+  } );
+  return sum;
+}
+
+</script>
+{% endblock %}

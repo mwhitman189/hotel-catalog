@@ -206,19 +206,19 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
-    # Check if user is already if database, and if not, creates a new user object
+    # Check if user is already in the database, and if not, creates a new user object
     user_id = getUserID(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
     login_session['user_id'] = user_id
 
     output = ''
-    output += '<h1>Welcome, '
+    output += '<h2>Welcome, '
     output += login_session['username']
-    output += '!</h1>'
+    output += '!</h2>'
     output += '<img src="'
     output += login_session['picture']
-    output += '" style = "width: 100px; height: 100px;border-radius: 50px;"> '
+    output += '"class="signin-pic" style = "width: 100px; height: 100px;border-radius: 50px;"> '
     flash("You are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -261,6 +261,7 @@ def gdisconnect():
 ####################
 # API calls
 ####################
+
 
 ### JSON APIs to view Hotel information ###
 @app.route('/api/hotels/JSON/')
@@ -305,6 +306,31 @@ def showHotelsByCategoryJSON(category):
 ####################
 # Client facing web pages
 ####################
+
+
+#TODO: Try WTForms to handle validation and prevent '400 BadRequest'
+@app.route('/users/new', methods=['GET', 'POST'])
+@ratelimit(limit=30, per=60 * 1)
+def newUser():
+    if 'username' in login_session:
+        output = ''
+        output += '<p>You are already logged in as '
+        output += login_session['username']
+        output += '. <a href="/logout">Log out</a>?'
+        return output
+    else:
+        if request.method == 'POST':
+            new_user = User(
+            username = request.form['username'],
+            email = request.form['email'],
+            )
+            new_user.hash_password(request.form['password'])
+            session.add(new_user)
+            session.commit()
+            flash("Success! %s was added to the user database." % new_user.username)
+            return redirect(url_for('showHotels'))
+        else:
+            return render_template('new_user.html')
 
 
 @app.route('/login')

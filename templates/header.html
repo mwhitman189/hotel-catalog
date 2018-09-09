@@ -4,59 +4,36 @@
 
 
 <header role="banner" class="navbar-hotels main-header">
-    <section class="header-container">
-        <nav class="header-container__item header-container__item--left" role="navigation">
-            <div class="logo-and-links-menu__logo-container">
-                <a href="{{ url_for('showHotelCategories') }}" class="logo-and-links-menu__yamagata-hotels-link">
-                    <img src="/static/img/basho_logo.svg" alt="basho logo" title="basho" class="logo-and-links-menu__yamagata-hotels-logo">
-                </a>
-            </div>
-            <!-- Use comments to fill white space to prevent extra space between 'inline-block' links -->
-            <ul class="nav link-container"><!--
-            --><li class="link-container__link-wrapper"><a href="{{ url_for('showHotels', hotels=hotels) }}" class="link-container__link"><span class="link-container__link__text">Home</span></a></li><!--
-            --><li class="link-container__link-wrapper"><a href="{{ url_for('newHotel') }}" class="link-container__link"><span class="link-container__link__text">Add A Lodging</span></a></li><!--
-            --><li class="link-container__link-wrapper"><a href="{{ url_for('showHotelCategories') }}" class="link-container__link"><span class="link-container__link__text">Types of Lodgings</span></a></li><!--
-            --><hr id="nav_slide_hover" class="link-container__highlight" style="width: 17.6152%; margin-left: 0%;">
-            </ul>
-        </nav>
-        <span class="header-container__space"></span>
-
-        <nav class="header-container__item header-container__item--right" role="navigation">
-            <ul class="header-menu header-menu--right header-menu--master">
-                {% if 'username' not in session %}
-                <li class="header-menu__group">
-                    <a class="header-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text">Sign in</span></i></a></li>
-                {% else %}
-                <li class="header-menu__group">
-                    <a class="header-user-link" href="#"><i class="fas fa-user"><span class="hdr-text"> Welcome, {{ session.username }}!</span></i></a></li>
-                {% endif %}
-                {% if 'username' not in session %}
-                <li class="header-menu__group">
-                    <a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Sign in</a></li>
-                {% else %}
-                <li class="header-menu__group">
-                    <a href="#"><span class="btn glyphicon glyphicon-user">{{ session.username }}</span></a></li>
-                <li class="header-menu__group">
-                    <a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user">Log Out</span></a></li>
-                {% endif %}
-                <li class="header-menu__group">
-                    <a href="javascript:void(0);" class="hdr-icon" onclick="hdrFunction()">
-                        <i class="fa fa-bars fa-2x"></i>
-                    </a></li>
+    <div class="header flex-container">
+        <a href="{{ url_for('showHotelCategories') }}" class="logo-link">
+            <img src="/static/img/basho_logo.svg" alt="basho logo" title="basho" class="logo"></a>
+        <nav class="navbar flex-container" id="hdrNavbar" role="navigation">
+            <!-- header-left -->
+            <ul class="items nav-links">
+                <li class="hidden-item link-container__link-wrapper header-menu__group"><a href="{{ url_for('showHotels', hotels=hotels) }}" class="link-container__link"><span class="hdr-text">Home</span></a></li>
+                <li class="hidden-item link-container__link-wrapper header-menu__group"><a href="{{ url_for('newHotel') }}" class="link-container__link"><span class="hdr-text">Add A Lodging</span></a></li>
+                <li class="hidden-item link-container__link-wrapper header-menu__group"><a href="{{ url_for('showHotelCategories') }}" class="link-container__link"><span class="hdr-text">Types of Lodgings</span></a></li>
             </ul>
 
-            <div class="nav-right visible-xs">
-              <div class="button" id="btn">
-                <div class="bar top"></div>
-                <div class="bar middle"></div>
-                <div class="bar bottom"></div>
-              </div>
-            </div>
-            <!-- nav-right -->
-            <main>
-
+            <!-- header-right -->
+            <ul class="items user-links">
+                {% if 'username' not in session %}
+                <li class="hidden-item header-menu__group"><a class="header-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text">Sign in</span></i></a></li>
+                {% else %}
+                <li class="hidden-item header-menu__group"><a class="header-user-link" href="#"><i class="fas fa-user"><span class="hdr-text"> {{ session.username }}</span></i></a></li>
+                {% endif %}
+                {% if 'username' not in session %}
+                <li class="hidden-item header-menu__group"><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Sign in</a></li>
+                {% else %}
+                <li class="hidden-item header-menu__group"><a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user">Log Out</span></a></li>
+                {% endif %}
+            </ul>
+            <a href="javascript:void(0);" class="hdr-icon" onclick="hdrFunction()">
+                <i class="fa fa-bars fa-2x"></i>
+            </a>
+            <!--<hr id="nav_slide_hover" class="link-container__highlight" style="width: 17.6152%; margin-left: 0%;">-->
         </nav>
-    </section>
+    </div>
 </header>
 {% endblock %}
 
@@ -64,17 +41,17 @@
 <script>
 function hdrFunction() {
     var x = document.getElementById("hdrNavbar");
-    if (x.className === "hdr-navbar") {
-        x.className += " responsive";
+    if (x.className === "nav") {
+        x.className += " visible";
     } else {
-        x.className = "hdr-navbar";
+        x.className = "nav";
     }
 }
 </script>
 
 <script>
 // Create dynamic sliding navbar
-let menu = document.getElementsByClassName( 'nav' );
+let menu = document.getElementsByClassName( 'nav-links' );
 // Values are set.
 if ( menu ) {
 

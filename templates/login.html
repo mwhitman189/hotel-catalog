@@ -11,9 +11,10 @@
     {% if 'username' not in session %}
     <div class="signin-box">
         <img src="/static/img/basho_logo.svg" class="signin-logo" alt="basho logo" title="basho">
-        <div class="result">
+        <div class="signin-result">
             <div id="result"></div>
         </div>
+        <!-- Check that client is signed in, then remove title-->
         {% if 'username' in session %}
         <h2 class="signin-title">Sign in</h2>
         {% endif %}

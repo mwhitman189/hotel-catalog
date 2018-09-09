@@ -69,6 +69,10 @@ ul {
   padding: 0;
 }
 
+li {
+  list-style: none;
+}
+
 a {
   background-color: transparent;
   color: $color-5;
@@ -109,9 +113,10 @@ img {
   vertical-align: middle;
 }
 
-.ficon {
-  font-family: icons;
-  text-rendering: optimizeLegibility;
+img {
+  display: block;
+  height: auto;
+  max-width: 100%;
 }
 
 .btn {
@@ -124,11 +129,6 @@ img {
   }
 }
 
-.hidden {
-  display: none !important;
-  visibility: hidden !important;
-}
-
 .link {
   font-size: $font-size-one;
 }
@@ -136,137 +136,55 @@ img {
 // Layout Rules ***********************
 // ************************************
 
-// ************************************
-// Modules Rules **********************
-// ************************************
-
-// header
-.main-header {
-  background-color: transparent;
-  color: $color-5;
-  display: inline-block;
-  height: 60px;
-  margin: 0 auto;
-  position: fixed;
-  top: 0;
-  width: 100%;
-}
-
-.header-menu {
-  display: inline-block;
-  margin: 0;
-}
-
-.header-container {
-  display: flex;
-  padding: 0 16px;
-}
-
-.header-container__item--left {
-  display: inline-flex;
-  flex: none;
-}
-
-.logo-and-links-menu__logo-container {
-  display: inline-block;
-  line-height: 60px;
-  position: relative;
-}
-
-.logo-and-links-menu__yamagata-hotels-logo {
-  height: 40px;
-
-  &:hover {
-    opacity: .7;
-  }
-}
-
-.logo-and-links-menu__yamagata-hotels-link {
-  display: inline-block;
-}
-
-.link-container {
-  display: inline-block;
-  font-size: $font-size-base;
-  margin-bottom: 0;
-  margin-left: 10px;
-  position: relative;
-}
-
-@-moz-document url-prefix() {
-  .nav hr {
-    float: left;
-  }
-}
-
-.link-container__link-wrapper {
-  cursor: pointer;
-  display: inline-block;
-}
-
-.link-container__link {
-  display: inline-block;
-  font-weight: 700;
-  line-height: 60px;
-  padding: 0 10px;
-
-  &:link,
-  :focus,
-  :visited {
-    color: $color-5;
-    text-decoration: none;
-  }
-
-  &:hover {
-    color: rgba($color-4, 1);
-  }
-}
-
-.nav {
-  hr {
-    background: $color-5;
-    border: 0;
-    display: block;
-    height: .2rem;
-    margin: 0;
-    transition: all .2s ease-in-out;
-
-  }
-}
-
-.header-container__item--right {
-  display: inline-flex;
-}
-
-// TODO: get the hamburger menu working properly
-.button {
-  position: absolute;
-  height: 50px;
-  width: 50px;
-}
-
-.header-menu--right {
+.flex-container {
   display: flex;
 }
 
-.header-menu__group {
-  display: inline-flex;
-  padding: 10px 10px 10px 0;
+// ************************************
+// Module Rules ***********************
+// ************************************
+
+// {{ start HEADER }}
+header {
+  .logo-link {
+    padding: 10px;
+  }
+
+  .logo {
+    height: auto;
+    width: 170px;
+  }
+
+  .hdr-text {
+    font-family: $font-stack;
+    font-weight: 600;
+  }
+
+  .hidden-item {
+    display: none;
+  }
+
+  .hdr-icon {
+    display: flex;
+    float: right;
+    position: relative;
+  }
 }
 
-.header-user-link {
-  line-height: 45px;
-}
+// {{ end HEADER }}
 
+// {{ start FORMS }}
 .form {
   margin-left: 0;
   margin-right: auto;
   width: 75%;
 }
 
-// Main content
+// {{ end FORMS }}
+
+// {{ start MAIN CONTENT }}
 .wrap {
-  background: linear-gradient(rgba(#fff, 0), rgba(#000, .3)), url('//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971');
+  background: linear-gradient(rgba(#fff, 0), rgba(#000, .5)), url('//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971');
   background-position: center;
   background-size: cover;
 }
@@ -285,7 +203,9 @@ img {
   margin-top: 100px;
 }
 
-// ftr = footer
+// {{ end MAIN CONTENT }}
+
+// {{ start FOOTER }}
 .ftr {
   background-color: rgba($color-8, .7);
   bottom: 0;
@@ -300,26 +220,31 @@ img {
   }
 }
 
+// {{ end FOOTER }}
+
 .thumbnail {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   border-radius: 25px;
   height: 50px;
-  position: relative;
   right: 50px;
   width: 50px;
 }
 
+.hotel-thumbnail {
+  position: relative;
+}
+
 .hotel-img {
-  height: 50px;
-  width: 88px;
+  width: 100%;
 }
 
 .hotel-info {
   color: $color-5;
 }
 
+// {{ start SIGNIN }}
 .signin-box {
   background-color: $color-4;
   border-radius: 3px;
@@ -367,28 +292,118 @@ img {
   top: 200px;
 }
 
+.signin-result {
+  position: relative;
+  top: 40px;
+}
+
+// {{ end SIGNIN }}
+
 // ************************************
 // State Rules ************************
 // ************************************
 
-@media screen and (min-width: 600px) {
-  .header-dropdown__hamburger {
-    font-weight: 700;
-    line-height: 60px;
-    margin-bottom: 0;
-    padding: 0 10px;
+@media screen and (max-width: 1016px) {
+
+  // ************************************
+  // Layout Rules ***********************
+  // ************************************
+
+  // ************************************
+  // Module Rules ***********************
+  // ************************************
+
+  // {{ start HEADER }}
+  .navbar {
+    height: 100vh;
+    position: absolute;
+    width: 300px;
+
+    li {
+      border-bottom: 1px solid $color-6;
+      margin-left: auto;
+      margin-right: auto;
+      width: 95%;
+    }
+
+    a {
+      color: $color-8;
+      margin-left: 10px;
+      width: 100%;
+    }
   }
 
-  .header-container__space {
-    flex: none;
-    margin-left: auto;
-    margin-right: auto;
-    width: 0;
+  .hdr-icon {
+    position: absolute;
+    right: 0;
+    top: 0;
   }
+
+  .navbar.visible {
+    background-color: $color-4;
+    display: block;
+    right: 0;
+
+  }
+
+  // {{ end HEADER }}
+}
+
+@media screen and (min-width: 1016px) {
+
+  // ************************************
+  // Layout Rules ***********************
+  // ************************************
+
+  .container {
+    margin-top: 40px;
+  }
+
+  // ************************************
+  // Module Rules ***********************
+  // ************************************
+
+  // {{ start HEADER }}
+  header {
+    .flex-container {
+      display: flex;
+      justify-content: space-between;
+      position: relative;
+      width: 100%;
+    }
+
+    .items {
+      display: flex;
+    }
+
+    .hidden-item {
+      display: flex;
+    }
+
+    .nav-links {
+      justify-content: flex-start;
+    }
+
+    .user-links {
+      justify-content: flex-end;
+    }
+
+    li {
+      margin-bottom: auto;
+      margin-top: auto;
+      padding: 15px;
+    }
+
+    .hdr-icon {
+      display: none;
+    }
+  }
+
+  // {{ end HEADER }}
 
   .hotel-img {
-    height: 200px;
-    width: 350px;
+    height: 400px;
+    width: 700px;
   }
 }
 
