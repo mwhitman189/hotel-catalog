@@ -6,13 +6,14 @@
 
 
 {% block body %}
-<section>
-    <h1 class="page-title heading">Delete {{ hotel.name }}</h1>
-    <form action="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" method="POST">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        <input class="btn btn-danger" type="submit" value="Delete Hotel"></input>
-    </form>
-    <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>
-</section>
-
+<div class="container">
+    <section>
+        <h1 class="page-title heading">Delete {{ hotel.name }}</h1>
+        <form action="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" method="POST">
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input class="btn btn-danger" type="submit" value="Delete Hotel"></input>
+        </form>
+        <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>
+    </section>
+</div>
 {% endblock %}

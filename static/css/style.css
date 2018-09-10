@@ -127,7 +127,7 @@ header .hdr-icon {
   width: 100%; }
 
 .wrap {
-  background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5)), url("//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971");
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5)), url("https://cdn.zekkei-japan.jp/images/spots/g8xzqy1v0erg5885i0uewo25wyselax8a.jpg");
   background-position: center;
   background-size: cover; }
 
@@ -271,6 +271,18 @@ header .hdr-icon {
     padding: 15px; }
   header .hdr-icon {
     display: none; }
+  .wrap {
+    background: none; }
+  .hero-img {
+    background-repeat: no-repeat;
+    background-size: cover;
+    box-sizing: border-box;
+    min-height: 450px;
+    padding: 50px 0;
+    position: relative;
+    top: -145px;
+    width: 100%;
+    z-index: -1; }
   .hotel-img {
     border-radius: 50%;
     height: 400px;

@@ -6,50 +6,52 @@
 
 
 {% block body %}
-<section>
-    <h1 class="page-title heading">Edit Hotel</h1>
-    <form class="form sm-form" action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
-        <div class="form-group">
-            <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
-            <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="{{ hotel.name }}">
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="urlOfImage">URL of Image</label>
-            <input class="form-control" type="text" id="urlOfImage" name="picture" placeholder="{{ hotel.picture }}">
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="description">Description</label>
-            <input class="form-control" type="textarea" id="description" name="description" placeholder="{{ hotel.description }}">
-        </div>
-        <div class="input-group mb-3">
-            <label class=".sr-only" for="roomPrice">Room Rate (in USD)</label>
-            <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
+<div class="container">
+    <section>
+        <h1 class="page-title heading">Edit Hotel</h1>
+        <form class="form sm-form" action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
+            <div class="form-group">
+                <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
+                <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="{{ hotel.name }}">
             </div>
-            <input type="number" class="form-control" id="roomPrice" name="price" placeholder="{{ hotel.price }}">
-            <div class="input-group-append">
-                <span class="input-group-text">.00</span>
+            <div class="form-group">
+                <label class=".sr-only" for="urlOfImage">URL of Image</label>
+                <input class="form-control" type="text" id="urlOfImage" name="picture" placeholder="{{ hotel.picture }}">
             </div>
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="rating">Rating</label>
-            <input class="form-control" type="number" id="rating" max="5" name="rating" placeholder="{{ hotel.rating }}">
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="hotelType">Type of lodging</label>
-            <select class="form-control" name="category" id="hotelType">
-                <option value="" disabled {% if not hotel.category %}selected{% endif %}>--Choose Category--</option>
-                <option value="Bed & Breakfast"{% if hotel.category == "Bed & Breakfast" %} selected{% endif %}>Bed & Breakfast</option>
-                <option value="Hotel"{% if hotel.category == "Hotel" %} selected{% endif %}>Hotel</option>
-                <option value="Hot Spring Inn"{% if hotel.category == "Hot Spring Inn" %} selected{% endif %}>Hot Spring Inn</option>
-                <option value="Love Hotel"{% if hotel.category == "Love Hotel" %} selected{% endif %}>Love Hotel</option>
-                <option value="Ryokan"{% if hotel.category == "Ryokan" %} selected{% endif %}>Ryokan (Japanese Inn)</option>
-            </select>
-        </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        <input class="btn btn-danger" type="submit" value="Edit Hotel">
-    </form>
-    <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
-</section>
+            <div class="form-group">
+                <label class=".sr-only" for="description">Description</label>
+                <input class="form-control" type="textarea" id="description" name="description" placeholder="{{ hotel.description }}">
+            </div>
+            <div class="input-group mb-3">
+                <label class=".sr-only" for="roomPrice">Room Rate (in USD)</label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="roomPrice" name="price" placeholder="{{ hotel.price }}">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=".sr-only" for="rating">Rating</label>
+                <input class="form-control" type="number" id="rating" max="5" name="rating" placeholder="{{ hotel.rating }}">
+            </div>
+            <div class="form-group">
+                <label class=".sr-only" for="hotelType">Type of lodging</label>
+                <select class="form-control" name="category" id="hotelType">
+                    <option value="" disabled {% if not hotel.category %}selected{% endif %}>--Choose Category--</option>
+                    <option value="Bed & Breakfast"{% if hotel.category == "Bed & Breakfast" %} selected{% endif %}>Bed & Breakfast</option>
+                    <option value="Hotel"{% if hotel.category == "Hotel" %} selected{% endif %}>Hotel</option>
+                    <option value="Hot Spring Inn"{% if hotel.category == "Hot Spring Inn" %} selected{% endif %}>Hot Spring Inn</option>
+                    <option value="Love Hotel"{% if hotel.category == "Love Hotel" %} selected{% endif %}>Love Hotel</option>
+                    <option value="Ryokan"{% if hotel.category == "Ryokan" %} selected{% endif %}>Ryokan (Japanese Inn)</option>
+                </select>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input class="btn btn-danger" type="submit" value="Edit Hotel">
+        </form>
+        <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
+    </section>
+</div>
 
 {% endblock %}

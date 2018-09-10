@@ -17,25 +17,27 @@
     {% endif %}
 {% endwith %}
 
-<section>
-    <h1 class="page-title heading">{{ hotel.name }}</h1>
-    <h3>({{ hotel.category }})</h3>
-        {% if hotel.picture %}
-            <img class="hotel-img" src="{{ hotel.picture }}">
-        {% else %}
-            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 48 48">
-                <path d="M0 0h48v48h-48z" fill="none"/>
-                <path d="M14 26c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm24-12h-16v14h-16v-18h-4v30h4v-6h36v6h4v-18c0-4.42-3.58-8-8-8z"/>
-            </svg>
-        {% endif %}
-    <p class="description">{{ hotel.description }}</p>
+<div class="container">
+    <section>
+        <h1 class="page-title heading">{{ hotel.name }}</h1>
+        <h3>({{ hotel.category }})</h3>
+            {% if hotel.picture %}
+                <img class="hotel-img" src="{{ hotel.picture }}">
+            {% else %}
+                <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 48 48">
+                    <path d="M0 0h48v48h-48z" fill="none"/>
+                    <path d="M14 26c3.31 0 6-2.69 6-6s-2.69-6-6-6-6 2.69-6 6 2.69 6 6 6zm24-12h-16v14h-16v-18h-4v30h4v-6h36v6h4v-18c0-4.42-3.58-8-8-8z"/>
+                </svg>
+            {% endif %}
+        <p class="description">{{ hotel.description }}</p>
 
-    <p><a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
-        <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a></p>
+        <p><a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
+            <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a></p>
 
-    <p><a class="" href="{{ url_for('showHotelsByCategory', hotels=hotels, category=hotel.category) }}">Back to {{ hotel.category }}s</a></p>
+        <p><a class="" href="{{ url_for('showHotelsByCategory', hotels=hotels, category=hotel.category) }}">Back to {{ hotel.category }}s</a></p>
 
-    <p><a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a></p>
-</section>
+        <p><a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a></p>
+    </section>
+</div>
 
 {% endblock %}

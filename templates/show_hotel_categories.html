@@ -6,13 +6,15 @@
 
 
 {% block body %}
-<section>
-    <h1 class="page-title heading">What kind of lodging are you looking for?</h1>
+<div class="container">
+    <section>
+        <h1 class="page-title heading">What kind of lodging are you looking for?</h1>
 
-    {% for category in categories %}
-        <h1><a class="category" href="{{ url_for('showHotelsByCategory', category=category[0]) }}">{{ category[0] }}</a></h1>
-    {% endfor %}
-    
-</section>
+        {% for category in categories %}
+            <h1><a class="category" href="{{ url_for('showHotelsByCategory', category=category[0]) }}">{{ category[0] }}</a></h1>
+        {% endfor %}
+
+    </section>
+</div>
 
 {% endblock %}

@@ -6,16 +6,18 @@
 
 
 {% block body %}
-<section>
-    <h1 class="page-title heading">{{ category }}</h1>
+<div class="container">
+    <section>
+        <h1 class="page-title heading">{{ category }}</h1>
 
-    {% for hotel in hotels %}
-        <h1><a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">{{ hotel.name }}</a></h1>
-    {% endfor %}
+        {% for hotel in hotels %}
+            <h1><a class="hotel-name" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">{{ hotel.name }}</a></h1>
+        {% endfor %}
 
-    <p><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Log In</a> to edit.</p>
+        <p><a href="{{ url_for('showLogin') }}"><span class="glyphicon glyphicon-user"></span>Log In</a> to edit.</p>
 
-    <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
-</section>
+        <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
+    </section>
+</div>
 
 {% endblock %}

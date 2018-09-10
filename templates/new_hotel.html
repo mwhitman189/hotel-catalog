@@ -6,52 +6,53 @@
 
 
 {% block body %}
+<div class="container">
+    <section>
+        <h1 class="page-title heading">Add New Hotel</h1>
 
-<section>
-    <h1 class="page-title heading">Add New Hotel</h1>
-
-    <form class="form sm-form" action="{{ url_for('newHotel') }}" method="POST">
-        <div class="form-group">
-            <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
-            <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="Name of hotel" required>
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="urlOfImage">URL of Image</label>
-            <input class="form-control" type="text" id="urlOfImage" name="picture" placeholder="URL of image">
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="description">Description</label>
-            <input class="form-control" type="textarea" id="description" name="description" placeholder="Description">
-        </div>
-        <div class="input-group mb-3">
-            <label class=".sr-only" for="roomPrice">Room Rate (in USD) </label>
-            <div class="input-group-prepend">
-                <span class="input-group-text">$</span>
+        <form class="form sm-form" action="{{ url_for('newHotel') }}" method="POST">
+            <div class="form-group">
+                <label class=".sr-only" for="nameOfHotel">Name of hotel</label>
+                <input class="form-control" type="text" id="nameOfHotel" name="name" placeholder="Name of hotel" required>
             </div>
-            <input type="number" class="form-control" id="roomPrice" name="price" placeholder="Room rate(in USD)">
-            <div class="input-group-append">
-                <span class="input-group-text">.00</span>
+            <div class="form-group">
+                <label class=".sr-only" for="urlOfImage">URL of Image</label>
+                <input class="form-control" type="text" id="urlOfImage" name="picture" placeholder="URL of image">
             </div>
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="rating">Rating</label>
-            <input class="form-control" type="number" id="rating" max="5" name="rating" placeholder="Rating">
-        </div>
-        <div class="form-group">
-            <label class=".sr-only" for="hotelType">Type of lodging</label>
-            <select class="form-control" name="category" id="hotelType" required>
-                <option value="" disabled selected hidden>--Choose Category--</option>
-                <option value="Bed & Breakfast">Bed & Breakfast</option>
-                <option value="Hotel">Hotel</option>
-                <option value="Hot Spring Inn">Hot Spring Inn</option>
-                <option value="Love Hotel">Love Hotel</option>
-                <option value="Ryokan">Ryokan (Japanese Inn)</option>
-            </select>
-        </div>
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
-        <input class="btn btn-danger" type="submit" value="Add Hotel">
-    </form>
-    <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>
-</section>
+            <div class="form-group">
+                <label class=".sr-only" for="description">Description</label>
+                <input class="form-control" type="textarea" id="description" name="description" placeholder="Description">
+            </div>
+            <div class="input-group mb-3">
+                <label class=".sr-only" for="roomPrice">Room Rate (in USD) </label>
+                <div class="input-group-prepend">
+                    <span class="input-group-text">$</span>
+                </div>
+                <input type="number" class="form-control" id="roomPrice" name="price" placeholder="Room rate(in USD)">
+                <div class="input-group-append">
+                    <span class="input-group-text">.00</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class=".sr-only" for="rating">Rating</label>
+                <input class="form-control" type="number" id="rating" max="5" name="rating" placeholder="Rating">
+            </div>
+            <div class="form-group">
+                <label class=".sr-only" for="hotelType">Type of lodging</label>
+                <select class="form-control" name="category" id="hotelType" required>
+                    <option value="" disabled selected hidden>--Choose Category--</option>
+                    <option value="Bed & Breakfast">Bed & Breakfast</option>
+                    <option value="Hotel">Hotel</option>
+                    <option value="Hot Spring Inn">Hot Spring Inn</option>
+                    <option value="Love Hotel">Love Hotel</option>
+                    <option value="Ryokan">Ryokan (Japanese Inn)</option>
+                </select>
+            </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
+            <input class="btn btn-danger" type="submit" value="Add Hotel">
+        </form>
+        <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>
+    </section>
+</div>
 
 {% endblock %}
