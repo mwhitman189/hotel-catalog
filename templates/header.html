@@ -7,7 +7,7 @@
     <div class="header flex-container">
         <a href="{{ url_for('showHotelCategories') }}" class="logo-link">
             <img src="/static/img/basho_logo.svg" alt="basho logo" title="basho" class="logo"></a>
-        <nav class="navbar flex-container" id="hdrNavbar" role="navigation">
+        <nav class="flex-container navbar" id="hdrNavbar" role="navigation">
             <!-- header-left -->
             <ul class="items nav-links">
                 <li class="hidden-item link-container__link-wrapper header-menu__group"><a href="{{ url_for('showHotels', hotels=hotels) }}" class="link-container__link"><span class="hdr-text">Home</span></a></li>
@@ -18,7 +18,7 @@
             <!-- header-right -->
             <ul class="items user-links">
                 {% if 'username' not in session %}
-                <li class="hidden-item header-menu__group"><a class="header-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text">Sign in</span></i></a></li>
+                <li class="hidden-item header-menu__group"><a class="header-user-link" href="{{ url_for('showLogin') }}"><i class="far fa-user"><span class="hdr-text"></span></i></a></li>
                 {% else %}
                 <li class="hidden-item header-menu__group"><a class="header-user-link" href="#"><i class="fas fa-user"><span class="hdr-text"> {{ session.username }}</span></i></a></li>
                 {% endif %}
@@ -28,11 +28,11 @@
                 <li class="hidden-item header-menu__group"><a href="{{ url_for('gdisconnect') }}"><span class="btn glyphicon glyphicon-user">Log Out</span></a></li>
                 {% endif %}
             </ul>
-            <a href="javascript:void(0);" class="hdr-icon" onclick="hdrFunction()">
-                <i class="fa fa-bars fa-2x"></i>
-            </a>
             <!--<hr id="nav_slide_hover" class="link-container__highlight" style="width: 17.6152%; margin-left: 0%;">-->
         </nav>
+        <a href="javascript:void(0);" class="hdr-icon" onclick="hdrFunction()">
+            <i class="fa fa-bars fa-2x"></i>
+        </a>
     </div>
 </header>
 {% endblock %}
@@ -41,10 +41,10 @@
 <script>
 function hdrFunction() {
     var x = document.getElementById("hdrNavbar");
-    if (x.className === "nav") {
+    if (x.className === "flex-container navbar") {
         x.className += " visible";
     } else {
-        x.className = "nav";
+        x.className = "flex-container navbar";
     }
 }
 </script>

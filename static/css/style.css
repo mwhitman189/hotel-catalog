@@ -93,7 +93,10 @@ img {
   font-size: 1.5rem; }
 
 .flex-container {
-  display: flex; }
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  width: 100%; }
 
 header .logo-link {
   padding: 10px; }
@@ -112,19 +115,23 @@ header .hidden-item {
 header .hdr-icon {
   display: flex;
   float: right;
-  position: relative; }
+  margin-bottom: auto;
+  margin-right: 10px;
+  margin-top: auto;
+  padding: 10px;
+  z-index: 3; }
 
 .form {
   margin-left: 0;
   margin-right: auto;
-  width: 75%; }
+  width: 100%; }
 
 .wrap {
   background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5)), url("//media.gettyimages.com/photos/asakura-fuji-sengenjinja-and-mtfuji-picture-id531114971");
   background-position: center;
   background-size: cover; }
 
-.title {
+.page-title {
   margin-bottom: 50px; }
 
 .hotel-link:hover {
@@ -208,38 +215,47 @@ header .hdr-icon {
 .signin-result {
   position: relative;
   top: 40px; }
+  .signin-result img {
+    margin-left: auto;
+    margin-right: auto; }
 
 @media screen and (max-width: 1016px) {
-  .navbar {
+  header .navbar {
+    background: #fde0ff;
+    box-shadow: -2px 4px 4px 4px rgba(55, 51, 56, 0.5);
+    display: block;
     height: 100vh;
     position: absolute;
-    width: 300px; }
-    .navbar li {
-      border-bottom: 1px solid #595454;
+    right: -306px;
+    top: 0;
+    transition: .2s ease-in-out;
+    width: 300px;
+    z-index: 1; }
+    header .navbar ul {
+      width: 100%; }
+    header .navbar li {
+      border-bottom: 1.5px solid rgba(89, 84, 84, 0.5);
+      display: block;
+      height: 70px;
       margin-left: auto;
       margin-right: auto;
-      width: 95%; }
-    .navbar a {
+      width: 100%; }
+    header .navbar a {
       color: #373338;
       margin-left: 10px;
       width: 100%; }
-  .hdr-icon {
-    position: absolute;
-    right: 0;
-    top: 0; }
-  .navbar.visible {
-    background-color: #fde0ff;
-    display: block;
-    right: 0; } }
+    header .navbar .hdr-text {
+      margin-bottom: auto;
+      margin-top: auto; }
+    header .navbar .btn {
+      border: 0;
+      height: inherit; }
+  header .navbar.visible {
+    transform: translateX(-306px); } }
 
 @media screen and (min-width: 1016px) {
   .container {
     margin-top: 40px; }
-  header .flex-container {
-    display: flex;
-    justify-content: space-between;
-    position: relative;
-    width: 100%; }
   header .items {
     display: flex; }
   header .hidden-item {
@@ -256,4 +272,6 @@ header .hdr-icon {
     display: none; }
   .hotel-img {
     height: 400px;
-    width: 700px; } }
+    width: 700px; }
+  .form {
+    width: 75%; } }

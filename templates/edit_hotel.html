@@ -6,7 +6,7 @@
 
 
 {% block body %}
-<section class="lay-content">
+<section>
     <h1 class="page-title heading">Edit Hotel</h1>
     <form class="form sm-form" action="{{ url_for('editHotel', hotel_id=hotel.id) }}" method="POST">
         <div class="form-group">
@@ -38,7 +38,7 @@
         <div class="form-group">
             <label class=".sr-only" for="hotelType">Type of lodging</label>
             <select class="form-control" name="category" id="hotelType">
-                <option {% if not hotel.category %}selected{% endif %}>--Choose Category--</option>
+                <option value="" disabled {% if not hotel.category %}selected{% endif %}>--Choose Category--</option>
                 <option value="Bed & Breakfast"{% if hotel.category == "Bed & Breakfast" %} selected{% endif %}>Bed & Breakfast</option>
                 <option value="Hotel"{% if hotel.category == "Hotel" %} selected{% endif %}>Hotel</option>
                 <option value="Hot Spring Inn"{% if hotel.category == "Hot Spring Inn" %} selected{% endif %}>Hot Spring Inn</option>
@@ -49,7 +49,7 @@
 
         <input class="btn btn-danger" type="submit" value="Edit Hotel">
     </form>
+    <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
 </section>
 
-    <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
 {% endblock %}

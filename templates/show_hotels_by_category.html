@@ -6,7 +6,7 @@
 
 
 {% block body %}
-<section class="lay-content">
+<section>
     <h1 class="page-title heading">{{ category }}s</h1>
 
     {% for hotel in hotels %}
@@ -18,9 +18,7 @@
         </p>
     {% endfor %}
 
-    <p>
-        <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
-    </p>
-
+    <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
 </section>
+
 {% endblock %}

@@ -22,7 +22,7 @@ auth = HTTPBasicAuth()
 APPLICATION_NAME = "Hotel Listings"
 CLIENT_ID = json.loads(
     open('client_secrets.json', 'r').read())['web']['client_id']
-CLIENT_SECRET_FILE = 'client_secrets.json'
+CLIENT_SECRET_FILE = '/home/miles/webdev/imports/client_secrets.json'
 
 
 engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
@@ -252,7 +252,8 @@ def gdisconnect():
         return redirect(url_for('showLogin'))
     else:
         # The given token was invalid
-        response = make_response(json.dumps('Failed to revoke the user token'), 400)
+        response = make_response(json.dumps(
+            'Failed to revoke the user token'), 400)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -271,7 +272,7 @@ def showHotelsJSON():
     Return the hotels show as JSON.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to obtain JSON data."
     hotels = session.query(Hotel).all()
     return jsonify(hotels=[h.serialize for h in hotels])
 
@@ -283,7 +284,7 @@ def showHotelCategoriesJSON():
     Return the hotel categories show as JSON.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to obtain JSON data."
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return jsonify(categories=[c.serialize for c in categories])
@@ -296,7 +297,7 @@ def showHotelsByCategoryJSON(category):
     Return a show of hotels in a specified category as JSON.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to obtain JSON data."
     hotels = session.query(Hotel).filter_by(
         category=category).all()
     return jsonify(hotels=[h.serialize for h in hotels])
@@ -390,10 +391,11 @@ def showHotelsByCategory(category):
 @ratelimit(limit=30, per=60 * 1)
 def newHotel():
     """
-    If the user is logged in, allow the user to create a new hotel; Otherwise redirect the user to the Lodgings show.
+    If the user is logged in, allow the user to create a new hotel; Otherwise
+    redirect the user to the Lodgings show.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to create new entries."
     if request.method == 'POST':
         new_hotel = Hotel(
             name=request.form['name'],
@@ -425,10 +427,11 @@ def showHotel(hotel_id):
 @ratelimit(limit=30, per=60 * 1)
 def editHotel(hotel_id):
     """
-    If the user is logged in, allow them to edit only hotel entries they created.
+    If the user is logged in, allow them to edit only hotel entries they
+    created.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to edit entries."
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
     creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
@@ -463,7 +466,7 @@ def deleteHotel(hotel_id):
     If the user is logged in, allow them to edit only hotel entries they created.
     """
     if 'username' not in login_session:
-        return redirect('/login')
+        return "Please sign in to delete entries."
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
     if login_session['user_id']:
         creator = getUserInfo(login_session['user_id'])

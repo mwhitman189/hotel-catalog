@@ -20,8 +20,8 @@
 
 
 
-<section class="main-div">
-    <h1 class="title">Lodgings</h1>
+<section>
+    <h1 class="page-title">Lodgings</h1>
     <ul>
     {% for hotel in hotels %}
         <li>
@@ -31,8 +31,7 @@
         </li>
     {% endfor %}
     </ul>
+    <a class="link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
 </section>
-
-<a class="link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
 
 {% endblock %}

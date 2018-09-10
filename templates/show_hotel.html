@@ -17,7 +17,7 @@
     {% endif %}
 {% endwith %}
 
-<section class="hotel-info">
+<section>
     <h1 class="page-title heading">{{ hotel.name }}</h1>
     <h3>({{ hotel.category }})</h3>
         {% if hotel.picture %}
@@ -29,16 +29,13 @@
             </svg>
         {% endif %}
     <p class="description">{{ hotel.description }}</p>
-    <p>
-        <a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
-        <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a>
-    </p>
-    <p>
-        <a class="sub-link" href="{{ url_for('showHotelsByCategory', hotels=hotels, category=hotel.category) }}">Back to {{ hotel.category }}s</a>
-    </p>
-    <p>
-        <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a>
-    </p>
+
+    <p><a href="{{ url_for('editHotel', hotel_id=hotel.id) }}" title="Edit {{ hotel.name }}" class="btn hotels-btn">Edit</a>
+        <a href="{{ url_for('deleteHotel', hotel_id=hotel.id) }}" title="Delete {{ hotel.name }}" class="btn hotels-btn">Delete</a></p>
+
+    <p><a class="" href="{{ url_for('showHotelsByCategory', hotels=hotels, category=hotel.category) }}">Back to {{ hotel.category }}s</a></p>
+
+    <p><a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Back to Lodgings</a></p>
 </section>
 
 {% endblock %}

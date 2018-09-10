@@ -16,32 +16,17 @@
     {% endif %}
 {% endwith %}
 
-<section class="lay-content">
-
-    <ul>
-        {% for hotel in hotels_by_category %}
-        <li>
-            <a class="hotel category--name img" href="{{ url_for('showHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
-            </a>
-            <a class="hotel category name-text" href="{{ url_for('showHotels', hotels_by_category=hotels_by_category) }}" title="{{ hotel.category }}">{{ hotel.category }}</a>
-        </li>
-        {% endfor %}
-    </ul>
-
-</section>
-
-<section class="sidebar">
-
+<section>
+    <h1 class="page-title">Lodgings</h1>
     <ul>
     {% for hotel in hotels %}
         <li>
-            <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="img" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ic_hotel_48px.svg');"{% endif %}></span>
+            <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="thumbnail hotel-thumbnail" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ichotels_hotel_48px.svg');"{% endif %}></span>
             </a>
-            <h1><a class="hotel name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}">{{ hotel.name }}</a></h1>
+            <h1><a class="hotel hotel-link name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h1>
         </li>
     {% endfor %}
     </ul>
-
 </section>
 
 {% endblock %}
