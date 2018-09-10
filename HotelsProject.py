@@ -21,7 +21,7 @@ import requests
 auth = HTTPBasicAuth()
 
 APPLICATION_NAME = "Hotel Listings"
-CLIENT_SECRET_FILE = '/home/miles/webdev/udacity/full_stack_nano/fullstack/vagrant/catalog/client_secrets.json'
+CLIENT_SECRET_FILE = 'client_secrets.json'
 CLIENT_ID = json.loads(
     open(CLIENT_SECRET_FILE, 'r').read())['web']['client_id']
 
@@ -99,6 +99,9 @@ def inject_x_rate_headers(response):
 ####################
 
 def createUser(login_session):
+    """
+    Used to add OAuth2 authenticated users to database
+    """
     newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
     session.add(newUser)
     session.commit()
@@ -125,10 +128,13 @@ def getUserID(email):
 ####################
 
 
+# Exempt Google OAuth2 from SeaSurf CSRF token validation.
+@csrf.exempt
 @app.route('/gconnect', methods=['GET', 'POST'])
 def gconnect():
     """
     Connect to google using OAuth2.
+    Prevent CSRF attack by comparing state token to session token.
     """
     # Validate state token
     if request.args.get('state') != login_session['state']:
@@ -310,31 +316,6 @@ def showHotelsByCategoryJSON(category):
 ####################
 
 
-#TODO: Try WTForms to handle validation and prevent '400 BadRequest'
-@app.route('/users/new', methods=['GET', 'POST'])
-@ratelimit(limit=30, per=60 * 1)
-def newUser():
-    if 'username' in login_session:
-        output = ''
-        output += '<p>You are already logged in as '
-        output += login_session['username']
-        output += '. <a href="/logout">Log out</a>?'
-        return output
-    else:
-        if request.method == 'POST':
-            new_user = User(
-            username = request.form['username'],
-            email = request.form['email'],
-            )
-            new_user.hash_password(request.form['password'])
-            session.add(new_user)
-            session.commit()
-            flash("Success! %s was added to the user database." % new_user.username)
-            return redirect(url_for('showHotels'))
-        else:
-            return render_template('new_user.html')
-
-
 @app.route('/login')
 @ratelimit(limit=30, per=60 * 1)
 def showLogin():
@@ -428,7 +409,7 @@ def showHotel(hotel_id):
 @ratelimit(limit=30, per=60 * 1)
 def editHotel(hotel_id):
     """
-    If the user is logged in, allow them to edit only hotel entries they
+    If the user is logged in, allow them to edit only hotel entries that they
     created.
     """
     if 'username' not in login_session:

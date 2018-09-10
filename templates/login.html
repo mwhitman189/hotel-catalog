@@ -18,7 +18,8 @@
         {% if 'username' in session %}
         <h2 class="signin-title">Sign in</h2>
         {% endif %}
-        <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
+        
+            <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>
     </div>
 
     {% else %}
@@ -26,7 +27,7 @@
         <h3 class="center-text">You are already logged in!</br>Head on over to the <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}" title="Hotel listings">Hotel listings</a> page.</h3>
     </div>
     {% endif %}
-    
+
 </section>
 
 <script>

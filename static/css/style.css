@@ -138,6 +138,7 @@ header .hdr-icon {
   opacity: .7; }
 
 .container {
+  margin-bottom: 50px;
   margin-top: 100px; }
 
 .ftr {
@@ -271,6 +272,7 @@ header .hdr-icon {
   header .hdr-icon {
     display: none; }
   .hotel-img {
+    border-radius: 50%;
     height: 400px;
     width: 700px; }
   .form {
