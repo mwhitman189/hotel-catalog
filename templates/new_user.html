@@ -1,4 +1,4 @@
-{% extends 'header.html' %}
+<!--{% extends 'header.html' %}
 
 {% block head %}
 <meta name="Description" content="Create a new Yamagata Hotels account">
@@ -26,9 +26,10 @@
             <label class=".sr-only" for="profilePicture">Profile Picture</label>
             <input class="form-control" type="photo" id="profilePicture" name="picture" placeholder="URL of picture (www.example.com/happy/fun/pic.jpeg)">
         </div>
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <input class="btn btn-danger" type="submit" value="Add Hotel">
     </form>
     <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>
 </section>
 
-{% endblock %}
+{% endblock %}-->

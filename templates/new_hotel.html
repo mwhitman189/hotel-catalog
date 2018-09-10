@@ -48,7 +48,7 @@
                 <option value="Ryokan">Ryokan (Japanese Inn)</option>
             </select>
         </div>
-
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <input class="btn btn-danger" type="submit" value="Add Hotel">
     </form>
     <a class="sub-link" href="{{ url_for('showHotels', hotels=hotels) }}">Cancel</a>

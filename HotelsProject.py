@@ -1,4 +1,5 @@
 from redis import Redis
+from flask_seasurf import SeaSurf
 import time
 import random
 import string
@@ -20,9 +21,9 @@ import requests
 auth = HTTPBasicAuth()
 
 APPLICATION_NAME = "Hotel Listings"
+CLIENT_SECRET_FILE = '/home/miles/webdev/udacity/full_stack_nano/fullstack/vagrant/catalog/client_secrets.json'
 CLIENT_ID = json.loads(
-    open('client_secrets.json', 'r').read())['web']['client_id']
-CLIENT_SECRET_FILE = '/home/miles/webdev/imports/client_secrets.json'
+    open(CLIENT_SECRET_FILE, 'r').read())['web']['client_id']
 
 
 engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
@@ -31,7 +32,7 @@ DBSession = sessionmaker(bind=engine)
 session = DBSession()
 app = Flask(__name__)
 redis = Redis()
-
+csrf = SeaSurf(app)
 
 
 

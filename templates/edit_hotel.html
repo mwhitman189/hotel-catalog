@@ -46,7 +46,7 @@
                 <option value="Ryokan"{% if hotel.category == "Ryokan" %} selected{% endif %}>Ryokan (Japanese Inn)</option>
             </select>
         </div>
-
+        <input type="hidden" name="_csrf_token" value="{{ csrf_token() }}">
         <input class="btn btn-danger" type="submit" value="Edit Hotel">
     </form>
     <a class="sub-link" href="{{ url_for('showHotel', hotel_id=hotel.id) }}">Cancel</a>
