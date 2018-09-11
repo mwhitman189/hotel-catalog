@@ -132,6 +132,11 @@ img {
 .link {
   font-size: $font-size-one;
 }
+
+.flashes {
+  text-align: center;
+}
+
 // ************************************
 // Layout Rules ***********************
 // ************************************
@@ -437,6 +442,10 @@ header {
     top: -145px;
     width: 100%;
     z-index: -1;
+  }
+
+  .signin-box {
+    top: -350px;
   }
 
   .hotel-img {

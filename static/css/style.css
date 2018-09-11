@@ -92,6 +92,9 @@ img {
 .link {
   font-size: 1.5rem; }
 
+.flashes {
+  text-align: center; }
+
 .flex-container {
   display: flex;
   justify-content: space-between;
@@ -283,6 +286,8 @@ header .hdr-icon {
     top: -145px;
     width: 100%;
     z-index: -1; }
+  .signin-box {
+    top: -350px; }
   .hotel-img {
     border-radius: 50%;
     height: 400px;

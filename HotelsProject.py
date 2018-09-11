@@ -4,7 +4,8 @@ import time
 import random
 import string
 from functools import update_wrapper
-from flask import Flask, render_template, request, redirect, jsonify, url_for, flash, abort, g, make_response, session as login_session
+from flask import Flask, render_template, request, redirect, jsonify, url_for
+from flask import flash, abort, g, make_response, session as login_session
 from flask_httpauth import HTTPBasicAuth
 from models import Base, Hotel, User
 from sqlalchemy.ext.declarative import declarative_base
@@ -35,12 +36,12 @@ redis = Redis()
 csrf = SeaSurf(app)
 
 
-
 class RateLimit(object):
     """
     Create rate limiter using Redis.
 
-    The rate limiter is added as a decorator with a limit per specified number of seconds.
+    The rate limiter is added as a decorator with a limit per specified number
+    of seconds.
 
     Send JSON data when the limit is exceeded.
     """
@@ -60,11 +61,14 @@ class RateLimit(object):
     remaining = property(lambda x: x.limit - x.current)
     over_limit = property(lambda x: x.current >= x.limit)
 
+
 def get_view_rate_limit():
     return getattr(g, '_view_rate_limit', None)
 
+
 def on_over_limit(limit):
-    return (jsonify({'data':'You hit the rate limit','error':'429'}),429)
+    return (jsonify({'data': 'You hit the rate limit', 'error': '429'}), 429)
+
 
 def ratelimit(limit, per=300, send_x_headers=True,
               over_limit=on_over_limit,
@@ -93,7 +97,6 @@ def inject_x_rate_headers(response):
     return response
 
 
-
 ####################
 # Helper functions for user objects
 ####################
@@ -102,7 +105,9 @@ def createUser(login_session):
     """
     Used to add OAuth2 authenticated users to database
     """
-    newUser = User(username=login_session['username'], email=login_session['email'], picture=login_session['picture'])
+    newUser = User(username=login_session['username'],
+                   email=login_session['email'],
+                   picture=login_session['picture'])
     session.add(newUser)
     session.commit()
     user = session.query(User).filter_by(email=login_session['email']).one()
@@ -120,8 +125,6 @@ def getUserID(email):
         return user.id
     except:
         return None
-
-
 
 ####################
 # Authentication
@@ -155,7 +158,8 @@ def gconnect():
         # Exchange auth code for access token, refresh token, and ID token
         credentials = flow.step2_exchange(code)
     except FlowExchangeError:
-        response = make_response(json.dumps("Failed to upgrade the authorization code."), 401)
+        response = make_response(json.dumps(
+            "Failed to upgrade the authorization code."), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
@@ -178,13 +182,15 @@ def gconnect():
     email = credentials.id_token['email']
 
     if result['user_id'] != userid:
-        response = make_response(json.dumps("Token's user ID doesn't match the given user ID."), 401)
+        response = make_response(json.dumps(
+            "Token's user ID doesn't match the given user ID."), 401)
         response.headers['Content-Type'] = 'application/json'
         return response
 
     # Verify that the access token is valid for this app
     if result['issued_to'] != CLIENT_ID:
-        response = make_response(json.dumps("Token's client ID does not match app's"), 401)
+        response = make_response(json.dumps(
+            "Token's client ID does not match app's"), 401)
         print "Token's client ID does not match app's."
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -193,7 +199,8 @@ def gconnect():
     stored_userid = login_session.get('userid')
     if stored_access_token is not None and userid == stored_userid:
         login_session['access_token'] = credentials.access_token
-        response = make_response(json.dumps('Current user is already connected'), 200)
+        response = make_response(json.dumps(
+            'Current user is already connected'), 200)
         flash("Current user is already connected!")
         response.headers['Content-Type'] = 'application/json'
         return response
@@ -213,7 +220,8 @@ def gconnect():
     login_session['picture'] = data['picture']
     login_session['email'] = data['email']
 
-    # Check if user is already in the database, and if not, creates a new user object
+    # Check if user is already in the database, and if not, creates a new user
+    # object
     user_id = getUserID(login_session['email'])
     if not user_id:
         user_id = createUser(login_session)
@@ -225,7 +233,8 @@ def gconnect():
     output += '!</h2>'
     output += '<img src="'
     output += login_session['picture']
-    output += '"class="signin-pic" style = "width: 100px; height: 100px;border-radius: 50px;"> '
+    output += '"class="signin-pic" style = "width: 100px; \
+        height: 100px;border-radius: 50px;"> '
     flash("You are now logged in as %s" % login_session['username'])
     print "done!"
     return output
@@ -243,7 +252,8 @@ def gdisconnect():
         return response
     # Execute HTTP GET request to revoke the current token
     access_token = credentials
-    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % login_session['access_token']
+    url = 'https://accounts.google.com/o/oauth2/revoke?token=%s' % \
+        login_session['access_token']
     h = httplib2.Http()
     result = h.request(url, 'GET')[0]
     if result['status'] == '200':
@@ -265,13 +275,12 @@ def gdisconnect():
         return response
 
 
-
 ####################
 # API calls
 ####################
 
 
-### JSON APIs to view Hotel information ###
+# JSON APIs to view Hotel information ###
 @app.route('/api/hotels/JSON/')
 @ratelimit(limit=30, per=60 * 1)
 def showHotelsJSON():
@@ -279,7 +288,8 @@ def showHotelsJSON():
     Return the hotels show as JSON.
     """
     if 'username' not in login_session:
-        return "Please sign in to obtain JSON data."
+        flash("Please sign in to obtain JSON data.")
+        return render_template('login.html')
     hotels = session.query(Hotel).all()
     return jsonify(hotels=[h.serialize for h in hotels])
 
@@ -291,7 +301,8 @@ def showHotelCategoriesJSON():
     Return the hotel categories show as JSON.
     """
     if 'username' not in login_session:
-        return "Please sign in to obtain JSON data."
+        flash("Please sign in to obtain JSON data.")
+        return render_template('login.html')
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return jsonify(categories=[c.serialize for c in categories])
@@ -304,11 +315,11 @@ def showHotelsByCategoryJSON(category):
     Return a show of hotels in a specified category as JSON.
     """
     if 'username' not in login_session:
-        return "Please sign in to obtain JSON data."
+        flash("Please sign in to obtain JSON data.")
+        return render_template('login.html')
     hotels = session.query(Hotel).filter_by(
         category=category).all()
     return jsonify(hotels=[h.serialize for h in hotels])
-
 
 
 ####################
@@ -364,9 +375,13 @@ def showHotelsByCategory(category):
         creator = getUserInfo(login_session['user_id'])
         user_id = session.query(User.id).first()[0]
         if creator.id == user_id:
-            return render_template('show_hotels_by_category.html', hotels=hotels, creator=creator, category=category)
+            return render_template('show_hotels_by_category.html',
+                                   hotels=hotels,
+                                   creator=creator,
+                                   category=category)
     else:
-        return render_template('public_show_hotels_by_category.html', hotels=hotels)
+        return render_template('public_show_hotels_by_category.html',
+                               hotels=hotels)
 
 
 @app.route('/hotels/new/', methods=['GET', 'POST'])
@@ -377,7 +392,8 @@ def newHotel():
     redirect the user to the Lodgings show.
     """
     if 'username' not in login_session:
-        return "Please sign in to create new entries."
+        flash("Please sign in to create new entries.")
+        return render_template('login.html')
     if request.method == 'POST':
         new_hotel = Hotel(
             name=request.form['name'],
@@ -387,7 +403,7 @@ def newHotel():
             rating=request.form['rating'],
             category=request.form['category'],
             user_id=login_session['user_id'],
-            )
+        )
         session.add(new_hotel)
         session.commit()
         flash("Success! %s was added to the database." % new_hotel.name)
@@ -413,7 +429,8 @@ def editHotel(hotel_id):
     created.
     """
     if 'username' not in login_session:
-        return "Please sign in to edit entries."
+        flash("Please sign in to create new entries.")
+        return render_template('login.html')
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
     creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
@@ -436,19 +453,25 @@ def editHotel(hotel_id):
                 flash("Hotel successfully edited!")
                 return redirect(url_for('showHotel', hotel_id=hotel_id))
         else:
-            return render_template('edit_hotel.html', hotel_id=hotel_id, hotel=hotel_to_edit)
+            return render_template('edit_hotel.html',
+                                   hotel_id=hotel_id,
+                                   hotel=hotel_to_edit)
     else:
-        return "You do not have permission to edit or delete this item. You can only delete items you have created."
+        flash("You do not have permission to edit or delete this item. You \
+            can only delete items you have created.")
+        return render_template('login.html')
 
 
 @app.route('/hotels/<int:hotel_id>/delete', methods=['GET', 'POST'])
 @ratelimit(limit=30, per=60 * 1)
 def deleteHotel(hotel_id):
     """
-    If the user is logged in, allow them to edit only hotel entries they created.
+    If the user is logged in, allow them to edit only hotel entries they
+    created.
     """
     if 'username' not in login_session:
-        return "Please sign in to delete entries."
+        flash("Please sign in to delete entries.")
+        return render_template('login.html')
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
     if login_session['user_id']:
         creator = getUserInfo(login_session['user_id'])
@@ -460,14 +483,17 @@ def deleteHotel(hotel_id):
             flash("Hotel successfully deleted.")
             return redirect(url_for('showHotels'))
         else:
-            return render_template('delete_hotel.html', hotel_id=hotel_id, hotel=hotel_to_delete)
+            return render_template('delete_hotel.html',
+                                   hotel_id=hotel_id,
+                                   hotel=hotel_to_delete)
     else:
-        return "You do not have permission to edit or delete this item. You can only delete items you have created."
+        flash("You do not have permission to edit or delete this item. You \
+            can only delete items you have created.")
+        return render_template('login.html')
 
 
-
-### Initialize App ###
+# Initialize App ###
 if __name__ == '__main__':
     app.secret_key = 'unbelievably_secret_key'
     app.debug = True
-    app.run(host = '0.0.0.0', port = 8000)
+    app.run(host='0.0.0.0', port=8000)

@@ -29,21 +29,9 @@ These can all be installed through the Udacity Vagrant VM installation:
 
 ### Installation
 
-Cloning the Virtual Machine is a quick way to get all of the remaining necessary depenecies.
+To install all dependencies, type the following into the console:
 
-Otherwise, you'll have to install each one independently, following the same procedures are in the SeaSurf and Jinja2 installations--the installation names are in parentheses.
-
-If any of these do not install properly, try a 'sudo' install.
-
-
-##### Flask Seasurf installation:
-
-`$ pip install flask-seasurf`
-
-
-##### Jinja2 installation:
-
-`$ pip install jinja2`
+`$ pip install -r requirements.txt`
 
 
 ##### Udacity VM installation:
