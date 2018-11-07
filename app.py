@@ -1,3 +1,4 @@
+import os
 from redis import Redis
 from flask_seasurf import SeaSurf
 import time
@@ -23,8 +24,8 @@ auth = HTTPBasicAuth()
 
 APPLICATION_NAME = "Hotel Listings"
 CLIENT_SECRET_FILE = 'client_secrets.json'
-CLIENT_ID = json.loads(
-    open(CLIENT_SECRET_FILE, 'r').read())['web']['client_id']
+with app.open_resource(CLIENT_SECRET_FILE) as f:
+    CLIENT_ID = json.load(f)['web']['client_id']
 
 
 engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
@@ -153,7 +154,7 @@ def gconnect():
         if not request.headers.get('X-Requested-With'):
             abort(403)
 
-        flow = flow_from_clientsecrets('client_secrets.json', scope='profile')
+        flow = flow_from_clientsecrets(os.path.abspath(os.path.join(os.path.dirname(__file__),CLIENT_SECRET_FILE)), scope='profile')
         flow.redirect_uri = 'postmessage'
         # Exchange auth code for access token, refresh token, and ID token
         credentials = flow.step2_exchange(code)
