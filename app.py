@@ -1,4 +1,5 @@
 import os
+import psycopg2
 from redis import Redis
 from flask_seasurf import SeaSurf
 import time
@@ -21,18 +22,23 @@ import requests
 
 
 auth = HTTPBasicAuth()
+app = Flask(__name__)
 
 APPLICATION_NAME = "Hotel Listings"
 CLIENT_SECRET_FILE = 'client_secrets.json'
-with app.open_resource(CLIENT_SECRET_FILE) as f:
-    CLIENT_ID = json.load(f)['web']['client_id']
+with app.open_resource(CLIENT_SECRET_FILE) as f:    
+   CLIENT_ID = json.load(f)['web']['client_id']
 
+hostname = 'localhost'
+username = 'catalog'
+password = 'pass?word?'
+database = 'catalog'
 
-engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
+engine = create_engine('postgresql+psycopg2://' + username + ':' + password + '@localhost/' + database)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-app = Flask(__name__)
+
 redis = Redis()
 csrf = SeaSurf(app)
 
@@ -154,7 +160,8 @@ def gconnect():
         if not request.headers.get('X-Requested-With'):
             abort(403)
 
-        flow = flow_from_clientsecrets(os.path.abspath(os.path.join(os.path.dirname(__file__),CLIENT_SECRET_FILE)), scope='profile')
+        flow = flow_from_clientsecrets(os.path.abspath(os.path.join( 
+      os.path.dirname(__file__),CLIENT_SECRET_FILE)), scope='profile')
         flow.redirect_uri = 'postmessage'
         # Exchange auth code for access token, refresh token, and ID token
         credentials = flow.step2_exchange(code)
@@ -360,6 +367,7 @@ def showHotelCategories():
     """
     Return a show of hotel categories.
     """
+    print CLIENT_ID
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return render_template(
@@ -390,11 +398,11 @@ def showHotelsByCategory(category):
 def newHotel():
     """
     If the user is logged in, allow the user to create a new hotel; Otherwise
-    redirect the user to the Lodgings show.
+    redirect the user to the login page.
     """
     if 'username' not in login_session:
         flash("Please sign in to create new entries.")
-        return render_template('login.html')
+        return redirect(url_for('showLogin'))
     if request.method == 'POST':
         new_hotel = Hotel(
             name=request.form['name'],
@@ -498,3 +506,4 @@ if __name__ == '__main__':
     app.secret_key = 'unbelievably_secret_key'
     app.debug = True
     app.run(host='0.0.0.0', port=8000)
+
