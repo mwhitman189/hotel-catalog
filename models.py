@@ -80,7 +80,14 @@ class Hotel(Base):
             'rating' : self.rating
         }
 
-engine = create_engine('sqlite:///hotelListings.db')
+
+hostname = 'localhost'
+username = 'catalog'
+password = 'pass?word?'
+database = 'catalog'
+
+engine = create_engine('postgresql+psycopg2://' + username + ':' + password + '@localhost/' + database)
 
 
 Base.metadata.create_all(engine)
+
