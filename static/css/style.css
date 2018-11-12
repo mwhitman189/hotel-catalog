@@ -131,7 +131,7 @@ header .hdr-icon {
   width: 100%; }
 
 .wrap {
-  background: linear-gradient(rgba(255, 255, 255, 0), rgba(0, 0, 0, 0.5)), url("https://cdn.zekkei-japan.jp/images/spots/g8xzqy1v0erg5885i0uewo25wyselax8a.jpg");
+  background: linear-gradient(rgba(255, 255, 255, 0), rgba(9, 11, 1, 0.5)), url("https://cdn.zekkei-japan.jp/images/spots/g8xzqy1v0erg5885i0uewo25wyselax8a.jpg");
   background-position: center;
   background-size: cover; }
 
@@ -236,6 +236,8 @@ header .hdr-icon {
     transition: .2s ease-in-out;
     width: 300px;
     z-index: 1; }
+    header .navbar.visible {
+      transform: translateX(-306px); }
     header .navbar ul {
       width: 100%; }
     header .navbar li {
@@ -254,13 +256,19 @@ header .hdr-icon {
       margin-top: auto; }
     header .navbar .btn {
       border: 0;
-      height: inherit; }
-  header .navbar.visible {
-    transform: translateX(-306px); } }
+      height: inherit; } }
 
 @media screen and (min-width: 1016px) {
   .container {
-    margin-top: 40px; }
+    margin-top: -135px; }
+  header a {
+    background-color: transparent;
+    color: #fff;
+    text-decoration: none; }
+    header a:hover {
+      background-color: inherit;
+      color: #fde0ff;
+      text-decoration: none; }
   header .items {
     display: flex; }
   header .hidden-item {
@@ -275,6 +283,14 @@ header .hdr-icon {
     padding: 15px; }
   header .hdr-icon {
     display: none; }
+  a {
+    background-color: transparent;
+    color: #498fff;
+    text-decoration: none; }
+    a:hover {
+      background-color: inherit;
+      color: #fde0ff;
+      text-decoration: none; }
   .wrap {
     background: none; }
   .hero-img {
@@ -282,7 +298,7 @@ header .hdr-icon {
     background-size: cover;
     box-sizing: border-box;
     min-height: 450px;
-    padding: 50px 0;
+    padding: 0;
     position: relative;
     top: -145px;
     width: 100%;
@@ -295,3 +311,4 @@ header .hdr-icon {
     width: 700px; }
   .form {
     width: 75%; } }
+

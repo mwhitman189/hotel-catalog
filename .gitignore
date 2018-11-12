@@ -40,3 +40,7 @@ Thumbs.db
 # Sensitive files #
 ###################
 client_secrets.json
+
+# Superfluous files #
+#####################
+node_modules

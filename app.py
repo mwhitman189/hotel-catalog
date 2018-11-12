@@ -1,3 +1,5 @@
+import os
+import psycopg2
 from redis import Redis
 from flask_seasurf import SeaSurf
 import time
@@ -20,18 +22,24 @@ import requests
 
 
 auth = HTTPBasicAuth()
+app = Flask(__name__)
 
 APPLICATION_NAME = "Hotel Listings"
 CLIENT_SECRET_FILE = 'client_secrets.json'
-CLIENT_ID = json.loads(
-    open(CLIENT_SECRET_FILE, 'r').read())['web']['client_id']
+with app.open_resource(CLIENT_SECRET_FILE) as f:
+    CLIENT_ID = json.load(f)['web']['client_id']
 
+hostname = 'localhost'
+username = 'catalog'
+password = 'pass?word?'
+database = 'catalog'
 
-engine = create_engine('sqlite:///hotelListings.db?check_same_thread=False')
+engine = create_engine('postgresql+psycopg2://' +
+                       username + ':' + password + '@localhost/' + database)
 Base.metadata.bind = engine
 DBSession = sessionmaker(bind=engine)
 session = DBSession()
-app = Flask(__name__)
+
 redis = Redis()
 csrf = SeaSurf(app)
 
@@ -39,10 +47,8 @@ csrf = SeaSurf(app)
 class RateLimit(object):
     """
     Create rate limiter using Redis.
-
     The rate limiter is added as a decorator with a limit per specified number
     of seconds.
-
     Send JSON data when the limit is exceeded.
     """
     expiration_window = 10
@@ -109,7 +115,11 @@ def createUser(login_session):
                    email=login_session['email'],
                    picture=login_session['picture'])
     session.add(newUser)
-    session.commit()
+    try:
+        session.commit()
+    except:
+        session.rollback()
+        raise
     user = session.query(User).filter_by(email=login_session['email']).one()
     return user.id
 
@@ -153,7 +163,8 @@ def gconnect():
         if not request.headers.get('X-Requested-With'):
             abort(403)
 
-        flow = flow_from_clientsecrets('client_secrets.json', scope='profile')
+        flow = flow_from_clientsecrets(os.path.abspath(os.path.join(
+            os.path.dirname(__file__), CLIENT_SECRET_FILE)), scope='profile')
         flow.redirect_uri = 'postmessage'
         # Exchange auth code for access token, refresh token, and ID token
         credentials = flow.step2_exchange(code)
@@ -359,6 +370,7 @@ def showHotelCategories():
     """
     Return a show of hotel categories.
     """
+    print CLIENT_ID
     categories = session.query(Hotel.category).group_by(
         Hotel.category).order_by(Hotel.category).all()
     return render_template(
@@ -389,11 +401,11 @@ def showHotelsByCategory(category):
 def newHotel():
     """
     If the user is logged in, allow the user to create a new hotel; Otherwise
-    redirect the user to the Lodgings show.
+    redirect the user to the login page.
     """
     if 'username' not in login_session:
         flash("Please sign in to create new entries.")
-        return render_template('login.html')
+        return redirect(url_for('showLogin'))
     if request.method == 'POST':
         new_hotel = Hotel(
             name=request.form['name'],
@@ -405,7 +417,11 @@ def newHotel():
             user_id=login_session['user_id'],
         )
         session.add(new_hotel)
-        session.commit()
+        try:
+            session.commit()
+        except:
+            session.rollback()
+            raise
         flash("Success! %s was added to the database." % new_hotel.name)
         return redirect(url_for('showHotels'))
     else:
@@ -430,7 +446,7 @@ def editHotel(hotel_id):
     """
     if 'username' not in login_session:
         flash("Please sign in to create new entries.")
-        return render_template('login.html')
+        return redirect(url_for('showLogin'))
     hotel_to_edit = session.query(Hotel).filter_by(id=hotel_id).one()
     creator = getUserInfo(login_session['user_id'])
     user_id = session.query(User.id).first()[0]
@@ -449,7 +465,11 @@ def editHotel(hotel_id):
             if request.form['category']:
                 hotel_to_edit.category = request.form['category']
                 session.add(hotel_to_edit)
-                session.commit()
+                try:
+                    session.commit()
+                except:
+                    session.rollback()
+                    raise
                 flash("Hotel successfully edited!")
                 return redirect(url_for('showHotel', hotel_id=hotel_id))
         else:
@@ -471,7 +491,7 @@ def deleteHotel(hotel_id):
     """
     if 'username' not in login_session:
         flash("Please sign in to delete entries.")
-        return render_template('login.html')
+        return redirect(url_for('showLogin'))
     hotel_to_delete = session.query(Hotel).filter_by(id=hotel_id).one()
     if login_session['user_id']:
         creator = getUserInfo(login_session['user_id'])
@@ -479,7 +499,11 @@ def deleteHotel(hotel_id):
     if creator.id == user_id:
         if request.method == 'POST':
             session.delete(hotel_to_delete)
-            session.commit()
+            try:
+                session.commit()
+            except:
+                session.rollback()
+                raise
             flash("Hotel successfully deleted.")
             return redirect(url_for('showHotels'))
         else:
