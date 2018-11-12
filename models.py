@@ -90,3 +90,4 @@ engine = create_engine('postgresql+psycopg2://' + username + ':' + password + '@
 
 
 Base.metadata.create_all(engine)
+
