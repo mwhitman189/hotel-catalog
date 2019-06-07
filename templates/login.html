@@ -17,7 +17,8 @@
         </div>
         <!-- Check that client is signed in, then remove title-->
         {% if 'username' in session %}
-        <h2 class="signin-title">Sign in</h2>
+        <h1 class="signin-title">Login</h1>
+        <h2 class="sub-title">Sign in</h2>
         {% endif %}
 
             <button id="signinButton" class="btn signin-btn hotels-btn">Sign in with Google</button>

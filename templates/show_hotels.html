@@ -16,7 +16,7 @@
             <li>
                 <a class="hotel name img" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="{{ hotel.name }}"><span class="thumbnail hotel-thumbnail" {% if hotel.picture %}style="background-image:url('{{ hotel.picture }}');"{% else %}style="background-image:url('/static/img/Ichotels_hotel_48px.svg');"{% endif %}></span>
                 </a>
-                <h1><a class="hotel hotel-link name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h1>
+                <h2><a class="hotel hotel-link name-text" href="{{ url_for('showHotel', hotel_id=hotel.id) }}" title="Show {{ hotel.name }}">{{ hotel.name }}</a></h2>
             </li>
         {% endfor %}
         </ul>
