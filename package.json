@@ -1,15 +1,16 @@
 {
   "name": "hotels",
   "version": "1.0.0",
-  "description": "Hotel listing webapp",
+  "description": "Hotel listing web app",
   "main": "index.js",
   "dependencies": {
-    "boostrap": "^2.0.0"
+    "boostrap": "^2.0.0",
+    "node-sass": "^4.12.0"
   },
   "devDependencies": {},
   "scripts": {
-  "test": "echo \"Error: no test specified\" && exit 1",
-  "scss": "node-sass --watch static/scss -o static/css"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch static/scss -o static/css"
   },
   "author": "Miles Whitman",
   "license": "ISC"

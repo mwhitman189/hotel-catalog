@@ -6,15 +6,14 @@ $font-size-base: 14px;
 $font-size-big: 2rem;
 $font-size-one: 1.5rem;
 $font-size-two: 1rem;
-$color-1: #2e005e;
-$color-2: #498fff;
-$color-3: #090b01;
-$color-4: #fde0ff;
-$color-5: #fff;
-$color-6: #595454;
-$color-7: #427bd6;
-$color-8: #373338;
-$color-9: #fff;
+$color-bg-1: #fff;
+$color-txt-1: #000;
+$color-bg-2: #ff9e40;
+$color-txt-2: #fff;
+$color-accent: #c43c00;
+$color-highlight-1: #1976d2;
+$color-highlight-2: #63a4ff;
+
 
 // ************************************
 // Base Rules *************************
@@ -35,8 +34,8 @@ html {
 }
 
 body {
-  background-color: $color-5;
-  color: $color-8;
+  background-color: $color-bg-1;
+  color: $color-txt-1;
   font-size: $font-size-base;
   font-weight: 400;
   letter-spacing: 0;
@@ -71,17 +70,17 @@ ul {
 
 li {
   list-style: none;
-}
 
-a {
-  background-color: transparent;
-  color: $color-5;
-  text-decoration: none;
-
-  &:hover {
-    background-color: inherit;
-    color: $color-4;
+  & > a {
+    background-color: transparent;
+    color: $color-bg-1;
     text-decoration: none;
+
+    &:hover {
+      background-color: inherit;
+      color: rgba($color-bg-2, .8);
+      text-decoration: none;
+    }
   }
 }
 
@@ -98,13 +97,13 @@ section {
 }
 
 input {
-  background-color: $color-3;
-  border: $color-6;
+  background-color: $color-bg-1;
+  border: $color-accent;
   border-radius: 2px;
 }
 
 label {
-  color: $color-5;
+  color: $color-highlight-1;
 }
 
 .btn,
@@ -221,14 +220,14 @@ header {
 
 // {{ start FOOTER }}
 .ftr {
-  background-color: rgba($color-8, .7);
+  background-color: rgba($color-bg-2, 1);
   bottom: 0;
   position: fixed;
   width: 100%;
   z-index: 9;
 
   .ftr-info {
-    color: $color-5;
+    color: $color-txt-1;
     font-size: $font-size-base;
     text-align: center;
   }
@@ -255,15 +254,15 @@ header {
 }
 
 .hotel-info {
-  color: $color-5;
+  color: rgba($color-txt-1, .8);
 }
 
 // {{ start SIGNIN }}
 .signin-box {
-  background-color: $color-4;
+  background-color: $color-bg-2;
   border-radius: 3px;
-  box-shadow: 1px 1px 3px 1px $color-6;
-  color: $color-8;
+  box-shadow: 1px 1px 3px 1px rgba($color-txt-1, .5);
+  color: $color-txt-1;
   display: block;
   height: 400px;
   justify-content: center;
@@ -285,7 +284,7 @@ header {
 }
 
 .signin-title {
-  color: $color-8;
+  color: $color-txt-1;
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -295,13 +294,13 @@ header {
 }
 
 .signin-btn {
-  background-color: $color-2;
-  background-image: linear-gradient(rgba($color-2, 1), rgba($color-7, 1));
+  background-color: $color-highlight-1;
+  background-image: linear-gradient(rgba($color-highlight-1, 1), rgba($color-highlight-2, 1));
   background-repeat: repeat-x;
   border: 0;
-  border-color: $color-7;
-  box-shadow: 1px 1px 1px $color-6;
-  color: $color-9;
+  border-color: $color-highlight-1;
+  box-shadow: 1px 1px 1px rgba($color-txt-1, .5);
+  color: $color-txt-2;
   position: relative;
   top: 200px;
 }
@@ -335,8 +334,8 @@ header {
   // {{ start HEADER }}
   header {
     .navbar {
-      background: $color-4;
-      box-shadow: -2px 4px 4px 4px rgba($color-8, .5);
+      background: $color-bg-2;
+      box-shadow: -2px 4px 4px 4px rgba($color-txt-1, .5);
       display: block;
       height: 100vh;
       position: absolute;
@@ -351,7 +350,7 @@ header {
       }
 
       li {
-        border-bottom: 1.5px solid rgba($color-6, .5);
+        border-bottom: 1.5px solid rgba($color-txt-1, .7);
         display: block;
         height: 70px;
         margin-left: auto;
@@ -360,7 +359,7 @@ header {
       }
 
       a {
-        color: $color-8;
+        color: $color-txt-1;
         margin-left: 10px;
         width: 100%;
       }

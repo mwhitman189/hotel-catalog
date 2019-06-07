@@ -41,10 +41,10 @@ Thumbs.db
 ###################
 client_secrets.json
 
-<<<<<<< HEAD
-# Superfluous files #
-=======
+
 # Superfulous files #
->>>>>>> 1192252060d5464fa688ae863f33cd3570398d01
+
 #####################
 node_modules
+
+
