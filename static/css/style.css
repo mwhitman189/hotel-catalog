@@ -41,12 +41,19 @@ ul {
   outline: 0;
   padding: 0; }
 
+a {
+  color: #fff;
+  text-decoration: none; }
+  a:hover {
+    background-color: inherit;
+    color: color-bg-1;
+    text-decoration: none; }
+
 li {
   list-style: none; }
   li > a {
     background-color: transparent;
-    color: #fff;
-    text-decoration: none; }
+    color: #fff; }
     li > a:hover {
       background-color: inherit;
       color: rgba(255, 158, 64, 0.8);
@@ -116,6 +123,7 @@ header .hidden-item {
   display: none; }
 
 header .hdr-icon {
+  color: color-bg-1;
   display: flex;
   float: right;
   margin-bottom: auto;
@@ -281,7 +289,7 @@ header .hdr-icon {
     background-repeat: no-repeat;
     background-size: cover;
     box-sizing: border-box;
-    min-height: 450px;
+    min-height: 200px;
     padding: 0;
     position: absolute;
     top: 0;
