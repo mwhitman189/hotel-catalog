@@ -135,7 +135,8 @@ header .hdr-icon {
   background-size: cover; }
 
 .page-title {
-  margin-bottom: 10px; }
+  color: #fff;
+  margin: 100px 0 0 70px; }
 
 .hotel-link:hover {
   opacity: .7; }
@@ -281,9 +282,9 @@ header .hdr-icon {
     background-size: cover;
     box-sizing: border-box;
     min-height: 450px;
-    padding: 50px 0;
-    position: relative;
-    top: -145px;
+    padding: 0;
+    position: absolute;
+    top: 0;
     width: 100%;
     z-index: -1; }
   .signin-box {
