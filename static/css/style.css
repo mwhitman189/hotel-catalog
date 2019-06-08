@@ -296,7 +296,7 @@ header .hdr-icon {
     width: 100%;
     z-index: -1; }
   .signin-box {
-    top: -350px; }
+    margin: auto; }
   .hotel-img {
     border-radius: 50%;
     height: 400px;
