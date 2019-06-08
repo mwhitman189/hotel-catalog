@@ -239,10 +239,10 @@ header .hdr-icon {
     display: block;
     height: 100vh;
     position: absolute;
-    right: -306px;
+    right: -228px;
     top: 0;
     transition: .2s ease-in-out;
-    width: 300px;
+    width: 220px;
     z-index: 1; }
     header .navbar ul {
       width: 100%; }
@@ -264,7 +264,7 @@ header .hdr-icon {
       border: 0;
       height: inherit; }
   header .navbar.visible {
-    transform: translateX(-306px); } }
+    transform: translateX(-228px); } }
 
 @media screen and (min-width: 1016px) {
   .container {
@@ -289,7 +289,7 @@ header .hdr-icon {
     background-repeat: no-repeat;
     background-size: cover;
     box-sizing: border-box;
-    min-height: 200px;
+    min-height: 60vh;
     padding: 0;
     position: absolute;
     top: 0;
